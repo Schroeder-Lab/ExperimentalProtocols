@@ -10,4 +10,4 @@ There is a Bonvision website which more or less describes what it does, how it w
 1.	Loading Bonvision resources in Bonsai
 
 	In order to be able to work with Bonvision, there are these three nodes that always have to be added first (Figure 1):
-	![Figure 1](C:\Users\maria\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\Figure_1)
+	![Figure 1](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/Figure_1.png)
