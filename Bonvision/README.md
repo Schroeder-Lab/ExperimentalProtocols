@@ -1,5 +1,5 @@
 # Bonvision- User guide
-## About and good to know:
+## About and good to know
 ### What is Bonvision?
 Bonvision is a community package which can be installed in Bonsai and allows creating diverse visual stimuli protocols
 **Most important thing to remember: Bosai is asynchronous, unlike Python, Matlab etc**
