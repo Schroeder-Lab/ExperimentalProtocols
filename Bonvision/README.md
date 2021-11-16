@@ -8,4 +8,5 @@ There is a Bonvision website which more or less describes what it does, how it w
 
 ## Step by step guide
 1.	Loading Bonvision resources in Bonsai
-In order to be able to work with Bonvision, there are these three nodes that always have to be added first (Figure 1):
+
+	In order to be able to work with Bonvision, there are these three nodes that always have to be added first (Figure 1):
