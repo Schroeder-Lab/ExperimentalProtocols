@@ -10,9 +10,9 @@ There is a Bonvision [website](https://bonvision.github.io/pages/001_info/) whic
 
 
 ## Example workflow
-![whole script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/whole%20script.PNG)
+![whole script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/whole%20script%20annotated.png)
 
-The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/whole%20script%20annotated.png)
+The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SingleCircleOverScreenOrtho.bonsai)
 
 Once you have loaded this in Bonsai and pressed run, you will see random circles appearing in various places on a grey background on a pop up window.
 
