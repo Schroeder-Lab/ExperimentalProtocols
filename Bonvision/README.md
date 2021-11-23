@@ -11,6 +11,7 @@ There is a Bonvision [website](https://bonvision.github.io/pages/001_info/) whic
 
 ## Example workflow
 ![script 1-6](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%201-6.PNG)
+
 ![7-8](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%207%2C8.PNG)
 
 The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SingleCircleOverScreenOrtho.bonsai)
