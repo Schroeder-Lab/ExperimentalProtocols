@@ -14,4 +14,7 @@ There is a Bonvision [website](https://bonvision.github.io/pages/001_info/) whic
 
 The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SingleCircleOverScreenOrtho.bonsai)
 
-Once you have loaded this in Bonsai and pressed run, you will see random circles appearing in various places on a grey background on a pop up window 
+Once you have loaded this in Bonsai and pressed run, you will see random circles appearing in various places on a grey background on a pop up window.
+
+Now let's see what the use of the components of this Bonvision script is:
+1. These are three nodes which are essential every time 
