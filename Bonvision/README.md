@@ -78,7 +78,7 @@ The essential node that connects to the 2P acquisiton is called **DigitialOutput
 
 	This **DigitalOutput** node writes a sequence of logical values (hence the connection to the **Boolean** nodes) to one or more DAQmx digital output channels.
 
-## This concludes the Bonsai and Bonvision exmaple runthrough. Hopefully this guide has helped create a better understanding of what Bonvision can do!
+## This concludes the Bonsai and Bonvision example runthrough. Hopefully this guide has helped create a better understanding of what Bonvision can do!
 
 
 
