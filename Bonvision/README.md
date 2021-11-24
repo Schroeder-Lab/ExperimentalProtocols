@@ -12,11 +12,7 @@ There is a Bonvision [website](https://bonvision.github.io/pages/001_info/) whic
 ## Example workflow
 
 **One important thing to bear in mind about Bonsai is the fact that it is *asynchronous* so the order in which the nodes are placed doesn't matter (*however* they do have to be connected to each other in a way that makes sense)**
-![script 1-6](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%201-6.PNG)
-
-![7-8](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%207%2C8.PNG)
-
-![9.](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/9..png)
+![script annotated](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%20all.PNG)
 
 The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SingleCircleOverScreenOrtho.bonsai)
 
@@ -40,3 +36,4 @@ Now let's see what the use of the general components of this Bonvision workflow 
 4. This draws a square in the specified location and colour and because it is connected to a **Subscribe Subject** called **Quad** which in turn is connected to the **BehaviourSubject** (**Quad**) it will display this on the window through its connection to **RenderFrame** from section **2**. The real purpose of this is to make sure the timing of the stimuli actually displayed on the monitor coresponds to the timing specified in the settings. This is because it will be important to match the stimuli shown to the 2P recording and since there could be a delay in the display of the stimuli for whatever reason (slow rendering by the computer etc), we have to know if there is a delay. Therefore, a small rectangle is shown in the right corner of the screen simultaneously with the other stimuli shown (hence the node format in section **2**.) and a photodiode is placed right on top of it to record the actual output. This is then fed into a file in section **9** through the **AnalogInput** node.
 5. This is the collection of nodes which actually specifies the exact stimuli (in this case both rectangles and circles) and the timing of these stimuli. Let's see the purpose of each node:
 	- the most important node here is probably **Concat**. This essentially takes the first command (to show the rectangle) and only displays the second command (to show the circles) once the first command has been executed
+	- **drawStim** is the **SubscribeSubject** which links to the **BehaviourSubject** we saw in section **2**.
