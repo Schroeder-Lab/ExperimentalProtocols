@@ -69,9 +69,9 @@ Returning to the main workflow:
 
 7. This part receives an input from a camera (in our case this will be the pupil camera and probably the camera below the mouse to record movement), creates a video (AVI file here) and logs when or if this was done
 8. The function of the final section here is to finish the 2P recording at the same time with the stimuli finishing and then closes the window with the stimuli when a key  is pressed. Here is what all the nodes mean:
-- **KeyDown**: when any key is pressed it executes a sequence of events specified
-- **Take**:  returns the specified number of contiguous elements from the start of the sequence
-- **EndAcq** and **StartAcq**: this is an embedded workflow (see below) which has the function of stopping the acquisition of data and is the counterpart to the **StartAcq** embedded workflow. The only difference is in the connection of the **EndAcq** which is linked to the two nodes specified above and thus ends the acquisition when a key is pressed.
+	- **KeyDown**: when any key is pressed it executes a sequence of events specified
+	- **Take**:  returns the specified number of contiguous elements from the start of the sequence
+	- **EndAcq** and **StartAcq**: this is an embedded workflow (see below) which has the function of stopping the acquisition of data and is the counterpart to the **StartAcq** embedded workflow. The only difference is in the connection of the **EndAcq** which is linked to the two nodes specified above and thus ends the acquisition when a key is pressed.
 The essential node that connects to the 2P acquisiton is called **DigitialOutput** which can be found both in the **EndAcq** and **StartAcq** embedded workflows (see below)
 ![endacq](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/EndAcq.PNG)
 ![startacq](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/StartAcq.PNG)
