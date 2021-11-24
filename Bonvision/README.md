@@ -19,4 +19,7 @@ The original full script can be opened in GitHub Desktop and downloaded from [he
 Once you have loaded this in Bonsai and pressed run, you will see random circles appearing in various places on a grey background on a pop up window.
 
 Now let's see what the use of the components of this Bonvision script is:
-1. These are three nodes which are essential every time 
+1. These are three nodes which are essential every time
+	- Create Window generates a popup window in which the stimuli will be displayed (there are settings on the right of the GUI which can be adjusted, the most relevant probably being *DisplayDevice* which in the current 2P setup(24.11.2021) would be Secondary) 
+
+	![CreateWindow settings](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/Figure_2.png)
