@@ -12,6 +12,7 @@ There is a Bonvision [website](https://bonvision.github.io/pages/001_info/) whic
 ## Example workflow
 
 **One important thing to bear in mind about Bonsai is the fact that it is *asynchronous* so the order in which the nodes are placed doesn't matter (*however* they do have to be connected to each other in a way that makes sense)**
+
 ![script annotated](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%20all.PNG)
 
 The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SingleCircleOverScreenOrtho.bonsai)
