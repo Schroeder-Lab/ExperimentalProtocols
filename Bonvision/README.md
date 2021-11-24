@@ -1,4 +1,4 @@
-# Bonvision- User guide
+# Bonsai and Bonvision- User guide
 ## About and good to know
 ### What is Bonvision?
 Bonvision is a community package which can be installed in Bonsai and allows creating diverse visual stimuli protocols
@@ -10,9 +10,13 @@ There is a Bonvision [website](https://bonvision.github.io/pages/001_info/) whic
 
 
 ## Example workflow
+
+**One important thing to bear in mind about Bonsai is the fact that it is *asynchronous* so the order in which the nodes are placed doesn't matter (*however* they do have to be connected to each other in a way that makes sense)**
 ![script 1-6](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%201-6.PNG)
 
 ![7-8](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/script%20annotated%207%2C8.PNG)
+
+![9.](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/9..png)
 
 The original full script can be opened in GitHub Desktop and downloaded from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SingleCircleOverScreenOrtho.bonsai)
 
@@ -20,6 +24,17 @@ Once you have loaded this in Bonsai and pressed run, you will see random circles
 
 Now let's see what the use of the components of this Bonvision script is:
 1. These are three nodes which are essential every time
-	- Create Window generates a popup window in which the stimuli will be displayed (there are settings on the right of the GUI which can be adjusted, the most relevant probably being *DisplayDevice* which in the current 2P setup(24.11.2021) would be Secondary) 
+	- **Create Window** generates a popup window in which the stimuli will be displayed (there are settings on the right of the GUI which can be adjusted, the most relevant probably being *DisplayDevice* which in the current 2P setup(24.11.2021) would be *Secondary*) 
 
 	![CreateWindow settings](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/Figure_2.png)
+
+	- **Bonvision Resources** and **Load Resources** simply specifies that we will be using the package Bonvision and loads these resources 
+
+2. This section is also needed in all types of workflows, however, it can be changed or simplefied
+	- **RenderFrame** will always be needed. It creates a frame on top of which the stimuli types are shown
+	- In this example, two types of stimuli are shown on the same frame and controlled through different parameters:
+		-  **Orthographic View** shows stimuli in terms of the angles specified. This will be important for us because the mouse will be positioned at a specific angle relative to the monitor
+		- **NormalizedView** normalizes the location of the stimuli between 0 and 1 to make it easier to specify the location regardless of the size of the window
+		- there are two nodes connected to the two View nodes which are marked with an X, (**drawStim** and **Quad**). These are both **BehaviourSubject** nodes and their names were changed to something more specific and meaningful. The official definition of **BehaviourSubject**  is "Broadcasts the latest value of an observable sequence to all subscribed and future observers using a shared suject". This works together with **SubscribeSubject** (usually has an X and a star displayed in the node, official definition: "Generates a sequence of values by subscribing to a shared subject"). This is how multiple stimuli can be generated when paired with **SubscribeSubject** of the same name. An example of this is **Quad** in this section and the other **Quad** in section **4**. Note the different colours and the extra star displayed with the X for the later.
+3. This part (**CreateRandom**) creates random numbers  which is important later on for randomising the sequence and location of the stimuli.
+4. This draws a square in the specified location and colour and because it is connected to a **Subscribe Subject** called **Quad** which in turn is connected to the **BehaviourSubject** (**Quad**) it will display this on the window through its connection to **RenderFrame** from section **2**. The real purpose of this is to make sure the timing of the stimuli actually displayed on the monitor coresponds to the timing specified in the settings. This is because it will be important to match the stimuli shown to the 2P recording and since there could be a delay in the display of the stimuli for whatever reason (slow rendering by the computer etc), we have to know if there is a delay. Therefore, a small rectangle is shown in the right corner of the screen simultaneously with the other stimuli shown (hence why the node format in section **2**.) and a photodiode is placed right on top of it to record the actual output. This is then fed into a file in section **9** through the **AnalogInput** node.
