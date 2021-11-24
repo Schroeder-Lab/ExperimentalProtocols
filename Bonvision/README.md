@@ -54,3 +54,30 @@ Now let's see what the use of the general components of this Bonvision workflow 
 	- **CircleGroup**: finally the above nodes connect to the node which actually generates the circles to be displayed on the window. This is a **CreateObservable**which is another workflow embedded in a node and creates higher order observable sequences using the encapsulated workflow (see below the embedded workflow)
 	![Circle Group](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/CircleGroup.PNG)
 
+	This may seem like a lot but it simply specifies the variables which are being modified, such as the location of the stimulus and the timing of both the circles and the rectangles. A few nodes to note:
+	- **Source**: accepts an input (it represents a connection to the main workflow and more specfically to the node immediately preceding it). In other words, it functions as a distribution centre for inputs
+	- **RangeAnimation**: creates a range of values between a specified min and max and can be connected to anything
+	- **Delay**: This is an interstimulus interval.
+	- **WorkflowOutput**: Whenever an embedded workflow is created, it has to have **WorkflowOutput** as an end node to feed the commands to the main workflow (essentially the equivalent of the return command when writing a function in python for example)
+
+	Returning to the **Present Stimuli** workflow:
+	- after the **CircleGroup**, the concat makes sure all the commands were executed in the embedded workflow before we move on to the next part
+	- **RepeatCount**: this just repeats the same stimulus presentation again (but in a random order of course due to the presence of the **Random** node)
+	- finally, we have **WorkflowOutput** again, as specified above.
+
+Returning to the main workflow:
+
+7. This part receives an input from a camera (in our case this will be the pupil camera and probably the camera below the mouse to record movement), creates a video (AVI file here) and logs when or if this was done
+8. The function of the final section here is to finish the 2P recording at the same time with the stimuli finishing and then closes the window with the stimuli when a key  is pressed. Here is what all the nodes mean:
+- **KeyDown**: when any key is pressed it executes a sequence of events specified
+- **Take**:  returns the specified number of contiguous elements from the start of the sequence
+- **EndAcq** and **StartAcq**: this is an embedded workflow (see below) which has the function of stopping the acquisition of data and is the counterpart to the **StartAcq** embedded workflow. The only difference is in the connection of the **EndAcq** which is linked to the two nodes specified above and thus ends the acquisition when a key is pressed.
+The essential node that connects to the 2P acquisiton is called **DigitialOutput** which can be found both in the **EndAcq** and **StartAcq** embedded workflows (see below)
+![endacq](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/EndAcq.PNG)
+![startacq](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/StartAcq.PNG)
+
+
+## This concludes the Bonsai and Bonvision exmaple runthrough. Hopefully this guide has helped create a better understanding of what Bonvision can do!
+
+
+
