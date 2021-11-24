@@ -44,6 +44,13 @@ Now let's see what the use of the general components of this Bonvision workflow 
 	- finally when the squares are displayed, the program goes to the other sub-workflow (**Present Stimuli**) (see below)
 
 	![present stimuli workflow](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/Present%20Stimuli%20Workflow.PNG)
---> this can be accessed bu double clicking on the node
 
+	--> this can be accessed by double clicking on the node
+
+	This sub-workflow has several components:
+	- **CSV Reader**: This reads a CSV file which was previosuly created and includes a lot of options for the size and location of the stimuli which can be accessed [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/csvSample.csv)
+	- **Permutation**: when combined with **Random** (see section **3**.) this generates a random permutation without repetition of all the elements in the CSV file in this case
+	- **Expression Transform**: This specifies what the columns in the CSV mean. Double-click on it to customise it (this has to be done every time an external file is used)
+	- **CircleGroup**: finally the above nodes connect to the node which actually generates the circles to be displayed on the window. This is a **CreateObservable**which is another workflow embedded in a node and creates higher order observable sequences using the encapsulated workflow (see below the embedded workflow)
+	![Circle Group](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/CircleGroup.PNG)
 
