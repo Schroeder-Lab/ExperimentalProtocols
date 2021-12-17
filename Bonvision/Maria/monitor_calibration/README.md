@@ -11,9 +11,9 @@
 - this is present in the current setup (December 2021)
 - There is a Bonvision script for this available from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/calibration_scripts_bonsai/GammaCalibration_Test.bonsai)
 - However, it gives an error when we try to run it which couldn't be solved, therefore three custom scripts (one for each colour) were written to obtain the output from the photodiode (the phtodiode records the voltage).
-- This output (in the form of a binary file) is then fed into a custom python script which feeds the data into an array and gives a graph with the normalised output from all 3 colours at 9 data data points
+- This output (in the form of a binary file) is then fed into a custom python script which feeds the data into an array and gives a graph with the normalised output from all 3 colours at 9 data points
 
-This is how it looks like before and after correction:
+This is how the plot looks like before and after correction:
 
 ![corrected_output](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/corrected_output2.png)
 
