@@ -118,5 +118,14 @@ def f(x):
    
     return interpolate.splev(x, tck)
 #here can add any value and obtain our desired input value
-print(f(1))
+range_of_xvalues= []
+for x in np.arange(0,1,0.01):
+    range_of_xvalues.append(f(x))
+    
+range_of_yvalues=[]
+for y in np.arange(0,1,0.01):
+    range_of_yvalues.append(y)
+    
+myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
+
 
