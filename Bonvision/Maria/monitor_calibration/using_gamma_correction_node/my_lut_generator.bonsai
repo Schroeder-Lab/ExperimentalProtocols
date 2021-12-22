@@ -3,23 +3,35 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
       <Expression xsi:type="io:CsvReader">
+        <io:FileName>LUT.csv</io:FileName>
         <io:SkipRows>0</io:SkipRows>
       </Expression>
       <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>it</scr:Expression>
+        <scr:Expression>new(it[0] as X, it[1] as Y)</scr:Expression>
+      </Expression>
+      <Expression xsi:type="dsp:ConvertToArray">
+        <dsp:Depth>F32</dsp:Depth>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:ConvertToImage" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:SaveImage">
+          <cv:Suffix>None</cv:Suffix>
+        </Combinator>
       </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
       <Edge From="1" To="2" Label="Source1" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
