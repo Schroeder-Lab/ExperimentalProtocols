@@ -128,17 +128,8 @@ for y in np.arange(0,1,0.01):
     
 myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
 
-import csv
-
-# with open('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT.csv', 'w', newline='') as f:
-#     writer=csv.writer(f)
-#     #writer = csv.DictWriter(f, fieldnames=fieldnames)
-#     writer.writerow(range_of_yvalues)
-#     writer.writerow(range_of_xvalues)
-#     #writer.writerow(range_of_xvalues)
-
 import pandas as pd
 
-values=pd.DataFrame(range_of_xvalues)
+values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
 
 values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
