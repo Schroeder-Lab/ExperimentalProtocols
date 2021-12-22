@@ -10,7 +10,8 @@
 - for this we need to measure what the monitor displays using a photodiode
 - this is present in the current setup (December 2021)
 - There is a Bonvision script for this available from [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/calibration_scripts_bonsai/GammaCalibration_Test.bonsai)
-- However, it gives an error when we try to run it which couldn't be solved, therefore [three custom scripts](https://github.com/Schroeder-Lab/ExperimentalProtocols/tree/main/Bonvision/Maria/monitor_calibration/calibration_scripts_bonsai) (one for each colour) were written to obtain the [output](https://github.com/Schroeder-Lab/ExperimentalProtocols/tree/main/Bonvision/Maria/monitor_calibration/output_files) from the photodiode (the phtodiode records the voltage).
+- However, it gives an error when we try to run it which couldn't be solved, therefore [three custom scripts](https://github.com/Schroeder-Lab/ExperimentalProtocols/tree/main/Bonvision/Maria/monitor_calibration/calibration_scripts_bonsai) (one for each colour) were written to obtain the [output](https://github.com/Schroeder-Lab/ExperimentalProtocols/tree/main/Bonvision/Maria/monitor_calibration/output_files) from the photodiode (the photodiode records the voltage).
+- These scripts should already be available on the local computer in the 2P room.
 - This output (in the form of a binary file) is then fed into a [custom python script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/20211216_full_monitor_calibration.py) which feeds the data into an array and gives a graph with the normalised output from all 3 colours at 9 data points
 
 This is how the plot looks like before and after correction:
