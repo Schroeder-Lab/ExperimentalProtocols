@@ -4,6 +4,8 @@
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -136,6 +138,24 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Concat" />
       </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="mx:AnalogInput">
+          <mx:SignalSource />
+          <mx:SampleRate>0</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1000</mx:BufferSize>
+          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:Channels />
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:MatrixWriter">
+          <dsp:Suffix>None</dsp:Suffix>
+          <dsp:Overwrite>false</dsp:Overwrite>
+          <dsp:Layout>ColumnMajor</dsp:Layout>
+        </Combinator>
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -147,6 +167,7 @@
       <Edge From="8" To="9" Label="Source1" />
       <Edge From="9" To="10" Label="Source1" />
       <Edge From="10" To="11" Label="Source1" />
+      <Edge From="12" To="13" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
