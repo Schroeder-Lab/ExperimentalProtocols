@@ -159,21 +159,17 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>24000</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\afterGC\optimalG\Calibration_red0</dsp:Path>
+          <dsp:Path>C:\Users\maria\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\Calibration_green</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
-          <dsp:Overwrite>false</dsp:Overwrite>
+          <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
         </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timer">
-          <rx:DueTime>PT21S</rx:DueTime>
-          <rx:Period>PT0S</rx:Period>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:TakeUntil" />
       </Expression>
     </Nodes>
     <Edges>
@@ -187,8 +183,7 @@
       <Edge From="9" To="10" Label="Source1" />
       <Edge From="10" To="11" Label="Source1" />
       <Edge From="12" To="13" Label="Source1" />
-      <Edge From="12" To="15" Label="Source2" />
-      <Edge From="14" To="15" Label="Source1" />
+      <Edge From="13" To="14" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
