@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
+<<<<<<< HEAD
 file_path_bGC= "C://MyPrograms//Bonvision//output//afterGC//Calibration_blue0"
 file_path_gGC= "C://MyPrograms//Bonvision//output//afterGC//Calibration_green0"
 file_path_rGC= "C://MyPrograms//Bonvision//output//afterGC//Calibration_red0"
@@ -18,6 +19,11 @@ file_path_rGC= "C://MyPrograms//Bonvision//output//afterGC//Calibration_red0"
 file_path_b= "C://MyPrograms//Bonvision//output//Calibration_blue9"
 file_path_g= "C://MyPrograms//Bonvision//output//Calibration_green0"
 file_path_r= "C://MyPrograms//Bonvision//output//Calibration_red0"
+=======
+file_path_b= "C://MyPrograms//Bonvision//output//afterGC//Calibration_blue1"
+file_path_g= "C://MyPrograms//Bonvision//output//afterGC//Calibration_green1"
+file_path_r= "C://MyPrograms//Bonvision//output//afterGC//Calibration_red1"
+>>>>>>> 589d13bab0b28e61891ac5399294fdea74979eee
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
@@ -43,6 +49,7 @@ norm_red=pd.DataFrame(norm_array_r, dtype='float64')
 norm_green= pd.DataFrame(norm_array_g, dtype='float64')
 norm_blue=pd.DataFrame(norm_array_b, dtype='float64')
 
+<<<<<<< HEAD
 norm_redGC=pd.DataFrame(norm_array_rGC, dtype='float64')
 norm_greenGC= pd.DataFrame(norm_array_gGC, dtype='float64')
 norm_blueGC=pd.DataFrame(norm_array_bGC, dtype='float64')
@@ -64,6 +71,13 @@ norm_blue.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bo
 
 # for i in norm_red:
 #     average_red.append
+=======
+# norm_red.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//normalised_red.csv')
+# norm_green.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//normalised_green.csv')
+# norm_blue.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//normalised_blue.csv')
+
+
+>>>>>>> 589d13bab0b28e61891ac5399294fdea74979eee
     
     
 

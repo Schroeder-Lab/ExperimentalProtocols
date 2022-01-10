@@ -9,16 +9,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #loading file
-#file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-<<<<<<< HEAD
-file_path_b= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_blue0"
-file_path_g= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_green0"
-file_path_r= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_red0"
-=======
-file_path_b= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_blue0"
-file_path_g= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_green0"
-file_path_r= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_red0"
->>>>>>> 589d13bab0b28e61891ac5399294fdea74979eee
+file_path_b= "C://Maria//output//afterGC//lowG//Calibration_blue0"
+file_path_g= "C://Maria//output//afterGC//optimalG//Calibration_green0"
+file_path_r= "C://Maria//output//afterGC/optimalG///Calibration_red0"
+
+# file_path_b= "C://Maria//output//Calibration_blue2"
+# file_path_g= "C://Maria//output//Calibration_green2"
+# file_path_r= "C://Maria//output//Calibration_red2"
+
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
@@ -76,23 +74,33 @@ b= np.array([frame2_b, frame3_b, frame4_b, frame5_b, frame6_b, frame7_b, frame8_
 g= np.array([frame2_g, frame3_g, frame4_g, frame5_g, frame6_g, frame7_g, frame8_g, frame9_g, frame10_g], dtype='float64')
 r= np.array([frame2_r, frame3_r, frame4_r, frame5_r, frame6_r, frame7_r, frame8_r, frame9_r, frame10_r], dtype='float64')
 
-#potting all frames to check if they match our expectations
-plt.plot(r)
-plt.plot(g)
-plt.plot(b)
+#plotting all frames to check if they match our expectations
 
-#obtaining the mean for all frames across all colours
-frame2_mean= (frame2_r + frame2_g + frame2_b)/3
-frame3_mean= (frame3_r + frame3_g + frame3_b)/3
-frame4_mean= (frame4_r + frame4_g + frame4_b)/3
-frame5_mean= (frame5_r + frame5_g + frame5_b)/3
-frame6_mean= (frame6_r + frame6_g + frame6_b)/3
-frame7_mean= (frame7_r + frame7_g + frame7_b)/3
-frame8_mean= (frame8_r + frame8_g + frame8_b)/3
-frame9_mean= (frame9_r + frame9_g + frame9_b)/3
-frame10_mean= (frame10_r + frame10_g + frame10_b)/3
+graph, (plot1, plot2) = plt.subplots(1, 2)
+ 
+# plot1 graph for normal axes
+plot1.plot(norm_array_g)
+plot1.set_title("all")
 
-#adding all values into a list
+# plot2 graph for inverted axes
+plot2.plot(g)
+plot2.set_title("average")
+# plt.plot(r)
+# plt.plot(g)
+# plt.plot(b)
+
+# #obtaining the mean for all frames across all colours
+# frame2_mean= (frame2_r + frame2_g + frame2_b)/3
+# frame3_mean= (frame3_r + frame3_g + frame3_b)/3
+# frame4_mean= (frame4_r + frame4_g + frame4_b)/3
+# frame5_mean= (frame5_r + frame5_g + frame5_b)/3
+# frame6_mean= (frame6_r + frame6_g + frame6_b)/3
+# frame7_mean= (frame7_r + frame7_g + frame7_b)/3
+# frame8_mean= (frame8_r + frame8_g + frame8_b)/3
+# frame9_mean= (frame9_r + frame9_g + frame9_b)/3
+# frame10_mean= (frame10_r + frame10_g + frame10_b)/3
+
+# #adding all values into a list
 # RGB_mean= [frame2_mean, frame3_mean, frame4_mean, frame5_mean, frame6_mean, frame7_mean, frame8_mean, frame9_mean, frame10_mean]
 
 # #appending a list with the actual values for interpolation
@@ -116,29 +124,29 @@ frame10_mean= (frame10_r + frame10_g + frame10_b)/3
 # plot2.scatter(x_points, y_points)
 # plot2.set_title("Inverted Plot")
 
-# #interpolation    
-# from scipy import interpolate
+# # #interpolation    
+# # from scipy import interpolate
 
 
 
-# tck = interpolate.splrep(x_points, y_points)
+# # tck = interpolate.splrep(x_points, y_points)
 
-# def f(x):
+# # def f(x):
    
-#     return interpolate.splev(x, tck)
-# #here can add any value and obtain our desired input value
-# range_of_xvalues= []
-# for x in np.arange(0,1,0.01):
-#     range_of_xvalues.append(f(x))
+# #     return interpolate.splev(x, tck)
+# # #here can add any value and obtain our desired input value
+# # range_of_xvalues= []
+# # for x in np.arange(0,1,0.01):
+# #     range_of_xvalues.append(f(x))
     
-# range_of_yvalues=[]
-# for y in np.arange(0,1,0.01):
-#     range_of_yvalues.append(y)
+# # range_of_yvalues=[]
+# # for y in np.arange(0,1,0.01):
+# #     range_of_yvalues.append(y)
     
-# myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
+# # myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
 
-# import pandas as pd
+# # import pandas as pd
 
-# values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
+# # values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
 
-# values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
+# # values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
