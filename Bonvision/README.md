@@ -1,6 +1,6 @@
 # Bonsai and Bonvision- User guide
 ## About and good to know
-###What is Bonsai?
+### What is Bonsai?
 Bonsai is an asynchronous programming language. See more information on the installation process, the way it works and the most used nodes [here](https://bonsai-rx.org/docs/installation/)
 ### What is Bonvision?
 Bonvision is a community package which can be installed in Bonsai and allows creating diverse visual stimuli protocols
