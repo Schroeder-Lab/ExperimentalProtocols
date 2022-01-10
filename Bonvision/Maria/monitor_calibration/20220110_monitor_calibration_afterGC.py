@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-file_path_b= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_blue0"
-file_path_g= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_green0"
-file_path_r= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_red0"
+file_path_b= "C://MyPrograms//Bonvision//output//Calibration_blue9"
+file_path_g= "C://MyPrograms//Bonvision//output//Calibration_green0"
+file_path_r= "C://MyPrograms//Bonvision//output//Calibration_red0"
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
@@ -39,9 +39,6 @@ frame7_b= np.mean(norm_array_b[14000:15999])
 frame8_b= np.mean(norm_array_b[16000:17999])
 frame9_b= np.mean(norm_array_b[18000:19999])
 frame10_b= np.mean(norm_array_b[20000:21999])
-
-
-
 
 #green
 frame2_g= np.mean(norm_array_g[4000:5999])
