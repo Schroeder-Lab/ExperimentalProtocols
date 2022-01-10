@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
 file_path_b= "C://Maria//output//afterGC//Calibration_blue2"
-file_path_g= "C://Maria//output//afterGC//Calibration_green1"
-file_path_r= "C://Maria//output//afterGC//Calibration_red1"
+file_path_g= "C://Maria//output//afterGC//Calibration_green2"
+file_path_r= "C://Maria//output//afterGC//Calibration_red2"
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')

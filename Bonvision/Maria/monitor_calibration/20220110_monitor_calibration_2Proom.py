@@ -11,10 +11,11 @@ import pandas as pd
 import numpy as np
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-file_path_b= "C://MyPrograms//Bonvision//output//afterGC//Calibration_blue1"
-file_path_g= "C://MyPrograms//Bonvision//output//afterGC//Calibration_green1"
-file_path_r= "C://MyPrograms//Bonvision//output//afterGC//Calibration_red1"
+file_path_b= "C://Maria//output//afterGC//Calibration_blue2"
+file_path_g= "C://Maria//output//afterGC//Calibration_green2"
+file_path_r= "C://Maria//output//afterGC//Calibration_red2"
 #formatting file into array
+
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
 array_r= np.fromfile(file_path_r,dtype='float64')
@@ -30,6 +31,10 @@ norm_array_r=  NormalizeData(array_r)
 norm_red=pd.DataFrame(norm_array_r, dtype='float64')
 norm_green= pd.DataFrame(norm_array_g, dtype='float64')
 norm_blue=pd.DataFrame(norm_array_b, dtype='float64')
+
+plt.plot(norm_red)
+plt.plot(norm_green)
+plt.plot(norm_blue)
 
 # norm_red.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//normalised_red.csv')
 # norm_green.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//normalised_green.csv')
