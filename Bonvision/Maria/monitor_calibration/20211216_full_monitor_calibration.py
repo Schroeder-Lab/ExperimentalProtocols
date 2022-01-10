@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-file_path_b= "C://Maria//output//afterGC//Calibration_blue2"
-file_path_g= "C://Maria//output//afterGC//Calibration_green1"
-file_path_r= "C://Maria//output//afterGC//Calibration_red1"
+file_path_b= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_blue0"
+file_path_g= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_green0"
+file_path_r= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_red0"
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
@@ -87,52 +87,52 @@ frame9_mean= (frame9_r + frame9_g + frame9_b)/3
 frame10_mean= (frame10_r + frame10_g + frame10_b)/3
 
 #adding all values into a list
-RGB_mean= [frame2_mean, frame3_mean, frame4_mean, frame5_mean, frame6_mean, frame7_mean, frame8_mean, frame9_mean, frame10_mean]
+# RGB_mean= [frame2_mean, frame3_mean, frame4_mean, frame5_mean, frame6_mean, frame7_mean, frame8_mean, frame9_mean, frame10_mean]
 
-#appending a list with the actual values for interpolation
-#NOTE: x_points are actually the y values and y_points the x values, written like this here for easier plotting and interpolation
-x_points= []
-for x in RGB_mean:
-    x_points.append(x)
+# #appending a list with the actual values for interpolation
+# #NOTE: x_points are actually the y values and y_points the x values, written like this here for easier plotting and interpolation
+# x_points= []
+# for x in RGB_mean:
+#     x_points.append(x)
 
-#known y points from Bonsai script
-y_points = [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+# #known y points from Bonsai script
+# y_points = [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
-#plotting inverse to check
-# creating graph space for two graphs
-graph, (plot1, plot2) = plt.subplots(1, 2)
+# #plotting inverse to check
+# # creating graph space for two graphs
+# graph, (plot1, plot2) = plt.subplots(1, 2)
  
-# plot1 graph for normal axes
-plot1.scatter(y_points, x_points)
-plot1.set_title("Normal Plot")
+# # plot1 graph for normal axes
+# plot1.scatter(y_points, x_points)
+# plot1.set_title("Normal Plot")
 
-# plot2 graph for inverted axes
-plot2.scatter(x_points, y_points)
-plot2.set_title("Inverted Plot")
+# # plot2 graph for inverted axes
+# plot2.scatter(x_points, y_points)
+# plot2.set_title("Inverted Plot")
 
-#interpolation    
-from scipy import interpolate
+# #interpolation    
+# from scipy import interpolate
 
 
 
-tck = interpolate.splrep(x_points, y_points)
+# tck = interpolate.splrep(x_points, y_points)
 
-def f(x):
+# def f(x):
    
-    return interpolate.splev(x, tck)
-#here can add any value and obtain our desired input value
-range_of_xvalues= []
-for x in np.arange(0,1,0.01):
-    range_of_xvalues.append(f(x))
+#     return interpolate.splev(x, tck)
+# #here can add any value and obtain our desired input value
+# range_of_xvalues= []
+# for x in np.arange(0,1,0.01):
+#     range_of_xvalues.append(f(x))
     
-range_of_yvalues=[]
-for y in np.arange(0,1,0.01):
-    range_of_yvalues.append(y)
+# range_of_yvalues=[]
+# for y in np.arange(0,1,0.01):
+#     range_of_yvalues.append(y)
     
-myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
+# myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
 
-import pandas as pd
+# import pandas as pd
 
-values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
+# values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
 
-values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
+# values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
