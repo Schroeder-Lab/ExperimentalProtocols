@@ -21,7 +21,7 @@
           <gl:Location xsi:nil="true" />
           <gl:WindowBorder>Resizable</gl:WindowBorder>
           <gl:WindowState>Fullscreen</gl:WindowState>
-          <gl:DisplayDevice>Primary</gl:DisplayDevice>
+          <gl:DisplayDevice>Second</gl:DisplayDevice>
           <gl:TargetRenderFrequency>60</gl:TargetRenderFrequency>
           <gl:TargetUpdateFrequency xsi:nil="true" />
           <gl:RenderState />
@@ -168,7 +168,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Users\maria\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\Calibration_blue</dsp:Path>
+          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\20220111\Calibration_blue</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
           <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
