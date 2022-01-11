@@ -101,35 +101,35 @@ graph, (plot1, plot2) = plt.subplots(1, 2)
  
 # plot1 graph for normal axes
 plot1.scatter(y_points, x_points)
-plot1.set_title("Normal Plot")
+plot1.set_title("Before Calibration")
 
 # plot2 graph for inverted axes
-plot2.scatter(x_points, y_points)
-plot2.set_title("Inverted Plot")
+# plot2.scatter(x_points, y_points)
+# plot2.set_title("Inverted Plot")
 
 #interpolation    
-from scipy import interpolate
+# from scipy import interpolate
 
 
 
-tck = interpolate.splrep(x_points, y_points)
+# tck = interpolate.splrep(x_points, y_points)
 
-def f(x):
+# def f(x):
    
-    return interpolate.splev(x, tck)
-#here can add any value and obtain our desired input value
-range_of_xvalues= []
-for x in np.arange(0,1,0.01):
-    range_of_xvalues.append(f(x))
+#     return interpolate.splev(x, tck)
+# #here can add any value and obtain our desired input value
+# range_of_xvalues= []
+# for x in np.arange(0,1,0.01):
+#     range_of_xvalues.append(f(x))
     
-range_of_yvalues=[]
-for y in np.arange(0,1,0.01):
-    range_of_yvalues.append(y)
+# range_of_yvalues=[]
+# for y in np.arange(0,1,0.01):
+#     range_of_yvalues.append(y)
     
-myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
+# myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
 
-import pandas as pd
+# import pandas as pd
 
-values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
+# values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
 
-values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
+#values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
