@@ -10,9 +10,9 @@ import matplotlib.pyplot as plt
 
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-file_path_b= "C://MyPrograms//Bonvision//output//Calibration_blue9"
-file_path_g= "C://MyPrograms//Bonvision//output//Calibration_green0"
-file_path_r= "C://MyPrograms//Bonvision//output//Calibration_red0"
+file_path_b= "C://Maria//output//20220111//Calibration_blue1"
+file_path_g= "C://Maria//output//20220111//Calibration_green1"
+file_path_r= "C://Maria//output//20220111//Calibration_red1"
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
@@ -38,7 +38,7 @@ frame6_b= np.mean(norm_array_b[12000:13999])
 frame7_b= np.mean(norm_array_b[14000:15999])
 frame8_b= np.mean(norm_array_b[16000:17999])
 frame9_b= np.mean(norm_array_b[18000:19999])
-frame10_b= np.mean(norm_array_b[20000:21999])
+# frame10_b= np.mean(norm_array_b[20000:21999])
 
 #green
 frame2_g= np.mean(norm_array_g[4000:5999])
@@ -49,7 +49,7 @@ frame6_g= np.mean(norm_array_g[12000:13999])
 frame7_g= np.mean(norm_array_g[14000:16999])
 frame8_g= np.mean(norm_array_g[16000:17999])
 frame9_g= np.mean(norm_array_g[18000:19999])
-frame10_g= np.mean(norm_array_g[20000:21999])
+# frame10_g= np.mean(norm_array_g[20000:21999])
 
 #red
 frame2_r= np.mean(norm_array_r[4000:5999])
@@ -60,12 +60,12 @@ frame6_r= np.mean(norm_array_r[12000:13999])
 frame7_r= np.mean(norm_array_r[14000:15999])
 frame8_r= np.mean(norm_array_r[16000:17999])
 frame9_r= np.mean(norm_array_r[18000:19999])
-frame10_r= np.mean(norm_array_r[20000:21999])
+# frame10_r= np.mean(norm_array_r[20000:21999])
 
 #loading all frames into an array
-b= np.array([frame2_b, frame3_b, frame4_b, frame5_b, frame6_b, frame7_b, frame8_b, frame9_b, frame10_b], dtype='float64')
-g= np.array([frame2_g, frame3_g, frame4_g, frame5_g, frame6_g, frame7_g, frame8_g, frame9_g, frame10_g], dtype='float64')
-r= np.array([frame2_r, frame3_r, frame4_r, frame5_r, frame6_r, frame7_r, frame8_r, frame9_r, frame10_r], dtype='float64')
+b= np.array([frame2_b, frame3_b, frame4_b, frame5_b, frame6_b, frame7_b, frame8_b, frame9_b], dtype='float64')
+g= np.array([frame2_g, frame3_g, frame4_g, frame5_g, frame6_g, frame7_g, frame8_g, frame9_g], dtype='float64')
+r= np.array([frame2_r, frame3_r, frame4_r, frame5_r, frame6_r, frame7_r, frame8_r, frame9_r], dtype='float64')
 
 #potting all frames to check if they match our expectations
 plt.plot(r)

@@ -100,8 +100,6 @@
                   </Expression>
                   <Expression xsi:type="ExternalizedMapping">
                     <Property Name="ColorB" />
-                    <Property Name="ColorR" />
-                    <Property Name="ColorG" />
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
                     <ExtentX>100</ExtentX>
