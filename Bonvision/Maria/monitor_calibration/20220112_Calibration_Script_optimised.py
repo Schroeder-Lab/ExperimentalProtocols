@@ -15,8 +15,8 @@ def normalize_data(data):
     return (data - np.min(data)) / (np.max(data) - np.min(data))
 
 #files location
-#filePath = "C://MyPrograms//Bonvision//output//"
-filePath = "data//"
+filePath = "C://MyPrograms//Bonvision//output//"
+#filePath = "data//"
 #files
 files = ["Calibration_red0","Calibration_green0","Calibration_blue9"]
 
