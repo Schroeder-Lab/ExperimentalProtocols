@@ -40,3 +40,5 @@ fig, axs = plt.subplots(1, 3, figsize=(30, 9))
 axs[0].plot(arrays[0])
 axs[1].plot(arrays[1])
 axs[2].plot(arrays[2])
+
+mean_red= np.mean(arrays[0,1,2])
