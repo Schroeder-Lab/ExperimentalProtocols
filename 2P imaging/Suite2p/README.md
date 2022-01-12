@@ -5,4 +5,5 @@ In order to ensure a standardised approach to cell detection, these criteria sho
 - neuropil traces and raw fluroescence activity should not be similar (as little correlation between spikes as possible)
 - as few slow responses as possible (beware of traces which only have slow responses, especially if it's present near a blood vessel)
 - be especially careful with ROIs detected on/below or near blood vessels (dark areas)
-To add: screenshots with examples
+## Good examples:
+![good](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/2P%20imaging/Suite2p/Examples%20of%20traces/good.PNG)
