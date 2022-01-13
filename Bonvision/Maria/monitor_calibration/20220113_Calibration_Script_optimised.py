@@ -17,31 +17,33 @@ def normalize_data(data):
 #files location
 filePath = "C://MyPrograms//Bonvision//output//G2.6//"
 
-#filePath = "data//"
 #files
 files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
+
 
 start = 4000
 step = 2000
 end = 22000
-
-arrays = []
+arrays = list()
+fig, axs = plt.subplots(1, 1, figsize=(30, 9))
 for item in files:
-    temp = np.fromfile(filePath+item,dtype='float64')
+    temp = np.fromfile(filePath+item,dtype='float64')    
     temp = normalize_data(temp)
-    temp = np.reshape(temp[start:end], (step,-1))
+    axs.plot(temp)
+    temp = np.reshape(temp[start:end:1], (-1,step))
     arrays.append(temp)
-
 
 
 
 
 #plotting all frames to check if they match our expectations
 fig, axs = plt.subplots(1, 3, figsize=(30, 9))
+axs[0].plot(arrays[0].T)
+axs[1].plot(arrays[1].T)
+axs[2].plot(arrays[2].T)
 
-axs[0].plot(arrays[0], color="red")
-axs[1].plot(arrays[1], color="green")
-axs[2].plot(arrays[2], color="blue")
 
-
-meanred= np.mean(arrays[0,2000])
+fig, axs = plt.subplots(1, 3, figsize=(30, 9))
+axs[0].plot(np.mean(arrays[0],1),'o', color= "red")
+axs[1].plot(np.mean(arrays[1],1),'o', color="green")
+axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
