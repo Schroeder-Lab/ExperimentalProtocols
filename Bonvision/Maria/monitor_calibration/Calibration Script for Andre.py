@@ -67,7 +67,7 @@ b= np.array([frame2_b, frame3_b, frame4_b, frame5_b, frame6_b, frame7_b, frame8_
 g= np.array([frame2_g, frame3_g, frame4_g, frame5_g, frame6_g, frame7_g, frame8_g, frame9_g], dtype='float64')
 r= np.array([frame2_r, frame3_r, frame4_r, frame5_r, frame6_r, frame7_r, frame8_r, frame9_r], dtype='float64')
 
-#potting all frames to check if they match our expectations
+#lpotting all frames to check if they match our expectations
 plt.plot(r)
 plt.plot(g)
 plt.plot(b)
