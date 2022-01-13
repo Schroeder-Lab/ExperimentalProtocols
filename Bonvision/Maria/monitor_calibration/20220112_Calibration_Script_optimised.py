@@ -15,11 +15,11 @@ def normalize_data(data):
     return (data - np.min(data)) / (np.max(data) - np.min(data))
 
 #files location
-filePath = "C://MyPrograms//Bonvision//output//20220111//"
+filePath = "C://MyPrograms//Bonvision//output//G1.0//"
 
 #filePath = "data//"
 #files
-files = ["Calibration_red","Calibration_green","Calibration_blue"]
+files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
 
 start = 4000
 step = 2000
@@ -44,3 +44,4 @@ axs[1].plot(arrays[1], color="green")
 axs[2].plot(arrays[2], color="blue")
 
 
+meanred= np.mean(arrays[0,2000])
