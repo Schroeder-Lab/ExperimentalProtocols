@@ -15,16 +15,16 @@ def normalize_data(data):
     return (data - np.min(data)) / (np.max(data) - np.min(data))
 
 #files location
-filePath = "C://Maria//output//"
+filePath = "C://MyPrograms//Bonvision//output//20220111//"
 #filePath = "data//"
 #files
-files = ["Calibration_red_no_red","Calibration_green0","Calibration_blue9"]
+files = ["Calibration_red","Calibration_green","Calibration_blue"]
 
 start = 4000
 step = 2000
 end = 22000
 
-arrays = list()
+arrays = []
 for item in files:
     temp = np.fromfile(filePath+item,dtype='float64')
     temp = normalize_data(temp)
@@ -40,5 +40,3 @@ fig, axs = plt.subplots(1, 3, figsize=(30, 9))
 axs[0].plot(arrays[0])
 axs[1].plot(arrays[1])
 axs[2].plot(arrays[2])
-
-mean_red= np.mean(arrays[0,1,2])

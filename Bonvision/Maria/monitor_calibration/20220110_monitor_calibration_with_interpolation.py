@@ -9,9 +9,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #loading file
-file_path_b= "C://Maria//output//afterGC//lowG//Calibration_blue0"
-file_path_g= "C://Maria//output//afterGC//optimalG//Calibration_green0"
-file_path_r= "C://Maria//output//afterGC/optimalG///Calibration_red0"
+file_path_b= "C://MyPrograms//Bonvision//output//Calibration_blue9"
+file_path_g= "C://MyPrograms//Bonvision//output//Calibration_green0"
+file_path_r= "C://MyPrograms//Bonvision//output//Calibration_red0"
 
 # file_path_b= "C://Maria//output//Calibration_blue2"
 # file_path_g= "C://Maria//output//Calibration_green2"
