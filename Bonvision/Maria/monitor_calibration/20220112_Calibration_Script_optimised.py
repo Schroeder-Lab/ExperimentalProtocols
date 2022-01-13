@@ -16,6 +16,7 @@ def normalize_data(data):
 
 #files location
 filePath = "C://MyPrograms//Bonvision//output//20220111//"
+
 #filePath = "data//"
 #files
 files = ["Calibration_red","Calibration_green","Calibration_blue"]
@@ -37,6 +38,9 @@ for item in files:
 
 #plotting all frames to check if they match our expectations
 fig, axs = plt.subplots(1, 3, figsize=(30, 9))
-axs[0].plot(arrays[0])
-axs[1].plot(arrays[1])
-axs[2].plot(arrays[2])
+
+axs[0].plot(arrays[0], color="red")
+axs[1].plot(arrays[1], color="green")
+axs[2].plot(arrays[2], color="blue")
+
+

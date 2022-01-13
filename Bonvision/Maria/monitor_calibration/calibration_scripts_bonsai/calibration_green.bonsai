@@ -166,7 +166,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\20220111\Calibration_green1</dsp:Path>
+          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\G2.6\Calibration_green1</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
           <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
