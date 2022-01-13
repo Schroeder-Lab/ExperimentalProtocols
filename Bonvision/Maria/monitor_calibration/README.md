@@ -14,14 +14,20 @@
 - These scripts should already be available on the local computer in the 2P room.
 - This output (in the form of a binary file) is then fed into a [custom python script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/20211216_full_monitor_calibration.py) which feeds the data into an array and gives a graph with the normalised output from all 3 colours at 9 data points
 
+
+### Part 2: Monitor calibration: Two options
+#### Option 1: Using the Nvidia control panel to adjust settings
+- go to adjust colour settings--> change gamma (value of 2.6 gives a linear output)
+- use the Python script to check how the graph compares to the previous one, before calibration
+
+#### Option 2: Using Bonvision
+- the code then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT)
+- this LUT is fed into the **gamma correction** node in Bonsai. This node should be added to all our scripts to allow for gamma correction
+
 This is how the plot looks like before and after correction:
 
 ![corrected_output](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/corrected_output2.png)
 
-
-### Part 2: Monitor calibration
-- the code then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT)
-- this LUT is fed into the **gamma correction** node in Bonsai. This node should be added to all our scripts to allow for gamma correction
 
 ### Calibration test every three months
 - In order to ensure the values stay the same and we perform the right correction, a gamma calibration test should be run once every three months and compared to the previous values in this [script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/comparing_old_and_new_output_values.py)
