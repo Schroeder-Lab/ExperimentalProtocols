@@ -74,6 +74,7 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="CreateObservable">
+        <Name>red</Name>
         <Workflow>
           <Nodes>
             <Expression xsi:type="WorkflowInput">
