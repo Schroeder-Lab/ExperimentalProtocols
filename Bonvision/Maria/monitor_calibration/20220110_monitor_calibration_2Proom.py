@@ -13,7 +13,7 @@ import numpy as np
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
 file_path_b= "C://Maria//output//no_red//Calibration_blue"
 file_path_g= "C://Maria//output//no_red//Calibration_green"
-file_path_r= "C://Maria//output//no_red//Calibration_red"
+file_path_r= "C://Maria//output//Calibration_red1"
 #formatting file into array
 
 array_b= np.fromfile(file_path_b,dtype='float64')

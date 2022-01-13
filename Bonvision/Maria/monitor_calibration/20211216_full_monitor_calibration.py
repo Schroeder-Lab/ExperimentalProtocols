@@ -10,15 +10,14 @@ import matplotlib.pyplot as plt
 
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-<<<<<<< HEAD
 file_path_b= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_blue0"
 file_path_g= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_green0"
 file_path_r= "C://MyPrograms//Bonvision//output//AfterGC//Calibration_red0"
-=======
+
 file_path_b= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_blue0"
 file_path_g= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_green0"
 file_path_r= "C://Maria//output//afterGC//optimalG//with_timer//Calibration_red0"
->>>>>>> 589d13bab0b28e61891ac5399294fdea74979eee
+
 #formatting file into array
 array_b= np.fromfile(file_path_b,dtype='float64')
 array_g= np.fromfile(file_path_g,dtype='float64')
