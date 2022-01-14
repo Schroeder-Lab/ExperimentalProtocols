@@ -134,3 +134,5 @@ import pandas as pd
 values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
 
 values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
+
+#plt.imshow showing rgb values rather than single numbers
