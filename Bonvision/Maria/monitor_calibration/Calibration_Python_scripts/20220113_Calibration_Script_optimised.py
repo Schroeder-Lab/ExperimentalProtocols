@@ -6,13 +6,19 @@ Updated on Tue Jan 11 23:13:55 2022 by Andre
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+from scipy import interpolate
 
 #support functions (should be placed in a separate file eventually)
 
 #normalizing the array
 def normalize_data(data):
     return (data - np.min(data)) / (np.max(data) - np.min(data))
+
+tck = interpolate.splrep(x_points, y_points)
+
+def f(x):
+    return interpolate.splev(x, tck)
+
 
 #files location
 filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//beforeC//"
@@ -33,7 +39,12 @@ for item in files:
     temp = np.reshape(temp[start:end:1], (-1,step))
     arrays.append(temp)
 
-
+y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+x_points=[]
+#make the loop give you the mean values for all three colours, then use the interpolation function
+#after interpol. save the values in a variable and use these values to plot the colours, use plt.imshow
+for value in arrays:
+    temp2= np.mean (arrays[0])
 
 
 #plotting all frames to check if they match our expectations
