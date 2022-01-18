@@ -20,7 +20,8 @@
 
 ### Part 2: Monitor calibration: Two options
 #### Step 1: Using the Nvidia control panel to adjust settings as good as possible
-This is how the plot looks like before and after correction (with changing Nvidia settings only, however) **to note: we removed the red from the monitor because it interferes with the 2P laser, so the red is not relevant anymore**:
+This is how the plot looks like before and after correction (with changing Nvidia settings only, however) 
+**To note: we removed the red from the monitor because it interferes with the 2P laser, so the red is not relevant anymore**:
 
 ![corrected_output](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Figures/before%20and%20after%20Calibration.PNG)
 
