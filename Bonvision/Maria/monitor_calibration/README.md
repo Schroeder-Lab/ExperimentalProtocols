@@ -16,16 +16,16 @@
 
 
 ### Part 2: Monitor calibration: Two options
-#### Option 1: Using the Nvidia control panel to adjust settings
+#### Step 1: Using the Nvidia control panel to adjust settings as good as possible
 ![Nvidia](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Figures/Nvidia%20control%20panel%20gamma%20adjustment.PNG)
 - go to adjust colour settings--> change gamma (value of 2.6 gives a linear output)
 - use the Python script to check how the graph compares to the previous one, before calibration
 
-#### Option 2: Using Bonvision
-- the code then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT)
+#### Step 2: Using Bonvision
+- the code available here [add finished code] then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT) (image format)
 - this LUT is fed into the **gamma correction** node in Bonsai. This node should be added to all our scripts to allow for gamma correction
 
-This is how the plot looks like before and after correction (with changing Nvidia settings only however):
+This is how the plot looks like before and after correction (with changing Nvidia settings only, however):
 
 ![corrected_output](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Figures/before%20and%20after%20Calibration.PNG)
 
