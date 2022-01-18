@@ -14,12 +14,12 @@
 - These scripts should already be available on the local computer in the 2P room.
 - This output (in the form of a binary file) is then fed into a [custom python script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Calibration_Python_scripts/20220113_Calibration_Script_optimised.py) which feeds the data into an array and gives a graph with the normalised output from all 3 colours at 9 data points
 
-
-### Part 2: Monitor calibration: Two options
-#### Step 1: Using the Nvidia control panel to adjust settings as good as possible
 ![Nvidia](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Figures/Nvidia%20control%20panel%20gamma%20adjustment.PNG)
 - go to adjust colour settings--> change gamma (value of 2.6 gives a linear output)
 - use the Python script to check how the graph compares to the previous one, before calibration
+
+### Part 2: Monitor calibration: Two options
+#### Step 1: Using the Nvidia control panel to adjust settings as good as possible
 
 #### Step 2: Using Bonvision
 - the code available here [add finished code] then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT) (image format)
