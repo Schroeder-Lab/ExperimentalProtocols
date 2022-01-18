@@ -20,12 +20,12 @@
 
 ### Part 2: Monitor calibration: Two options
 #### Step 1: Using the Nvidia control panel to adjust settings as good as possible
-This is how the plot looks like before and after correction (with changing Nvidia settings only, however):
+This is how the plot looks like before and after correction (with changing Nvidia settings only, however) **to note: we removed the red from the monitor because it interferes with the 2P laser, so the red is not relevant anymore**:
 
 ![corrected_output](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Figures/before%20and%20after%20Calibration.PNG)
 
 #### Step 2: Using Bonvision
-- the code available here [add finished code] then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT) (image format)
+- the output after Nvidia correction is then fed into the code available here [add finished code] then interpolates this data to obtain a range of values which are used to create a lookup table (LUT) (image format)
 - this LUT is fed into the **gamma correction** node in Bonsai. This node should be added to all our scripts to allow for gamma correction
 
 
