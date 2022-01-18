@@ -25,7 +25,7 @@
 - the code then inverses and interpolates this data to obtain the corrected values which are used to create a lookup table (LUT)
 - this LUT is fed into the **gamma correction** node in Bonsai. This node should be added to all our scripts to allow for gamma correction
 
-This is how the plot looks like before and after correction:
+This is how the plot looks like before and after correction (with changing Nvidia settings only however):
 
 ![corrected_output](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/monitor_calibration/Figures/before%20and%20after%20Calibration.PNG)
 
