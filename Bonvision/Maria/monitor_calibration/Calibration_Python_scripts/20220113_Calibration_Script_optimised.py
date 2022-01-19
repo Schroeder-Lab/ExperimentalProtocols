@@ -7,7 +7,7 @@ Updated on Tue Jan 11 23:13:55 2022 by Andre
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import interpolate
-from PIL import Image
+import PIL
 
 #support functions (should be placed in a separate file eventually)
 
@@ -77,8 +77,8 @@ for y in np.arange(0,0.9,0.01):
 # first= plt.imsave(fname='C://Users//maria//Documents//GitHub//Monitor_calibration//first', arr=first_value)
 
 #trying out a different module for this
-im= Image.(g, 'RGB')
-im.save('C://Users//maria//Documents//GitHub//Monitor_calibration//g')
+
+PIL.save('C://Users//maria//Documents//GitHub//Monitor_calibration//g')
 
 #plt.imshow(0, 0.029395561187219303, 0.04714912534373198)
 
