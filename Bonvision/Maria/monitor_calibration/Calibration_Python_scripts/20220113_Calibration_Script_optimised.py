@@ -27,7 +27,8 @@ def f2(x):
 def m(row):
     return np.mean(row)
 
-
+def combine(a,b):
+    return (a,b)
 
 #files location
 filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//"
@@ -92,8 +93,21 @@ for y in np.arange(0,0.9,0.01):
     
 arrayg= np.array(range_of_xvaluesg)
 arrayb= np.array(range_of_xvaluesb)
-    
+
+
 arraygb= np.stack((arrayg, arrayb))
+
+# zeros=[]
+# for i in range(0,90):
+#     zeros.append(0)
+
+# final= list(zip(zeros, arrayg, arrayb))
+
+
+#for loop which iterates through arraygb and creates a tuple with the 3 values (R,G,B)
+final=[]
+for i in arraygb:
+    final.append[i]
 
 plt.imshow(arraygb)
 plt.axis('off')
