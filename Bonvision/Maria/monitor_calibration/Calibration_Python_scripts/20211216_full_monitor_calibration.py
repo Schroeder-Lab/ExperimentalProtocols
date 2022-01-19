@@ -96,17 +96,17 @@ for x in RGB_mean:
 #known y points from Bonsai script
 y_points = [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
-#plotting inverse to check
-# creating graph space for two graphs
-graph, (plot1, plot2) = plt.subplots(1, 2)
+# #plotting inverse to check
+# # creating graph space for two graphs
+# graph, (plot1, plot2) = plt.subplots(1, 2)
  
-# plot1 graph for normal axes
-plot1.scatter(y_points, x_points)
-plot1.set_title("Normal Plot")
+# # plot1 graph for normal axes
+# plot1.scatter(y_points, x_points)
+# plot1.set_title("Normal Plot")
 
-# plot2 graph for inverted axes
-plot2.scatter(x_points, y_points)
-plot2.set_title("Inverted Plot")
+# # plot2 graph for inverted axes
+# plot2.scatter(x_points, y_points)
+# plot2.set_title("Inverted Plot")
 
 #interpolation    
 from scipy import interpolate
@@ -116,8 +116,9 @@ from scipy import interpolate
 tck = interpolate.splrep(x_points, y_points)
 
 def f(x):
-   
     return interpolate.splev(x, tck)
+
+
 #here can add any value and obtain our desired input value
 range_of_xvalues= []
 for x in np.arange(0,1,0.01):
@@ -127,12 +128,12 @@ range_of_yvalues=[]
 for y in np.arange(0,1,0.01):
     range_of_yvalues.append(y)
     
-myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
+# myLUT= dict(zip(range_of_yvalues, range_of_xvalues))
 
-import pandas as pd
+# import pandas as pd
 
-values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
+# values=pd.DataFrame(myLUT, index=(x,y), dtype='float64')
 
-values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
+#values.to_csv('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//using_gamma_correction_node//LUT2.csv')
 
 #plt.imshow showing rgb values rather than single numbers
