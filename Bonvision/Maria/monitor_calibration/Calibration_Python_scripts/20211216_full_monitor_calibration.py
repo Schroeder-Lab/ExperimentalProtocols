@@ -98,8 +98,6 @@ def f(x):
 
     return interpolate.splev(x, tck)
 
-
-
    
     return interpolate.splev(x, tckb)
 

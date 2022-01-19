@@ -7,6 +7,7 @@ Updated on Tue Jan 11 23:13:55 2022 by Andre
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import interpolate
+import cv2
 
 
 #support functions (should be placed in a separate file eventually)
@@ -20,12 +21,16 @@ def normalize_data(data):
 def f(x):
     return interpolate.splev(x, tck)
 
+def f2(x):
+    return interpolate.splev(x, tck2)
+
 def m(row):
     return np.mean(row)
 
 
+
 #files location
-filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//beforeC//"
+filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//"
 
 #files
 files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
@@ -39,7 +44,7 @@ fig, axs = plt.subplots(1, 1, figsize=(30, 9))
 for item in files:
     temp = np.fromfile(filePath+item,dtype='float64')    
     temp = normalize_data(temp)
-    axs.plot(temp)
+    #axs.plot(temp)
     temp = np.reshape(temp[start:end:1], (-1,step))
     arrays.append(temp)
 
@@ -53,6 +58,17 @@ y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 g = [m(arrays[1][0]),m(arrays[1][1]),m(arrays[1][2]),m(arrays[1][3]), m(arrays[1][4]), m(arrays[1][5]),m(arrays[1][6]),m(arrays[1][7]),m(arrays[1][8])]
 b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2][4]), m(arrays[2][5]),m(arrays[2][6]),m(arrays[2][7]),m(arrays[2][8])]
 
+# gmean= []
+# for array in arrays:
+#     for item in array:
+#         gmean.append(np.mean(item))
+#why does this produce 27 values?
+        
+
+    
+# norm_image = cv2.normalize(g, None, alpha = 0, beta = 255, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_32F)
+
+# norm_image = norm_image.astype(np.uint8)
 
 
     
@@ -60,21 +76,34 @@ b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2
 #interpolation    
 
 tck = interpolate.splrep(g, y_points)
+tck2= interpolate.splrep(b, y_points)
 
 range_of_xvaluesg=[]
-
+range_of_xvaluesb= []
 for x in np.arange(0,0.9,0.01):
     range_of_xvaluesg.append(f(x))
+    
+for x in np.arange(0,0.9,0.01):
+    range_of_xvaluesb.append(f2(x))
     
 range_of_yvalues=[]
 for y in np.arange(0,0.9,0.01):
     range_of_yvalues.append(y)
-
     
+arrayg= np.array(range_of_xvaluesg)
+arrayb= np.array(range_of_xvaluesb)
+    
+arraygb= np.stack((arrayg, arrayb))
+
+plt.imshow(arraygb)
+plt.axis('off')
+plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUT.png')
+
 #trying to figur eout how to make imshow work
 #first RGB values here
 # first_value= (0, 0.03, 0.05)
 # first= plt.imsave(fname='C://Users//maria//Documents//GitHub//Monitor_calibration//first', arr=first_value)
+
 
 
 #plt.imshow(0, 0.029395561187219303, 0.04714912534373198)
