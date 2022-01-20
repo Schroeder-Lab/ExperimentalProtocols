@@ -15,10 +15,10 @@ def normalize_data(data):
     return (data - np.min(data)) / (np.max(data) - np.min(data))
 
 #files location
-filePath = "C://Maria//output//no_red//"
+filePath = "C://Maria//output//G2.6//"
 #filePath = "data//"
 #files
-files = ["Calibration_red","Calibration_green","Calibration_blue"]
+files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
 
 start = 4000
 step = 2000
