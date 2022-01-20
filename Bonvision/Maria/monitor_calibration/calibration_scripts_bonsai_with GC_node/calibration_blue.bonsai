@@ -143,38 +143,44 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Concat" />
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="mx:AnalogInput">
-          <mx:SignalSource />
-          <mx:SampleRate>1000</mx:SampleRate>
-          <mx:ActiveEdge>Rising</mx:ActiveEdge>
-          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
-          <mx:BufferSize>1000</mx:BufferSize>
-          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
-          <mx:Channels>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName />
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-          </mx:Channels>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="mx:AnalogInput">
+            <mx:SignalSource />
+            <mx:SampleRate>1000</mx:SampleRate>
+            <mx:ActiveEdge>Rising</mx:ActiveEdge>
+            <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+            <mx:BufferSize>1000</mx:BufferSize>
+            <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+            <mx:Channels>
+              <mx:AnalogInputChannelConfiguration>
+                <mx:ChannelName />
+                <mx:MinimumValue>-10</mx:MinimumValue>
+                <mx:MaximumValue>10</mx:MaximumValue>
+                <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
+                <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+                <mx:VoltageUnits>Volts</mx:VoltageUnits>
+              </mx:AnalogInputChannelConfiguration>
+            </mx:Channels>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Take">
-          <rx:Count>24000</rx:Count>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Take">
+            <rx:Count>24000</rx:Count>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>output\Calibration_blue0</dsp:Path>
-          <dsp:Suffix>None</dsp:Suffix>
-          <dsp:Overwrite>true</dsp:Overwrite>
-          <dsp:Layout>ColumnMajor</dsp:Layout>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="dsp:MatrixWriter">
+            <dsp:Path>output\Calibration_blue0</dsp:Path>
+            <dsp:Suffix>None</dsp:Suffix>
+            <dsp:Overwrite>true</dsp:Overwrite>
+            <dsp:Layout>ColumnMajor</dsp:Layout>
+          </Combinator>
+        </Builder>
       </Expression>
     </Nodes>
     <Edges>

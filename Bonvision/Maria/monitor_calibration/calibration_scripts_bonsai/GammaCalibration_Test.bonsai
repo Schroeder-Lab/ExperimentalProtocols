@@ -3,9 +3,9 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
+                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -69,29 +69,37 @@
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
         <ClearColor>Gray</ClearColor>
-        <GammaLut>gammalut.bmp</GammaLut>
+        <GammaLut>C:\Users\maria\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\ourLUT.png</GammaLut>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="mx:AnalogInput">
-          <mx:SignalSource />
-          <mx:SampleRate>0</mx:SampleRate>
-          <mx:ActiveEdge>Rising</mx:ActiveEdge>
-          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
-          <mx:BufferSize>1000</mx:BufferSize>
-          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
-          <mx:Channels />
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="mx:AnalogInput">
+            <mx:SignalSource />
+            <mx:SampleRate>0</mx:SampleRate>
+            <mx:ActiveEdge>Rising</mx:ActiveEdge>
+            <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+            <mx:BufferSize>1000</mx:BufferSize>
+            <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+            <mx:Channels />
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>single(it)</scr:Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="scr:ExpressionTransform">
+          <scr:Expression>single(it)</scr:Expression>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:DelaySubscription">
-          <rx:DueTime>PT0.5S</rx:DueTime>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:DelaySubscription">
+            <rx:DueTime>PT0.5S</rx:DueTime>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="PublishSubject">
-        <Name>Analog</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="PublishSubject">
+          <Name>Analog</Name>
+        </Builder>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>DrawStimuli</Name>
