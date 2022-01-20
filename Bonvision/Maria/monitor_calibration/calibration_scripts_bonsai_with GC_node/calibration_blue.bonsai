@@ -59,7 +59,7 @@
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
         <ClearColor>Gray</ClearColor>
-        <GammaLut>C:\Users\maria\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\ourLUT.png</GammaLut>
+        <GammaLut>ourLUT.png</GammaLut>
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.ParameterRange.bonsai">
@@ -170,7 +170,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\output_files\G2.6\Calibration_blue1</dsp:Path>
+          <dsp:Path>output\Calibration_blue0</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
           <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
