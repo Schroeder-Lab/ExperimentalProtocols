@@ -64,15 +64,20 @@ b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2
 #     for item in array:
 #         gmean.append(np.mean(item))
 #why does this produce 27 values?
-        
-
-    
-# norm_image = cv2.normalize(g, None, alpha = 0, beta = 255, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_32F)
-
-# norm_image = norm_image.astype(np.uint8)
 
 
-    
+#plotting all frames to check if they match our expectations
+# fig, axs = plt.subplots(1, 3, figsize=(30, 9))
+# axs[0].plot(arrays[0].T)
+# axs[1].plot(arrays[1].T)
+# axs[2].plot(arrays[2].T)
+
+
+# fig, axs = plt.subplots(1, 3, figsize=(30, 9))
+# axs[0].plot(np.mean(arrays[0],1),'o', color= "red")
+# axs[1].plot(np.mean(arrays[1],1),'o', color="green")
+# axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
+
     
 #interpolation    
 
@@ -94,44 +99,18 @@ for y in np.arange(0,0.9,0.01):
 arrayg= np.array(range_of_xvaluesg)
 arrayb= np.array(range_of_xvaluesb)
 
-
-arraygb= np.stack((arrayg, arrayb))
-
-# zeros=[]
-# for i in range(0,90):
-#     zeros.append(0)
-
-# final= list(zip(zeros, arrayg, arrayb))
+zeros=np.zeros((1,90,1))
 
 
-#for loop which iterates through arraygb and creates a tuple with the 3 values (R,G,B)
-final=[]
-for i in arraygb:
-    final.append[i]
+arraygb= np.dstack((zeros,arrayg, arrayb))
+arraygbT= arraygb.T
+
+
 
 plt.imshow(arraygb)
 plt.axis('off')
 plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUT.png')
 
-#trying to figur eout how to make imshow work
-#first RGB values here
-# first_value= (0, 0.03, 0.05)
-# first= plt.imsave(fname='C://Users//maria//Documents//GitHub//Monitor_calibration//first', arr=first_value)
 
 
 
-#plt.imshow(0, 0.029395561187219303, 0.04714912534373198)
-
-# plt.show()
-
-#plotting all frames to check if they match our expectations
-# fig, axs = plt.subplots(1, 3, figsize=(30, 9))
-# axs[0].plot(arrays[0].T)
-# axs[1].plot(arrays[1].T)
-# axs[2].plot(arrays[2].T)
-
-
-# fig, axs = plt.subplots(1, 3, figsize=(30, 9))
-# axs[0].plot(np.mean(arrays[0],1),'o', color= "red")
-# axs[1].plot(np.mean(arrays[1],1),'o', color="green")
-# axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
