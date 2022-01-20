@@ -92,17 +92,17 @@ tck3= interpolate.splrep(r, y_points)
 range_of_xvaluesg=[]
 range_of_xvaluesb= []
 range_of_xvaluesr=[]
-for x in np.arange(0,0.9,0.01):
+for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesg.append(f(x))
     
-for x in np.arange(0,0.9,0.01):
+for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesb.append(f2(x))
 
-for x in np.arange(0,0.9,0.01):
+for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesr.append(f3(x))
     
 range_of_yvalues=[]
-for y in np.arange(0,0.9,0.01):
+for y in np.arange(0,0.9,0.003515625):
     range_of_yvalues.append(y)
     
 

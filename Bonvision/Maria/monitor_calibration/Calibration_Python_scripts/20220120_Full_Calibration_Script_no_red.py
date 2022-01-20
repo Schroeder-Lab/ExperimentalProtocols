@@ -86,20 +86,20 @@ tck2= interpolate.splrep(b, y_points)
 
 range_of_xvaluesg=[]
 range_of_xvaluesb= []
-for x in np.arange(0,0.9,0.01):
+for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesg.append(f(x))
     
-for x in np.arange(0,0.9,0.01):
+for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesb.append(f2(x))
     
 range_of_yvalues=[]
-for y in np.arange(0,0.9,0.01):
+for y in np.arange(0,0.9,0.003515625):
     range_of_yvalues.append(y)
     
 arrayg= np.array(range_of_xvaluesg)
 arrayb= np.array(range_of_xvaluesb)
 
-zeros=np.zeros((1,90,1))
+zeros=np.zeros((1,256,1))
 
 
 arraygb= np.dstack((zeros,arrayg, arrayb))
