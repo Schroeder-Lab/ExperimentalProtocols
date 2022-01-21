@@ -8,14 +8,14 @@ Created on Thu Jan 20 16:52:33 2022
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import interpolate
-import cv2
+
 
 
 #support functions (should be placed in a separate file eventually)
 
 #normalizing the array
 def normalize_data(data):
-    return (data - np.min(data)) / (np.max(data) - np.min(data))
+    return ((data - np.min(data))) / ((np.max(data) - np.min(data)))
 
 
 
@@ -31,8 +31,7 @@ def f3(x):
 def m(row):
     return np.mean(row)
 
-def combine(a,b):
-    return (a,b)
+
 
 #files location
 filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//"
@@ -44,15 +43,16 @@ files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
 start = 4000
 step = 2000
 end = 22000
-arrays = list()
-fig, axs = plt.subplots(1, 1, figsize=(30, 9))
+arrays = ()
+#fig, axs = plt.subplots(1, 1, figsize=(30, 9))
 for item in files:
-    temp = np.fromfile(filePath+item,dtype='float64')    
-    temp = normalize_data(temp)
+    temp = np.fromfile(filePath+item,dtype='float64')
     #axs.plot(temp)
+    temp= normalize_data(temp)
     temp = np.reshape(temp[start:end:1], (-1,step))
     arrays.append(temp)
 
+#arrays= normalize_data(arrays)
 y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
 
@@ -88,6 +88,8 @@ b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2
 tck = interpolate.splrep(g, y_points)
 tck2= interpolate.splrep(b, y_points)
 tck3= interpolate.splrep(r, y_points)
+
+
 
 range_of_xvaluesg=[]
 range_of_xvaluesb= []

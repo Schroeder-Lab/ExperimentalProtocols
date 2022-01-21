@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan 11 09:09:37 2022 by Maria
-Updated on Tue Jan 11 23:13:55 2022 by Andre
+Created on Fri Jan 21 09:05:36 2022
+
+@author: maria
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import interpolate
-import cv2
-
+from scipy.interpolate import InterpolatedUnivariateSpline
 
 #support functions (should be placed in a separate file eventually)
 
@@ -19,22 +19,24 @@ def normalize_data(data):
 
 
 def f(x):
-    return interpolate.splev(x, tck)
+    return interpolate.interp1d(x, tck, kind='slinear')
 
-def f2(x):
-    return interpolate.splev(x, tck2)
+# def f2(x):
+#     return InterpolatedUnivariateSpline(x, y_points, k=1)
+
+# def f3(x):
+#     return InterpolatedUnivariateSpline(x, y_points, k=1)
 
 def m(row):
     return np.mean(row)
 
-def combine(a,b):
-    return (a,b)
+
 
 #files location
 filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//"
 
 #files
-files = ["Calibration_red1","Calibration_green1","Calibration_blue0"]
+files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
 
 
 start = 4000
@@ -55,7 +57,7 @@ y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
 #make the loop give you the mean values for all two colours, then use the interpolation function
 #after interpol. save the values in a variable and use these values to plot the colours, use plt.imshow
-
+r= [m(arrays[0][0]),m(arrays[0][1]),m(arrays[0][2]),m(arrays[0][3]), m(arrays[0][4]), m(arrays[0][5]),m(arrays[0][6]),m(arrays[0][7]),m(arrays[0][8])]
 g = [m(arrays[1][0]),m(arrays[1][1]),m(arrays[1][2]),m(arrays[1][3]), m(arrays[1][4]), m(arrays[1][5]),m(arrays[1][6]),m(arrays[1][7]),m(arrays[1][8])]
 b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2][4]), m(arrays[2][5]),m(arrays[2][6]),m(arrays[2][7]),m(arrays[2][8])]
 
@@ -81,36 +83,43 @@ b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2
     
 #interpolation    
 
-tck = interpolate.splrep(g, y_points)
-tck2= interpolate.splrep(b, y_points)
+tck = InterpolatedUnivariateSpline(g, y_points)
+# tck2= InterpolatedUnivariateSpline(b, y_points)
+# tck3= InterpolatedUnivariateSpline(r, y_points)
+
+
 
 range_of_xvaluesg=[]
 range_of_xvaluesb= []
+range_of_xvaluesr=[]
 for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesg.append(f(x))
     
-for x in np.arange(0,0.9,0.003515625):
-    range_of_xvaluesb.append(f2(x))
+# for x in np.arange(0,0.9,0.003515625):
+#     range_of_xvaluesb.append(f2(x))
+
+# for x in np.arange(0,0.9,0.003515625):
+#     range_of_xvaluesr.append(f3(x))
     
 range_of_yvalues=[]
 for y in np.arange(0,0.9,0.003515625):
     range_of_yvalues.append(y)
     
+
+    
 arrayg= np.array(range_of_xvaluesg)
-arrayb= np.array(range_of_xvaluesb)
-
-zeros=np.zeros((1,256,1))
-
-
-arraygb= np.dstack((zeros,arrayg, arrayb))
+# arrayb= np.array(range_of_xvaluesb)
+# arrayr= np.array(range_of_xvaluesr)
 
 
 
-
-plt.imshow(arraygb)
-plt.axis('off')
-plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUT.png')
+# arrayrgb= np.dstack((arrayr, arrayg, arrayb))
 
 
+
+
+# plt.imshow(arrayrgb)
+# plt.axis('off')
+# plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png')
 
 
