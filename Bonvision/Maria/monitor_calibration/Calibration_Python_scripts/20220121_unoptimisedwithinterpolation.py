@@ -103,6 +103,8 @@ arrayrgb= np.dstack((zeros, arrayg, arrayb))
 
 plt.imshow(arrayrgb)
 plt.axis('off')
-plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png')
+plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png', arrayrgb)
+
+#plt.save(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png')
 
 
