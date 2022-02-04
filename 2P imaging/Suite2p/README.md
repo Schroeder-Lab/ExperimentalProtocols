@@ -12,4 +12,4 @@ In order to ensure a standardised approach to cell detection, these criteria sho
 
 To keep in mind: during pre-processing slow responses are filtered out (over 1350 frames)
 ## Good examples:
-![good](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/2P%20imaging/Suite2p/Examples%20of%20traces/good.PNG)
+![good](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/2P%20imaging/Suite2p/Examples%20of%20traces/good/good.PNG)
