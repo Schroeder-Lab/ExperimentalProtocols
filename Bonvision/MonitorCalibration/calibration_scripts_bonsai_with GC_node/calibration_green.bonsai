@@ -60,7 +60,7 @@
       <Expression xsi:type="Disable">
         <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
           <ClearColor>Gray</ClearColor>
-          <GammaLut>ourLUT.png</GammaLut>
+          <GammaLut>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\ourLUT_final.jpg</GammaLut>
         </Builder>
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
@@ -80,7 +80,7 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="CreateObservable">
-        <Name>red</Name>
+        <Name>green</Name>
         <Workflow>
           <Nodes>
             <Expression xsi:type="WorkflowInput">
@@ -88,7 +88,7 @@
             </Expression>
             <Expression xsi:type="PropertyMapping">
               <PropertyMappings>
-                <Property Name="ColorR" />
+                <Property Name="ColorG" />
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -105,7 +105,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="ColorR" />
+                    <Property Name="ColorG" />
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
                     <ExtentX>100</ExtentX>
@@ -114,8 +114,8 @@
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
                     <Angle>0</Angle>
-                    <ColorR>1</ColorR>
-                    <ColorG>0</ColorG>
+                    <ColorR>0</ColorR>
+                    <ColorG>1</ColorG>
                     <ColorB>0</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
@@ -172,7 +172,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>output\Calibration_red1</dsp:Path>
+          <dsp:Path>different_brightness\Calibration_green1</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
           <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>

@@ -57,9 +57,11 @@
       <Expression xsi:type="BehaviorSubject">
         <Name>DrawStimuli</Name>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
-        <ClearColor>Gray</ClearColor>
-        <GammaLut>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\ourLUTrgb.png</GammaLut>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
+          <ClearColor>Gray</ClearColor>
+          <GammaLut>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\Maria\monitor_calibration\ourLUT_final.jpg</GammaLut>
+        </Builder>
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.ParameterRange.bonsai">
@@ -78,7 +80,7 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="CreateObservable">
-        <Name>blue</Name>
+        <Name>red</Name>
         <Workflow>
           <Nodes>
             <Expression xsi:type="WorkflowInput">
@@ -86,7 +88,7 @@
             </Expression>
             <Expression xsi:type="PropertyMapping">
               <PropertyMappings>
-                <Property Name="ColorB" />
+                <Property Name="ColorR" />
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -103,7 +105,7 @@
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="ExternalizedMapping">
-                    <Property Name="ColorB" />
+                    <Property Name="ColorR" />
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
                     <ExtentX>100</ExtentX>
@@ -112,9 +114,9 @@
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
                     <Angle>0</Angle>
-                    <ColorR>0</ColorR>
+                    <ColorR>1</ColorR>
                     <ColorG>0</ColorG>
-                    <ColorB>1</ColorB>
+                    <ColorB>0</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -170,7 +172,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>output_256\Calibration_blue1</dsp:Path>
+          <dsp:Path>different_brightness\Calibration_red1</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
           <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
