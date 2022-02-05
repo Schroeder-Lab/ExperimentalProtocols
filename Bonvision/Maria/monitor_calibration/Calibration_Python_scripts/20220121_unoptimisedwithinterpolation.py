@@ -11,8 +11,8 @@ from scipy import interpolate
 
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
-file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//beforeC//Calibration_blue1"
-file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//beforeC//Calibration_green1"
+file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//Calibration_blue1"
+file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//Calibration_green1"
 
 
 #formatting file into array
@@ -103,7 +103,7 @@ arrayrgb= np.dstack((zeros, arrayg, arrayb))
 
 plt.imshow(arrayrgb)
 plt.axis('off')
-plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.jpg', arrayrgb)
+plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//LUTgb.jpg', arrayrgb)
 
 #plt.save(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png')
 
