@@ -12,9 +12,9 @@ from scipy import interpolate
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
 
-file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//beforeC//Calibration_blue1"
-file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//beforeC//Calibration_green1"
-file_path_r= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//beforeC//Calibration_red1"
+file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//different_brightness//Calibration_blue1"
+file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//different_brightness//Calibration_green1"
+file_path_r= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//different_brightness//Calibration_red1"
 
 
 #formatting file into array
@@ -32,8 +32,8 @@ def f(x):
 def f2(x):
     return interpolate.splev(x, tck2)
 
-def f3(x):
-     return interpolate.splev(x, tck3)
+# def f3(x):
+ #    return interpolate.splev(x, tck3)
 
 norm_array_b=  NormalizeData(array_b)
 norm_array_g=  NormalizeData(array_g)
@@ -87,7 +87,7 @@ y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
 tck = interpolate.splrep(g, y_points)
 tck2= interpolate.splrep(b, y_points)
-tck3= interpolate.splrep(r, y_points)
+#tck3= interpolate.splrep(r, y_points)
 
 
 
@@ -100,8 +100,8 @@ for x in np.arange(0,0.9,0.003515625):
 for x in np.arange(0,0.9,0.003515625):
     range_of_xvaluesb.append(f2(x))
 
-for x in np.arange(0,0.9,0.003515625):
-     range_of_xvaluesr.append(f3(x))
+# for x in np.arange(0,0.9,0.003515625):
+#      range_of_xvaluesr.append(f3(x))
 
     
 range_of_yvalues=[]
