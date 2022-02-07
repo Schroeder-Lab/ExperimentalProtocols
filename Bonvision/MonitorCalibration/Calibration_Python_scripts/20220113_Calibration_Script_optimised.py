@@ -18,11 +18,11 @@ def normalize_data(data):
 
 
 
-# def f(x):
-#     return interpolate.splev(x, tck)
+def f(x):
+    return interpolate.splev(x, tck)
 
-# def f2(x):
-#     return interpolate.splev(x, tck2)
+def f2(x):
+    return interpolate.splev(x, tck2)
 
 def m(row):
     return np.mean(row)
@@ -31,7 +31,7 @@ def combine(a,b):
     return (a,b)
 
 #files location
-filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//beforeC//"
+filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//beforeC//"
 
 #files
 files = ["Calibration_red1","Calibration_green1", "Calibration_blue1"]
@@ -56,8 +56,8 @@ y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 #make the loop give you the mean values for all two colours, then use the interpolation function
 #after interpol. save the values in a variable and use these values to plot the colours, use plt.imshow
 
-# g = [m(arrays[1][0]),m(arrays[1][1]),m(arrays[1][2]),m(arrays[1][3]), m(arrays[1][4]), m(arrays[1][5]),m(arrays[1][6]),m(arrays[1][7]),m(arrays[1][8])]
-# b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2][4]), m(arrays[2][5]),m(arrays[2][6]),m(arrays[2][7]),m(arrays[2][8])]
+g = [m(arrays[1][0]),m(arrays[1][1]),m(arrays[1][2]),m(arrays[1][3]), m(arrays[1][4]), m(arrays[1][5]),m(arrays[1][6]),m(arrays[1][7]),m(arrays[1][8])]
+b = [m(arrays[2][0]),m(arrays[2][1]),m(arrays[2][2]),m(arrays[2][3]), m(arrays[2][4]), m(arrays[2][5]),m(arrays[2][6]),m(arrays[2][7]),m(arrays[2][8])]
 
 # gmean= []
 # for array in arrays:
@@ -80,23 +80,23 @@ axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
     
 #interpolation    
 
-# tck = interpolate.splrep(g, y_points)
-# tck2= interpolate.splrep(b, y_points)
+tck = interpolate.splrep(g, y_points)
+tck2= interpolate.splrep(b, y_points)
 
-# range_of_xvaluesg=[]
-# range_of_xvaluesb= []
-# for x in np.arange(0,0.9,0.01):
-#     range_of_xvaluesg.append(f(x))
+range_of_xvaluesg=[]
+range_of_xvaluesb= []
+for x in np.arange(0,0.9,0.01):
+    range_of_xvaluesg.append(f(x))
     
-# for x in np.arange(0,0.9,0.01):
-#     range_of_xvaluesb.append(f2(x))
+for x in np.arange(0,0.9,0.01):
+    range_of_xvaluesb.append(f2(x))
     
-# range_of_yvalues=[]
-# for y in np.arange(0,0.9,0.01):
-#     range_of_yvalues.append(y)
+range_of_yvalues=[]
+for y in np.arange(0,0.9,0.01):
+    range_of_yvalues.append(y)
     
-# arrayg= np.array(range_of_xvaluesg)
-# arrayb= np.array(range_of_xvaluesb)
+arrayg= np.array(range_of_xvaluesg)
+arrayb= np.array(range_of_xvaluesb)
 
 # zeros=np.zeros((1,90,1))
 
