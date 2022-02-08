@@ -43,14 +43,14 @@ ipb=fb(xnew)
 ipg= fg(xnew)
 ipr=fr(xnew)
 
-plt.plot(ipb)
-plt.plot(ipg)
-plt.plot(ipr)
+# plt.plot(ipb, color="blue")
+# plt.plot(ipg, color="green")
+# plt.plot(ipr, color="red")
 
-# arrayrgb= np.dstack((ipr, ipg, ipb))
-# plt.imshow(arrayrgb)
-# plt.axis('off')
-# plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220208b.jpg', arrayrgb)
+arrayrgb= np.dstack((ipr, ipg, ipb))
+plt.imshow(arrayrgb)
+plt.axis('off')
+plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220208b.jpg', arrayrgb)
 
 # blue= b.interpolate(method='spline', order=2)
 
