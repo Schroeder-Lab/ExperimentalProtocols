@@ -30,17 +30,16 @@ array_r= np.fromfile(file_path_r,dtype='float64')
 def NormalizeData(data):
     return (data - np.min(data)) / (np.max(data) - np.min(data))
 
-# def f(x):
-#     return interpolate.splev(x, tck)
+def f(x):
+    return interpolate.splev(x, tck)
 
-# def f2(x):
-#     return interpolate.splev(x, tck2)
+def f2(x):
+    return interpolate.splev(x, tck2)
 
-# def f3(x):
-#       return interpolate.splev(x, tck3)
+def f3(x):
+      return interpolate.splev(x, tck3)
 
-# def f(x):
-#     return x.interpolate(method='spline', order=2)
+
 
 norm_array_b=  NormalizeData(array_b)
 norm_array_g=  NormalizeData(array_g)
@@ -96,54 +95,70 @@ r= np.array([frame2_r, frame3_r, frame4_r, frame5_r, frame6_r, frame7_r, frame8_
 
 
 
-# y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
+# x= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
+# fb = interpolate.InterpolatedUnivariateSpline(x, yb)
+# fg= interpolate.InterpolatedUnivariateSpline(x, yg)
+# fr=interpolate.InterpolatedUnivariateSpline(x, yr)
+
+
+# xnew = np.linspace(0, 1, num=256, endpoint=True)
+
+# ipb=fb(xnew)
+# ipg= fg(xnew)
+# ipr=fr(xnew)
+
+# arrayrgb= np.dstack((ipr, ipg, ipb))
+# plt.imshow(arrayrgb)
+# plt.axis('off')
+
+y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 
 # y= np.array(y_points)
 # blue=np.dstack((y,b))
 # green=np.dstack((y,g))
 # red=np.dstack((y,r))
 
-# tck = interpolate.splrep(g, y_points)
-# tck2= interpolate.splrep(b, y_points)
-# tck3= interpolate.splrep(r, y_points)
+tck = interpolate.splrep(y_points, g)
+tck2= interpolate.splrep(y_points, b)
+tck3= interpolate.splrep(y_points, r)
 
 
 
-# range_of_xvaluesg=[]
-# range_of_xvaluesb= []
-# range_of_xvaluesr=[]
-# for x in np.arange(0,0.9,0.003515625):
-#     range_of_xvaluesg.append(f(x))
+range_of_xvaluesg=[]
+range_of_xvaluesb= []
+range_of_xvaluesr=[]
+for x in np.arange(0,0.9,0.003515625):
+    range_of_xvaluesg.append(f(x))
     
-# for x in np.arange(0,0.9,0.003515625):
-#     range_of_xvaluesb.append(f2(x))
+for x in np.arange(0,0.9,0.003515625):
+    range_of_xvaluesb.append(f2(x))
 
-# for x in np.arange(0,0.9,0.003515625):
-#       range_of_xvaluesr.append(f3(x))
-
-    
-# range_of_yvalues=[]
-# for y in np.arange(0,0.9,0.003515625):
-#     range_of_yvalues.append(y)
-    
+for x in np.arange(0,0.9,0.003515625):
+      range_of_xvaluesr.append(f3(x))
 
     
-# arrayg= np.array(range_of_xvaluesg)
-# arrayb= np.array(range_of_xvaluesb)
-# arrayr= np.array(range_of_xvaluesr)
+range_of_yvalues=[]
+for y in np.arange(0,0.9,0.003515625):
+    range_of_yvalues.append(y)
+    
 
-# #zeros=np.zeros((1,256,1))
+    
+arrayg= np.array(range_of_xvaluesg)
+arrayb= np.array(range_of_xvaluesb)
+arrayr= np.array(range_of_xvaluesr)
+
+#zeros=np.zeros((1,256,1))
 
 
-# arrayrgb= np.dstack((arrayr, arrayg, arrayb))
+arrayrgb= np.dstack((arrayr, arrayg, arrayb))
 
 
 
 
-# plt.imshow(arrayrgb)
-# plt.axis('off')
-# plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//LUTs//ourLUTrgb20220206.jpg', arrayrgb)
+plt.imshow(arrayrgb)
+plt.axis('off')
+plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220211.jpg', arrayrgb)
 
 #plt.save(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png')
 
