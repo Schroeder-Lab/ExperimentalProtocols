@@ -18,4 +18,4 @@ arraygray= np.dstack((y,y,y))
 
 plt.imshow(arraygray)
 plt.axis('off')
-plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTgray.png')
+plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTgray20220215.png', arraygray)
