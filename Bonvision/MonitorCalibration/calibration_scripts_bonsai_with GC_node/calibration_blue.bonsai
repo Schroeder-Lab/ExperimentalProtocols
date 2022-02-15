@@ -57,17 +57,9 @@
       <Expression xsi:type="BehaviorSubject">
         <Name>DrawStimuli</Name>
       </Expression>
-<<<<<<< Updated upstream
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
-          <ClearColor>Gray</ClearColor>
-          <GammaLut>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\LUTs\ourLUTrgb20220211.jpg</GammaLut>
-        </Builder>
-=======
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.GammaCorrection.bonsai">
         <ClearColor>Gray</ClearColor>
-        <GammaLut>C:\Users\maria\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\LUTs\ourLUT_final.jpg</GammaLut>
->>>>>>> Stashed changes
+        <GammaLut>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\LUTs\ourLUT_final.jpg</GammaLut>
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.ParameterRange.bonsai">
@@ -122,7 +114,7 @@
                     <Angle>0</Angle>
                     <ColorR>0</ColorR>
                     <ColorG>0</ColorG>
-                    <ColorB>0.5555556</ColorB>
+                    <ColorB>1</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -151,54 +143,38 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Concat" />
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="mx:AnalogInput">
-            <mx:SignalSource />
-            <mx:SampleRate>1000</mx:SampleRate>
-            <mx:ActiveEdge>Rising</mx:ActiveEdge>
-            <mx:SampleMode>ContinuousSamples</mx:SampleMode>
-            <mx:BufferSize>1000</mx:BufferSize>
-            <mx:SamplesPerRead>-1</mx:SamplesPerRead>
-            <mx:Channels>
-              <mx:AnalogInputChannelConfiguration>
-                <mx:ChannelName />
-                <mx:MinimumValue>-10</mx:MinimumValue>
-                <mx:MaximumValue>10</mx:MaximumValue>
-                <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
-                <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-                <mx:VoltageUnits>Volts</mx:VoltageUnits>
-              </mx:AnalogInputChannelConfiguration>
-            </mx:Channels>
-          </Combinator>
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="mx:AnalogInput">
+          <mx:SignalSource />
+          <mx:SampleRate>1000</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1000</mx:BufferSize>
+          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:Channels>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName />
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+          </mx:Channels>
+        </Combinator>
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="rx:Take">
-            <rx:Count>24000</rx:Count>
-          </Combinator>
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>24000</rx:Count>
+        </Combinator>
       </Expression>
-<<<<<<< Updated upstream
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\output_files\20220214\withoutGC\Calibration_blue1</dsp:Path>
+          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\output_files\20220215\ourLUT\Calibration_blue1</dsp:Path>
           <dsp:Suffix>None</dsp:Suffix>
           <dsp:Overwrite>true</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
         </Combinator>
-=======
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="dsp:MatrixWriter">
-            <dsp:Path>different_brightness\Calibration_blue1</dsp:Path>
-            <dsp:Suffix>None</dsp:Suffix>
-            <dsp:Overwrite>true</dsp:Overwrite>
-            <dsp:Layout>ColumnMajor</dsp:Layout>
-          </Combinator>
-        </Builder>
->>>>>>> Stashed changes
       </Expression>
     </Nodes>
     <Edges>
