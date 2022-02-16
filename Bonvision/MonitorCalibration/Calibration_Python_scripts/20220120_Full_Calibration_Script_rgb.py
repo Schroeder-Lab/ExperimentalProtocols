@@ -81,17 +81,17 @@ y_points= [0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1]
 # #why does this produce 27 values?
 
 
-# #plotting all frames to check if they match our expectations
-# fig, axs = plt.subplots(1, 3, figsize=(30, 9))
-# axs[0].plot(arrays[0].T)
-# axs[1].plot(arrays[1].T)
-# axs[2].plot(arrays[2].T)
+#plotting all frames to check if they match our expectations
+fig, axs = plt.subplots(1, 3, figsize=(30, 9))
+axs[0].plot(arrays[0].T)
+axs[1].plot(arrays[1].T)
+axs[2].plot(arrays[2].T)
 
 
-# fig, axs = plt.subplots(1, 3, figsize=(30, 9))
-# axs[0].plot(np.mean(arrays[0],1),'o', color= "red")
-# axs[1].plot(np.mean(arrays[1],1),'o', color="green")
-# axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
+fig, axs = plt.subplots(1, 3, figsize=(30, 9))
+axs[0].plot(np.mean(arrays[0],1),'o', color= "red")
+axs[1].plot(np.mean(arrays[1],1),'o', color="green")
+axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
 
     
 # #interpolation    

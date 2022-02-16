@@ -17,10 +17,11 @@ def normalize_data(data):
 
 
 #files location
-filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//withGnode//"
+filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//20220216//"
 
 #files
-files = ["Calibration_red0","Calibration_green0","Calibration_blue0"]
+#files = ["Calibration_red1","Calibration_green1","Calibration_blue1"]
+files = ["Calibration_blue1"]
 
 
 start = 4000
