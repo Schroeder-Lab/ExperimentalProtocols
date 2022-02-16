@@ -12,9 +12,9 @@ from scipy import interpolate
 #loading file
 #file_path= "C://Users//maria//Desktop//PhD//Code//Calibration_blue3"
 
-file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//different_brightness//Calibration_blue1"
-file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//different_brightness//Calibration_green1"
-file_path_r= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//different_brightness//Calibration_red1"
+file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//20220214//withoutGC//Calibration_blue1"
+file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//20220214//withoutGC//Calibration_green1"
+file_path_r= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//20220214//withoutGC//Calibration_red1"
 
 # file_path_b= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//beforeC//Calibration_blue1"
 # file_path_g= "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//beforeC//Calibration_green1"
@@ -158,7 +158,7 @@ arrayrgb= np.dstack((arrayr, arrayg, arrayb))
 
 plt.imshow(arrayrgb)
 plt.axis('off')
-plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220211.jpg', arrayrgb)
+#plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220211.jpg', arrayrgb)
 
 #plt.save(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUTrgb.png')
 
