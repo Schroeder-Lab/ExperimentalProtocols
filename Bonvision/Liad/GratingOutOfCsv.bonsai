@@ -8,10 +8,10 @@
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
-                 xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
-                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:gli="clr-namespace:Bonsai.Shaders.Input;assembly=Bonsai.Shaders"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
+                 xmlns:p1="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
+                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -569,10 +569,10 @@ def generate():
         <FileName>C:\Data\Test\2022-02-17\Log.csv</FileName>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="spk:SpinnakerCapture">
-          <spk:Index xsi:nil="true" />
-          <spk:SerialNumber>21225772</spk:SerialNumber>
-          <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
+        <Combinator xsi:type="p1:SpinnakerCapture">
+          <p1:Index xsi:nil="true" />
+          <p1:SerialNumber>21225772</p1:SerialNumber>
+          <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
         </Combinator>
       </Expression>
       <Expression xsi:type="MemberSelector">
