@@ -50,7 +50,7 @@ ipr=fr(xnew)
 arrayrgb= np.dstack((ipr, ipg, ipb))
 plt.imshow(arrayrgb)
 plt.axis('off')
-plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220208b.jpg', arrayrgb)
+#plt.imsave('C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//LUTs//ourLUTrgb20220208b.jpg', arrayrgb)
 
 # blue= b.interpolate(method='spline', order=2)
 
