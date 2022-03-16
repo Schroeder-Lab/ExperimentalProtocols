@@ -43,7 +43,7 @@ data = np.array([0,0,0,0]).T
 
 fileName = 'csvGratingsContrastChange'
 orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
-Sfrequencies = [0.08]
+Sfrequencies = [0.01,0.02,0.05,0.1,0.5,1]
 Tfrequencies = [0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
 contrasts = [1]
 
