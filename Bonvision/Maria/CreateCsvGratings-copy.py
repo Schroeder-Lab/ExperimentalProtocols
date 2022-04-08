@@ -31,21 +31,21 @@ data = np.array([0,0,0,0]).T
 
 ####Changing Temporal Frequencies
 
-# fileName = 'csvGratingsTemporalChange'
-# orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
-# Sfrequencies = [0.08]
-# Tfrequencies = [0.5, 1, 2, 4, 8 ,16]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
-# contrasts = [1]#[0,0.25,0.5,1]
+fileName = 'csvGratingsTemporalChange'
+orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
+Sfrequencies = [0.08]
+Tfrequencies = [0.5, 1, 2, 4, 8 ,16]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+contrasts = [1]#[0,0.25,0.5,1]
 
 #########################################################################################
 
 ####Changing Contrast
 
-fileName = 'csvGratingsContrastChange'
-orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
-Sfrequencies = [0.08]
-Tfrequencies = [2]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
-contrasts = [0,0.125,0.25,0.5,0.75,1]
+# fileName = 'csvGratingsContrastChange'
+# orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
+# Sfrequencies = [0.08]
+# Tfrequencies = [2]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+# contrasts = [0,0.125,0.25,0.5,0.75,1]
 
 #########################################################################################
 
@@ -85,7 +85,7 @@ for ori in orientations:
             
 data = np.unique(data[1:,:],axis=0)
 totTime = len(data)*2
-print('Total Time: ' + str((totTime + totTime*3)/60) +' Minutes')
+print('Total Time: ' + str((totTime + totTime*4)/60) +' Minutes')
               
 
 with open(filePath, 'w', encoding='UTF8', newline='') as f:
