@@ -161,7 +161,7 @@
               <Append>false</Append>
               <Overwrite>false</Overwrite>
               <Suffix>FileCount</Suffix>
-              <FileName>C:\Data\Test\2022-04-07\Log.csv</FileName>
+              <FileName>C:\Data\Test\2022-04-13\Log.csv</FileName>
             </Expression>
           </Nodes>
           <Edges>
@@ -398,7 +398,7 @@
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>C:\Data\Test\2022-04-07\SparseNoise.bin</dsp:Path>
+                <dsp:Path>C:\Data\Test\2022-04-13\SparseNoise.bin</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -630,9 +630,9 @@
               <LocationY>-35</LocationY>
               <Layer>100</Layer>
               <Angle>15</Angle>
-              <ColorR>0</ColorR>
-              <ColorG>0</ColorG>
-              <ColorB>0</ColorB>
+              <ColorR>1</ColorR>
+              <ColorG>1</ColorG>
+              <ColorB>1</ColorB>
               <ColorA>1</ColorA>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
@@ -686,30 +686,6 @@
               <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
               <mx:VoltageUnits>Volts</mx:VoltageUnits>
             </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>RotaryForward</mx:ChannelName>
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai0</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>RotaryBack</mx:ChannelName>
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai4</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>Camera</mx:ChannelName>
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai2</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
           </mx:Channels>
         </Combinator>
       </Expression>
@@ -723,7 +699,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Test\2022-04-07\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>C:\Data\Test\2022-04-13\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -762,7 +738,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Test\2022-04-07\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\Test\2022-04-13\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>true</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -933,64 +909,88 @@ def generate():
       <Expression xsi:type="BehaviorSubject">
         <Name>LogDir</Name>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="ard:DigitalInput">
-          <ard:PortName>COM3</ard:PortName>
-          <ard:Pin>4</ard:Pin>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="ard:DigitalInput">
+            <ard:PortName>COM3</ard:PortName>
+            <ard:Pin>4</ard:Pin>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timestamp" />
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timestamp" />
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>CameraTriggerPath</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>CameraTriggerPath</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="PropertyMapping">
+          <PropertyMappings>
+            <Property Name="FileName" />
+          </PropertyMappings>
+        </Builder>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-07\CameraTicks.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>C:\Data\Test\2022-04-13\CameraTicks.csv</io:FileName>
+          <io:Delimiter>,</io:Delimiter>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>FileCount</io:Suffix>
+          <io:IncludeHeader>false</io:IncludeHeader>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="ard:DigitalInput">
-          <ard:PortName>COM3</ard:PortName>
-          <ard:Pin>8</ard:Pin>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="ard:DigitalInput">
+            <ard:PortName>COM3</ard:PortName>
+            <ard:Pin>8</ard:Pin>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timestamp" />
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timestamp" />
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>ForwardsEncoder</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>ForwardsEncoder</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="PropertyMapping">
+          <PropertyMappings>
+            <Property Name="FileName" />
+          </PropertyMappings>
+        </Builder>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-07\ForwardsEncoder.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>C:\Data\Test\2022-04-13\ForwardsEncoder.csv</io:FileName>
+          <io:Delimiter>,</io:Delimiter>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>FileCount</io:Suffix>
+          <io:IncludeHeader>false</io:IncludeHeader>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="ard:DigitalInput">
-          <ard:PortName>COM3</ard:PortName>
-          <ard:Pin>10</ard:Pin>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="ard:DigitalInput">
+            <ard:PortName>COM3</ard:PortName>
+            <ard:Pin>10</ard:Pin>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timestamp" />
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timestamp" />
+        </Builder>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>BackwardsEncoder</Name>
@@ -1000,13 +1000,15 @@ def generate():
           <Property Name="FileName" />
         </PropertyMappings>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-07\BackwardsEncoder.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>C:\Data\Test\2022-04-13\BackwardsEncoder.csv</io:FileName>
+          <io:Delimiter>,</io:Delimiter>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>FileCount</io:Suffix>
+          <io:IncludeHeader>false</io:IncludeHeader>
+        </Builder>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Saving Dir</Name>
@@ -1070,6 +1072,79 @@ def generate():
       </Expression>
       <Expression xsi:type="BehaviorSubject">
         <Name>BackwardsEncoder</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>CameraTriggerPath</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="ard:AnalogInput">
+          <ard:PortName>COM3</ard:PortName>
+          <ard:Pin>7</ard:Pin>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timestamp" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>C:\Data\Test\2022-04-13\CameraTicks.csv</io:FileName>
+        <io:Delimiter>,</io:Delimiter>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>FileCount</io:Suffix>
+        <io:IncludeHeader>false</io:IncludeHeader>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>ForwardsEncoder</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="ard:AnalogInput">
+          <ard:PortName>COM3</ard:PortName>
+          <ard:Pin>5</ard:Pin>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timestamp" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>C:\Data\Test\2022-04-13\ForwardsEncoder.csv</io:FileName>
+        <io:Delimiter>,</io:Delimiter>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>FileCount</io:Suffix>
+        <io:IncludeHeader>false</io:IncludeHeader>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="ard:AnalogInput">
+          <ard:PortName>COM3</ard:PortName>
+          <ard:Pin>3</ard:Pin>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timestamp" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>C:\Data\Test\2022-04-13\BackwardsEncoder.csv</io:FileName>
+        <io:Delimiter>,</io:Delimiter>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>FileCount</io:Suffix>
+        <io:IncludeHeader>false</io:IncludeHeader>
       </Expression>
     </Nodes>
     <Edges>
@@ -1152,6 +1227,16 @@ def generate():
       <Edge From="96" To="97" Label="Source3" />
       <Edge From="97" To="98" Label="Source1" />
       <Edge From="98" To="99" Label="Source1" />
+      <Edge From="100" To="101" Label="Source1" />
+      <Edge From="101" To="104" Label="Source2" />
+      <Edge From="102" To="103" Label="Source1" />
+      <Edge From="103" To="104" Label="Source1" />
+      <Edge From="105" To="106" Label="Source1" />
+      <Edge From="106" To="109" Label="Source2" />
+      <Edge From="107" To="108" Label="Source1" />
+      <Edge From="108" To="109" Label="Source1" />
+      <Edge From="110" To="111" Label="Source1" />
+      <Edge From="111" To="112" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
