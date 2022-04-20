@@ -1087,13 +1087,18 @@ def generate():
           <ard:Pin>7</ard:Pin>
         </Combinator>
       </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+        <Format>CameraIn</Format>
+        <Selector xsi:nil="true" />
+        <Name>Events</Name>
+      </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:Timestamp" />
         </Builder>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-13\CameraTicks.csv</io:FileName>
+        <io:FileName>C:\Data\Test\2022-04-20\CameraTicks.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -1114,13 +1119,18 @@ def generate():
           <ard:Pin>5</ard:Pin>
         </Combinator>
       </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+        <Format>ForwardIn</Format>
+        <Selector xsi:nil="true" />
+        <Name>Events</Name>
+      </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:Timestamp" />
         </Builder>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-13\ForwardsEncoder.csv</io:FileName>
+        <io:FileName>C:\Data\Test\2022-04-20\ForwardsEncoder.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -1133,13 +1143,26 @@ def generate():
           <ard:Pin>3</ard:Pin>
         </Combinator>
       </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+        <Format>BackwardsIn</Format>
+        <Selector xsi:nil="true" />
+        <Name>Events</Name>
+      </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:Timestamp" />
         </Builder>
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>BackwardsEncoder</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-13\BackwardsEncoder.csv</io:FileName>
+        <io:FileName>C:\Data\Test\2022-04-20\BackwardsEncoder.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -1228,15 +1251,20 @@ def generate():
       <Edge From="97" To="98" Label="Source1" />
       <Edge From="98" To="99" Label="Source1" />
       <Edge From="100" To="101" Label="Source1" />
-      <Edge From="101" To="104" Label="Source2" />
+      <Edge From="101" To="105" Label="Source2" />
       <Edge From="102" To="103" Label="Source1" />
       <Edge From="103" To="104" Label="Source1" />
-      <Edge From="105" To="106" Label="Source1" />
-      <Edge From="106" To="109" Label="Source2" />
-      <Edge From="107" To="108" Label="Source1" />
+      <Edge From="104" To="105" Label="Source1" />
+      <Edge From="106" To="107" Label="Source1" />
+      <Edge From="107" To="111" Label="Source2" />
       <Edge From="108" To="109" Label="Source1" />
+      <Edge From="109" To="110" Label="Source1" />
       <Edge From="110" To="111" Label="Source1" />
-      <Edge From="111" To="112" Label="Source1" />
+      <Edge From="112" To="113" Label="Source1" />
+      <Edge From="113" To="114" Label="Source1" />
+      <Edge From="114" To="117" Label="Source1" />
+      <Edge From="115" To="116" Label="Source1" />
+      <Edge From="116" To="117" Label="Source2" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
