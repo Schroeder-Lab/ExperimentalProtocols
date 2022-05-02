@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.2"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
@@ -122,7 +122,7 @@
                     <Angle>0</Angle>
                     <ColorR>0</ColorR>
                     <ColorG>0</ColorG>
-                    <ColorB>0.111111112</ColorB>
+                    <ColorB>1</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -152,44 +152,38 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Concat" />
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="mx:AnalogInput">
-            <mx:SignalSource />
-            <mx:SampleRate>1000</mx:SampleRate>
-            <mx:ActiveEdge>Rising</mx:ActiveEdge>
-            <mx:SampleMode>ContinuousSamples</mx:SampleMode>
-            <mx:BufferSize>1000</mx:BufferSize>
-            <mx:SamplesPerRead>-1</mx:SamplesPerRead>
-            <mx:Channels>
-              <mx:AnalogInputChannelConfiguration>
-                <mx:ChannelName />
-                <mx:MinimumValue>-10</mx:MinimumValue>
-                <mx:MaximumValue>10</mx:MaximumValue>
-                <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
-                <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-                <mx:VoltageUnits>Volts</mx:VoltageUnits>
-              </mx:AnalogInputChannelConfiguration>
-            </mx:Channels>
-          </Combinator>
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="mx:AnalogInput">
+          <mx:SignalSource />
+          <mx:SampleRate>1000</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1000</mx:BufferSize>
+          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:Channels>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName />
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+          </mx:Channels>
+        </Combinator>
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="rx:Take">
-            <rx:Count>24000</rx:Count>
-          </Combinator>
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>24000</rx:Count>
+        </Combinator>
       </Expression>
-      <Expression xsi:type="Disable">
-        <Builder xsi:type="Combinator">
-          <Combinator xsi:type="dsp:MatrixWriter">
-            <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\output_files\20220215\ourLUT\Calibration_blue1</dsp:Path>
-            <dsp:Suffix>None</dsp:Suffix>
-            <dsp:Overwrite>true</dsp:Overwrite>
-            <dsp:Layout>ColumnMajor</dsp:Layout>
-          </Combinator>
-        </Builder>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:MatrixWriter">
+          <dsp:Path>C:\Users\LABadmin\Documents\GitHub\ExperimentalProtocols\Bonvision\MonitorCalibration\output_files\20220428\Calibration_blue1</dsp:Path>
+          <dsp:Suffix>None</dsp:Suffix>
+          <dsp:Overwrite>true</dsp:Overwrite>
+          <dsp:Layout>ColumnMajor</dsp:Layout>
+        </Combinator>
       </Expression>
     </Nodes>
     <Edges>
