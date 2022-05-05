@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.2"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
@@ -119,6 +119,14 @@
               <mx:MaximumValue>10</mx:MaximumValue>
               <mx:PhysicalChannel>Dev1/ai6</mx:PhysicalChannel>
               <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>ArduinoSync</mx:ChannelName>
+              <mx:MinimumValue>-5</mx:MinimumValue>
+              <mx:MaximumValue>5</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai4</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Rse</mx:TerminalConfiguration>
               <mx:VoltageUnits>Volts</mx:VoltageUnits>
             </mx:AnalogInputChannelConfiguration>
           </mx:Channels>
@@ -502,164 +510,230 @@ def generate():
           <io:IncludeHeader>false</io:IncludeHeader>
         </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>Saving Dir</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>Saving Dir</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>DateDir</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>DateDir</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>\CameraTicks.csv</Value>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="StringProperty">
+            <Value>\CameraTicks.csv</Value>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Zip" />
+        </Builder>
       </Expression>
-      <Expression xsi:type="Format">
-        <Format>{0}{1}{2}</Format>
-        <Selector>Item1,Item2,Item3</Selector>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Format">
+          <Format>{0}{1}{2}</Format>
+          <Selector>Item1,Item2,Item3</Selector>
+        </Builder>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
-        <Name>CameraTriggerPath</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="BehaviorSubject">
+          <Name>CameraTriggerPath</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>Saving Dir</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>Saving Dir</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>DateDir</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>DateDir</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>\ForwardsEncoder.csv</Value>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="StringProperty">
+            <Value>\ForwardsEncoder.csv</Value>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Zip" />
+        </Builder>
       </Expression>
-      <Expression xsi:type="Format">
-        <Format>{0}{1}{2}</Format>
-        <Selector>Item1,Item2,Item3</Selector>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Format">
+          <Format>{0}{1}{2}</Format>
+          <Selector>Item1,Item2,Item3</Selector>
+        </Builder>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
-        <Name>ForwardsEncoder</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="BehaviorSubject">
+          <Name>ForwardsEncoder</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>Saving Dir</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>Saving Dir</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>DateDir</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>DateDir</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>\BackwardsEncoder.csv</Value>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="StringProperty">
+            <Value>\BackwardsEncoder.csv</Value>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Zip" />
+        </Builder>
       </Expression>
-      <Expression xsi:type="Format">
-        <Format>{0}{1}{2}</Format>
-        <Selector>Item1,Item2,Item3</Selector>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Format">
+          <Format>{0}{1}{2}</Format>
+          <Selector>Item1,Item2,Item3</Selector>
+        </Builder>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
-        <Name>BackwardsEncoder</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="BehaviorSubject">
+          <Name>BackwardsEncoder</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>CameraTriggerPath</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>CameraTriggerPath</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="PropertyMapping">
+          <PropertyMappings>
+            <Property Name="FileName" />
+          </PropertyMappings>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="ard:AnalogInput">
-          <ard:PortName>COM3</ard:PortName>
-          <ard:Pin>7</ard:Pin>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="ard:AnalogInput">
+            <ard:PortName>COM3</ard:PortName>
+            <ard:Pin>7</ard:Pin>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-        <Format>CameraIn</Format>
-        <Selector xsi:nil="true" />
-        <Name>Events</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+          <Format>CameraIn</Format>
+          <Selector xsi:nil="true" />
+          <Name>Events</Name>
+        </Builder>
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:Timestamp" />
         </Builder>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-25\CameraTicks.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>C:\Data\Test\2022-04-25\CameraTicks.csv</io:FileName>
+          <io:Delimiter>,</io:Delimiter>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>FileCount</io:Suffix>
+          <io:IncludeHeader>false</io:IncludeHeader>
+        </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>ForwardsEncoder</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>ForwardsEncoder</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="PropertyMapping">
+          <PropertyMappings>
+            <Property Name="FileName" />
+          </PropertyMappings>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="ard:AnalogInput">
-          <ard:PortName>COM3</ard:PortName>
-          <ard:Pin>5</ard:Pin>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="ard:AnalogInput">
+            <ard:PortName>COM3</ard:PortName>
+            <ard:Pin>5</ard:Pin>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-        <Format>ForwardIn</Format>
-        <Selector xsi:nil="true" />
-        <Name>Events</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+          <Format>ForwardIn</Format>
+          <Selector xsi:nil="true" />
+          <Name>Events</Name>
+        </Builder>
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:Timestamp" />
         </Builder>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-25\ForwardsEncoder.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>C:\Data\Test\2022-04-25\ForwardsEncoder.csv</io:FileName>
+          <io:Delimiter>,</io:Delimiter>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>FileCount</io:Suffix>
+          <io:IncludeHeader>false</io:IncludeHeader>
+        </Builder>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="ard:AnalogInput">
-          <ard:PortName>COM3</ard:PortName>
-          <ard:Pin>3</ard:Pin>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="ard:AnalogInput">
+            <ard:PortName>COM3</ard:PortName>
+            <ard:Pin>3</ard:Pin>
+          </Combinator>
+        </Builder>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-        <Format>BackwardsIn</Format>
-        <Selector xsi:nil="true" />
-        <Name>Events</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+          <Format>BackwardsIn</Format>
+          <Selector xsi:nil="true" />
+          <Name>Events</Name>
+        </Builder>
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
           <Combinator xsi:type="rx:Timestamp" />
         </Builder>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>BackwardsEncoder</Name>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="SubscribeSubject">
+          <Name>BackwardsEncoder</Name>
+        </Builder>
       </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="PropertyMapping">
+          <PropertyMappings>
+            <Property Name="FileName" />
+          </PropertyMappings>
+        </Builder>
       </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-04-25\BackwardsEncoder.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="io:CsvWriter">
+          <io:FileName>C:\Data\Test\2022-04-25\BackwardsEncoder.csv</io:FileName>
+          <io:Delimiter>,</io:Delimiter>
+          <io:Append>false</io:Append>
+          <io:Overwrite>false</io:Overwrite>
+          <io:Suffix>FileCount</io:Suffix>
+          <io:IncludeHeader>false</io:IncludeHeader>
+        </Builder>
       </Expression>
       <Expression xsi:type="CreateAsync">
         <Name>GratingAsyncGroup</Name>
@@ -1096,6 +1170,122 @@ def generate():
         </Combinator>
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="io:CreateSerialPort">
+          <io:Name>ArduinoAnalog</io:Name>
+          <io:PortName>COM3</io:PortName>
+          <io:BaudRate>128000</io:BaudRate>
+          <io:Encoding>utf-8</io:Encoding>
+          <io:Parity>None</io:Parity>
+          <io:ParityReplace>63</io:ParityReplace>
+          <io:DataBits>8</io:DataBits>
+          <io:StopBits>One</io:StopBits>
+          <io:Handshake>None</io:Handshake>
+          <io:DiscardNull>false</io:DiscardNull>
+          <io:DtrEnable>true</io:DtrEnable>
+          <io:RtsEnable>false</io:RtsEnable>
+          <io:ReadBufferSize>4096</io:ReadBufferSize>
+          <io:WriteBufferSize>2048</io:WriteBufferSize>
+          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="io:SerialStringRead">
+          <io:PortName>ArduinoAnalog</io:PortName>
+          <io:NewLine>\n</io:NewLine>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Condition">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="scr:PythonTransform">
+              <scr:Script>@returns(bool)
+def process(value):
+  mylist = value.split("\t")
+
+  if len(mylist) == 4:
+    return True
+  else:
+    return False
+
+</scr:Script>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Parse">
+        <Pattern>%I\t%I\t%I\t%I</Pattern>
+        <Separator />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item2</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item1</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item3</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item4</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Timestamp" />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Timestamp.TimeOfDay.TotalMilliseconds</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="scr:ExpressionTransform">
+        <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Sync,  Item5 as Time)</scr:Expression>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>ArduinoInput</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>csvSampleMoving.csv</io:FileName>
+        <io:Delimiter>,</io:Delimiter>
+        <io:Append>false</io:Append>
+        <io:Overwrite>true</io:Overwrite>
+        <io:Suffix>None</io:Suffix>
+        <io:IncludeHeader>false</io:IncludeHeader>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Saving Dir</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>DateDir</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="StringProperty">
+          <Value>\ArduinoInput.csv</Value>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="Format">
+        <Format>{0}{1}{2}</Format>
+        <Selector>Item1,Item2,Item3</Selector>
+      </Expression>
+      <Expression xsi:type="BehaviorSubject">
+        <Name>ArduinoInput</Name>
+      </Expression>
     </Nodes>
     <Edges>
       <Edge From="0" To="1" Label="Source1" />
@@ -1187,6 +1377,28 @@ def generate():
       <Edge From="106" To="107" Label="Source2" />
       <Edge From="108" To="109" Label="Source1" />
       <Edge From="109" To="110" Label="Source1" />
+      <Edge From="112" To="113" Label="Source1" />
+      <Edge From="112" To="119" Label="Source1" />
+      <Edge From="113" To="114" Label="Source1" />
+      <Edge From="114" To="115" Label="Source1" />
+      <Edge From="114" To="116" Label="Source1" />
+      <Edge From="114" To="117" Label="Source1" />
+      <Edge From="114" To="118" Label="Source1" />
+      <Edge From="115" To="121" Label="Source2" />
+      <Edge From="116" To="121" Label="Source1" />
+      <Edge From="117" To="121" Label="Source3" />
+      <Edge From="118" To="121" Label="Source4" />
+      <Edge From="119" To="120" Label="Source1" />
+      <Edge From="120" To="121" Label="Source5" />
+      <Edge From="121" To="122" Label="Source1" />
+      <Edge From="122" To="125" Label="Source1" />
+      <Edge From="123" To="124" Label="Source1" />
+      <Edge From="124" To="125" Label="Source2" />
+      <Edge From="126" To="129" Label="Source1" />
+      <Edge From="127" To="129" Label="Source2" />
+      <Edge From="128" To="129" Label="Source3" />
+      <Edge From="129" To="130" Label="Source1" />
+      <Edge From="130" To="131" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
