@@ -84,18 +84,20 @@ The essential node that connects to the 2P acquisiton is called **DigitialOutput
 ## This concludes the Bonsai and Bonvision example runthrough. Hopefully this guide has helped create a better understanding of what Bonvision can do!
 
 
-# GRATINGS BONSAI FILE USER GUIDE
+# BONSAI FILES USER GUIDE
+
+*This guide applies to the [GratingsOutOfCSV](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/GratingOutOfCsv.bonsai) and the [SparseNoise](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/SparseNoise.bonsai) Bonsai files*
 
 We currently have a [Bonsai script](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/GratingOutOfCsv.bonsai) which creates moving gratings on the screen and simultaneously records what was shown using a photodiode (it also records when the 2-photon frames are recorded, when and how the mouse moves and when the camera recorded frames). In order to use this properly, two inputs need to be given:
 
-## Changing directory
+## Changing directory (*for both Bonsai files*)
 You need to specify where the metadata will be saved. For this, you need to go into the String node here and specify the name of the animal you are recording from (on the right where it says Value):
 
 ![specifying_dir](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Maria/Bonvision_guide_figures/specifying_directory.PNG)
 
 **Important: leave the backslash after the mouse name**
 
-## Changing CSV file used
+## Changing CSV file (*Gratings Bonsai file only*)
 The script takes CSV files which include all the paramaters that can be changed for gratings (orientation, spatial frequency, temporal frequency, contrast) and you can choose whether you want to test a protocol that has one of those parameters changed (this is mainly the spatial and temporal frequency and the contrast, the orientation is changed in the default protocol already). For example [this protocol](https://github.com/Schroeder-Lab/ExperimentalProtocols/blob/main/Bonvision/Liad/csvGratingsContrastChange.csv) has the contrast changed. The files can be found [here](https://github.com/Schroeder-Lab/ExperimentalProtocols/tree/main/Bonvision/Liad)
 This is where the csv file is inserted (you need to click into the GratingAsyncGroup node and click on CsvReader, then on the right you double click on FileName and it should take you to the file explorer where you can choose the file:
 
