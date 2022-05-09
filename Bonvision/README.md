@@ -84,4 +84,9 @@ The essential node that connects to the 2P acquisiton is called **DigitialOutput
 ## This concludes the Bonsai and Bonvision example runthrough. Hopefully this guide has helped create a better understanding of what Bonvision can do!
 
 
+# GRATINGS BONSAI FILE USER GUIDE
+
+We currently have a ![Bsai script which creates moving gratings on the screen
+
+
 
