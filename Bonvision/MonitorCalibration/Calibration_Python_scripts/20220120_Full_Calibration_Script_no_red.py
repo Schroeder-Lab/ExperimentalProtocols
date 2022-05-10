@@ -31,10 +31,10 @@ def combine(a,b):
     return (a,b)
 
 #files location
-filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//output_files//afterC//"
+filePath = "C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//MonitorCalibration//output_files//20220428//"
 
 #files
-files = ["Calibration_red1","Calibration_green1","Calibration_blue0"]
+files = ["Calibration_green1","Calibration_blue1"]
 
 
 start = 4000
@@ -109,7 +109,7 @@ arraygb= np.dstack((zeros,arrayg, arrayb))
 
 plt.imshow(arraygb)
 plt.axis('off')
-plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUT.png')
+# plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUT.png')
 
 
 
