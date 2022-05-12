@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.2"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
+                 xmlns:p1="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -104,40 +104,40 @@
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="gl:CreateWindow">
-          <gl:Width>960</gl:Width>
-          <gl:Height>480</gl:Height>
-          <gl:VSync>On</gl:VSync>
-          <gl:SwapSync>false</gl:SwapSync>
-          <gl:ClearColor>Gray</gl:ClearColor>
-          <gl:ClearMask>DepthBufferBit ColorBufferBit</gl:ClearMask>
-          <gl:CursorVisible>true</gl:CursorVisible>
-          <gl:Location xsi:nil="true" />
-          <gl:WindowBorder>Resizable</gl:WindowBorder>
-          <gl:WindowState>Fullscreen</gl:WindowState>
-          <gl:DisplayDevice>Second</gl:DisplayDevice>
-          <gl:TargetRenderFrequency>60</gl:TargetRenderFrequency>
-          <gl:TargetUpdateFrequency xsi:nil="true" />
-          <gl:RenderState />
-          <gl:GraphicsMode>
-            <gl:ColorFormat>
-              <gl:Red>8</gl:Red>
-              <gl:Green>8</gl:Green>
-              <gl:Blue>8</gl:Blue>
-              <gl:Alpha>8</gl:Alpha>
-            </gl:ColorFormat>
-            <gl:Depth>16</gl:Depth>
-            <gl:Stencil>0</gl:Stencil>
-            <gl:Samples>0</gl:Samples>
-            <gl:AccumulatorFormat>
-              <gl:Red>0</gl:Red>
-              <gl:Green>0</gl:Green>
-              <gl:Blue>0</gl:Blue>
-              <gl:Alpha>0</gl:Alpha>
-            </gl:AccumulatorFormat>
-            <gl:Buffers>2</gl:Buffers>
-            <gl:Stereo>false</gl:Stereo>
-          </gl:GraphicsMode>
+        <Combinator xsi:type="p1:CreateWindow">
+          <p1:Width>960</p1:Width>
+          <p1:Height>480</p1:Height>
+          <p1:VSync>On</p1:VSync>
+          <p1:SwapSync>false</p1:SwapSync>
+          <p1:ClearColor>Gray</p1:ClearColor>
+          <p1:ClearMask>DepthBufferBit ColorBufferBit</p1:ClearMask>
+          <p1:CursorVisible>true</p1:CursorVisible>
+          <p1:Location xsi:nil="true" />
+          <p1:WindowBorder>Resizable</p1:WindowBorder>
+          <p1:WindowState>Fullscreen</p1:WindowState>
+          <p1:DisplayDevice>Second</p1:DisplayDevice>
+          <p1:TargetRenderFrequency>60</p1:TargetRenderFrequency>
+          <p1:TargetUpdateFrequency xsi:nil="true" />
+          <p1:RenderState />
+          <p1:GraphicsMode>
+            <p1:ColorFormat>
+              <p1:Red>8</p1:Red>
+              <p1:Green>8</p1:Green>
+              <p1:Blue>8</p1:Blue>
+              <p1:Alpha>8</p1:Alpha>
+            </p1:ColorFormat>
+            <p1:Depth>16</p1:Depth>
+            <p1:Stencil>0</p1:Stencil>
+            <p1:Samples>0</p1:Samples>
+            <p1:AccumulatorFormat>
+              <p1:Red>0</p1:Red>
+              <p1:Green>0</p1:Green>
+              <p1:Blue>0</p1:Blue>
+              <p1:Alpha>0</p1:Alpha>
+            </p1:AccumulatorFormat>
+            <p1:Buffers>2</p1:Buffers>
+            <p1:Stereo>false</p1:Stereo>
+          </p1:GraphicsMode>
         </Combinator>
       </Expression>
     </Nodes>
