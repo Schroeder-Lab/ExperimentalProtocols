@@ -973,11 +973,24 @@ def generate():
                       <ColorA>1</ColorA>
                     </Builder>
                   </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>GratingParams</Name>
+                  <Expression xsi:type="scr:PythonSource">
+                    <scr:Script>from System import Random, TimeSpan
+random = Random()
+
+@returns(bool)
+def generate():
+  ind = random.Next(0,4)
+  yield bool(random.NextInt64(1))</scr:Script>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Reward</Selector>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Value" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="BooleanProperty">
+                      <Value>false</Value>
+                    </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
@@ -1051,6 +1064,7 @@ def generate():
                   <Edge From="33" To="34" Label="Source1" />
                   <Edge From="34" To="35" Label="Source1" />
                   <Edge From="35" To="36" Label="Source1" />
+                  <Edge From="36" To="37" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
