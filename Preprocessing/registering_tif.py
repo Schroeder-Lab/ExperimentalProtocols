@@ -76,15 +76,15 @@ How it does it:
 """
 #specifying the paths
 drive= 'D://Tiff_stacks'
-animal=  'Hedes'
-date= '2022-03-30'
-unreg_name= 'file_00005_00001'
+animal=  'Glaucus'
+date= '2022-04-28'
+unreg_name= 'file_00007_00001'
 
 filePath=drive+'//'+animal+ '//'+date+ '//'+unreg_name+'.tif'
 
 
 reg_stack_name= "reg_z-stack"
-path_reg= filePath+ reg_stack_name
+path_reg= drive+'//'+animal+ '//'+date+ '//registered.tif'
 
 
 
