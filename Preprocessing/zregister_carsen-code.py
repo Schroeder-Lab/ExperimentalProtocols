@@ -4,7 +4,21 @@ Created on Wed Jun  8 17:05:10 2022
 
 @author: maria
 """
+"""
+From Carsen's email to Sylvia:
+What the code does:
+-compute reference image from each plane
+-align reference images to each other
+-align each frame to each reference image and choose shifts based on best correlation
+It returns the best correlation reference image index as ops['zpos_registration'].
 
+There were some changes to the main suite2p code. To use this clone the repository then 
+
+git checkout refactor​
+pip install -e .​
+
+Then you'll get this version of suite2p installed. I will add it to the pip though sooner rather than later since there are some outstanding bugs. '
+"""
 
 import time, os
 import numpy as np
