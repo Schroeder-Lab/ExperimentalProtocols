@@ -31,12 +31,19 @@ import matplotlib.pyplot as plt
 
 ### RUN options
 # main ops
+
+#M:here just choosing the ops, added the below 4 lines to change file path more quickly
 ops = default_ops()
-ops['data_path'] = ['D:/DATA/M170821_SS075_2017-09-13/2/']
+animal=  'Hedes'
+date= '2022-03-23'
+experiment= '1'
+
+filePath= 'Z://RawData//'+animal+ '//'+date+'//'+experiment+'//'
+ops['data_path'] = [filePath]
 ops['look_one_level_down'] = True
-ops['ignore_flyback'] = [0,1,2]
-ops['nchannels'] = 2
-ops['nplanes'] = 8
+ops['ignore_flyback'] = [0]
+ops['nchannels'] = 1
+ops['nplanes'] = 5
 ops['functional_chan'] = 1
 
 # registration ops
@@ -89,11 +96,13 @@ for ipl, ops_path in enumerate(ops_paths):
     
     ### compute reference image
     
+    
+#M:this part of the code above just does registration etc (what is done with the GUI usually)    
     # grab frames
     with BinaryRWFile(Ly=Ly, Lx=Lx, filename=align_file_raw) as f_align_in:
         n_frames = f_align_in.shape[0]
         frames = f_align_in[np.linspace(0, n_frames, 1 + np.minimum(ops['nimg_init'], n_frames), dtype=int)[:-1]]    
-    
+#M: this is done to adjust bidirectional shift occuring due to line scanning
     # compute bidiphase shift
     if ops['do_bidiphase'] and ops['bidiphase'] == 0 and not ops['bidi_corrected']:
         bidiphase = bidiphase.compute(frames)
@@ -117,7 +126,7 @@ for frame in frames:
     frame[:] = np.clip(frame, rmin, rmax)
     
 refImg = frames.mean(axis=0)
-
+#M: the below section is just the usual xy registration
 niter = 8
 for iter in range(0, niter):
     # rigid registration
