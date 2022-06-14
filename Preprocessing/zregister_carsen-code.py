@@ -22,7 +22,7 @@ Then you'll get this version of suite2p installed. I will add it to the pip thou
 
 import time, os
 import numpy as np
-from suite2p.registration import register, rigid
+from suite2p.registration import register, rigid, bidiphase
 from suite2p.io import tiff_to_binary, BinaryRWFile
 from suite2p import io
 from suite2p import default_ops
@@ -35,7 +35,7 @@ import matplotlib.pyplot as plt
 #M:here just choosing the ops, added the below 4 lines to change file path more quickly
 ops = default_ops()
 animal=  'Hedes'
-date= '2022-03-23'
+date= '2022-03-16'
 experiment= '1'
 
 filePath= 'Z://RawData//'+animal+ '//'+date+'//'+experiment+'//'
@@ -48,7 +48,7 @@ ops['functional_chan'] = 1
 
 # registration ops
 ops['keep_movie_raw'] = True
-ops['align_by_chan'] = 2
+ops['align_by_chan'] = 1
 
 # run for only X number frames
 #ops['frames_include'] = 1000    
@@ -172,6 +172,6 @@ for ipl, ops_path in enumerate(ops_paths):
     if ipl in ops['ignore_flyback']:
         print('>>>> skipping flyback PLANE', ipl)
         continue
-    
+#M:    
     ops = np.load(ops_path, allow_pickle=True).item()
     plt.plot(ops['zpos_registration'][:500])
