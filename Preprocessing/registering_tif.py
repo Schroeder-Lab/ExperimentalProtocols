@@ -4,7 +4,7 @@ Created on Mon May  2 11:19:06 2022
 
 @author: maria
 """
-
+import os
 import numpy as np
 import pandas as pd
 import skimage
@@ -13,7 +13,9 @@ from skimage import data
 from skimage.util import img_as_float
 import tifftools as tt
 from pystackreg import StackReg
+from datetime import date
 
+today = date.today()
 #save as tiff!
 def save_image(path, img, **kwargs):
     if "interpolation" in kwargs:
@@ -77,15 +79,21 @@ How it does it:
 #specifying the paths
 drive= 'D://Tiff_stacks'
 animal=  'Glaucus'
-date= '2022-04-28'
-unreg_name= 'file_00007_00001'
+date= '2022-03-28'
+#to get the unregistered number need to go to folder where the raw tiff is and check the format, usually it's file_0000x_000001 where x depends on the no. of the folder 
+unreg_number= 7
+unreg_number_str= str(unreg_number)
+date_today= str(today)
 
-filePath=drive+'//'+animal+ '//'+date+ '//'+unreg_name+'.tif'
+filePath=drive+'//'+animal+ '//'+date+ '//''file_0000'+unreg_number_str+'_00001.tif'
+
 
 
 reg_stack_name= "reg_z-stack"
-path_reg= drive+'//'+animal+ '//'+date+ '//registered.tif'
-
+path_reg= drive+'//'+animal+ '//'+date+ '//'+date_today+'registered.tif'
+#target_dir=drive+'//'+animal+ '//'+date+'//'
+#os.mkdir(target_dir)
+path_reg_Zdrive='Z://RawData//'+animal+ '//'+date+ '//'+unreg_number_str+'//'+date_today+'registered.tif'
 
 
 #reading the tif
@@ -94,7 +102,7 @@ TIF= skimage.io.imread(filePath)
 image = np.array(TIF)
 
 
-#loop to create the registered arrays with the out_first function that I created based on the module pystackreg
+#loop to create the registered arrays with the "registration" function that I created based on the module pystackreg
 planes = image.shape[0]
 resolutionx = image.shape[2]
 resolutiony= image.shape[3]
@@ -107,3 +115,4 @@ for i in range(image.shape[0]):
 
 #save the registered array as a tiff
 save_image(path= path_reg, img=meanreg_arrays)
+#save_image(path= path_reg_Zdrive,img=meanreg_arrays)

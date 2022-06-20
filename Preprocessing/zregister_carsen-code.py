@@ -31,20 +31,23 @@ import matplotlib.pyplot as plt
 
 ### RUN options
 # main ops
-
+#%%
 #M:here just choosing the ops, added the below 4 lines to change file path more quickly
 ops = default_ops()
 animal=  'Hedes'
-date= '2022-03-16'
-experiment= '1'
+date= '2022-03-23'
+experiment= 'suite2p'
 
-filePath= 'Z://RawData//'+animal+ '//'+date+'//'+experiment+'//'
+filePath= 'D://Suite2Pprocessedfiles//'+animal+ '//'+date+'//'
 ops['data_path'] = [filePath]
-ops['look_one_level_down'] = True
+ops['look_one_level_down'] = False
 ops['ignore_flyback'] = [0]
 ops['nchannels'] = 1
 ops['nplanes'] = 5
 ops['functional_chan'] = 1
+#M: added the below because there was an error from line 25, "not enough values to unpack"
+#
+
 
 # registration ops
 ops['keep_movie_raw'] = True
@@ -64,6 +67,7 @@ os.makedirs(save_folder, exist_ok=True)
 
 #ops = tiff_to_binary(ops)
 
+#%%
 from natsort import natsorted
 plane_folders = natsorted([ f.path for f in os.scandir(save_folder) if f.is_dir() and f.name[:5]=='plane'])
 ops_paths = [os.path.join(f, 'ops.npy') for f in plane_folders]
@@ -71,6 +75,8 @@ nplanes = len(ops_paths)
 
 ### compute reference images
 
+#error here: Assertion Error?
+#%%
 refImgs = []
 
 for ipl, ops_path in enumerate(ops_paths):
@@ -116,7 +122,7 @@ for ipl, ops_path in enumerate(ops_paths):
         
     # compute reference image
     refImgs.append(register.compute_reference(frames))
-
+#%%
 
 ### align reference frames to each other
 
