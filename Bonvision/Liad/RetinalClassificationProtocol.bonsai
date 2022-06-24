@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.0"
+<WorkflowBuilder Version="2.6.2"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
@@ -59,61 +59,9 @@
         <Name>DrawStim</Name>
       </Expression>
       <Expression xsi:type="GroupWorkflow">
-        <Name>ChirpDown</Name>
+        <Name>ChirpContrast</Name>
         <Workflow>
           <Nodes>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>ChirpHigh</Name>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="RangeBegin" Selector="it" />
-              </PropertyMappings>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>ChirpLow</Name>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="RangeEnd" Selector="it" />
-              </PropertyMappings>
-            </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.RangeAnimation.bonsai">
-              <Duration>10</Duration>
-              <RangeBegin>50</RangeBegin>
-              <RangeEnd>0.5</RangeEnd>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="Frequency" />
-              </PropertyMappings>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="dsp:FunctionGenerator">
-                <dsp:BufferLength>1</dsp:BufferLength>
-                <dsp:Frequency>25.25</dsp:Frequency>
-                <dsp:Waveform>Sine</dsp:Waveform>
-                <dsp:SampleRate>100</dsp:SampleRate>
-                <dsp:Amplitude>1</dsp:Amplitude>
-                <dsp:Offset>0.5</dsp:Offset>
-                <dsp:Phase>0</dsp:Phase>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Index">
-              <Operand xsi:type="IntProperty">
-                <Value>0</Value>
-              </Operand>
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Val0</Selector>
-            </Expression>
-            <Expression xsi:type="PropertyMapping">
-              <PropertyMappings>
-                <Property Name="ColorR" Selector="it" />
-                <Property Name="ColorG" Selector="it" />
-                <Property Name="ColorB" Selector="it" />
-              </PropertyMappings>
-            </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>ChirpDuration</Name>
             </Expression>
@@ -133,6 +81,42 @@
             <Expression xsi:type="SubscribeSubject">
               <Name>DrawStim</Name>
             </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.RangeAnimation.bonsai">
+              <Duration>10</Duration>
+              <RangeBegin>0</RangeBegin>
+              <RangeEnd>1</RangeEnd>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="Amplitude" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="dsp:FunctionGenerator">
+                <dsp:BufferLength>1</dsp:BufferLength>
+                <dsp:Frequency>10</dsp:Frequency>
+                <dsp:Waveform>Sine</dsp:Waveform>
+                <dsp:SampleRate>100</dsp:SampleRate>
+                <dsp:Amplitude>0.5</dsp:Amplitude>
+                <dsp:Offset>0.5</dsp:Offset>
+                <dsp:Phase>0</dsp:Phase>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Index">
+              <Operand xsi:type="IntProperty">
+                <Value>0</Value>
+              </Operand>
+            </Expression>
+            <Expression xsi:type="MemberSelector">
+              <Selector>Val0</Selector>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="ColorR" Selector="it" />
+                <Property Name="ColorG" Selector="it" />
+                <Property Name="ColorB" Selector="it" />
+              </PropertyMappings>
+            </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
               <ExtentX>100</ExtentX>
               <ExtentY>100</ExtentY>
@@ -140,9 +124,9 @@
               <LocationY>0</LocationY>
               <Layer>0</Layer>
               <Angle>0</Angle>
-              <ColorR>1.35679865</ColorR>
-              <ColorG>1.35679865</ColorG>
-              <ColorB>1.35679865</ColorB>
+              <ColorR>0.5</ColorR>
+              <ColorG>0.5</ColorG>
+              <ColorB>0.5</ColorB>
               <ColorA>1</ColorA>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -156,27 +140,23 @@
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="4" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="4" Label="Source2" />
-            <Edge From="4" To="5" Label="Source1" />
+            <Edge From="3" To="12" Label="Source2" />
+            <Edge From="4" To="11" Label="Source2" />
             <Edge From="5" To="6" Label="Source1" />
             <Edge From="6" To="7" Label="Source1" />
             <Edge From="7" To="8" Label="Source1" />
             <Edge From="8" To="9" Label="Source1" />
-            <Edge From="9" To="15" Label="Source1" />
+            <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
             <Edge From="12" To="13" Label="Source1" />
-            <Edge From="13" To="16" Label="Source2" />
-            <Edge From="14" To="15" Label="Source2" />
-            <Edge From="15" To="16" Label="Source1" />
-            <Edge From="16" To="17" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
       <Expression xsi:type="GroupWorkflow">
-        <Name>ChirpUp</Name>
+        <Name>ChirpFrequency</Name>
         <Workflow>
           <Nodes>
             <Expression xsi:type="SubscribeSubject">
@@ -208,7 +188,7 @@
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:FunctionGenerator">
                 <dsp:BufferLength>1</dsp:BufferLength>
-                <dsp:Frequency>25.25</dsp:Frequency>
+                <dsp:Frequency>17.412500381469727</dsp:Frequency>
                 <dsp:Waveform>Sine</dsp:Waveform>
                 <dsp:SampleRate>100</dsp:SampleRate>
                 <dsp:Amplitude>1</dsp:Amplitude>
@@ -257,9 +237,9 @@
               <LocationY>0</LocationY>
               <Layer>0</Layer>
               <Angle>0</Angle>
-              <ColorR>1.369874</ColorR>
-              <ColorG>1.369874</ColorG>
-              <ColorB>1.369874</ColorB>
+              <ColorR>-0.336152017</ColorR>
+              <ColorG>-0.336152017</ColorG>
+              <ColorB>-0.336152017</ColorB>
               <ColorA>1</ColorA>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -655,9 +635,9 @@
               <LocationY>0.95</LocationY>
               <Layer>10</Layer>
               <Angle>0</Angle>
-              <ColorR>1</ColorR>
-              <ColorG>1</ColorG>
-              <ColorB>1</ColorB>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
               <ColorA>1</ColorA>
             </Expression>
             <Expression xsi:type="Combinator">
