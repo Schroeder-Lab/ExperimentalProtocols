@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.6.3"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
+                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="scr:PythonSource">
+          <scr:Name>RandomVectors</scr:Name>
+          <scr:Script>import clr
+clr.AddReference("OpenCV.Net")
+from OpenCV.Net import *
+from System import Array
+from System import Random, TimeSpan
+
+@returns(Mat)
+def generate():
+  vector = 100
+  random = Random()
+  duration = random.Next(vector)
+  interval  = Array.CreateInstance(float, vector)
+  
+  for i in range(vector):
+    if i &gt;= duration:
+      interval[i] = 1
+    else:
+      interval[i] = 0
+      
+  yield Mat.FromArray(interval,1,vector,Depth.F64,1)
+</scr:Script>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:RepeatCount">
+            <rx:Count>1000</rx:Count>
+          </Combinator>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="dsp:MatrixWriter">
+            <dsp:Path>Bonsai\rand_signal</dsp:Path>
+            <dsp:Suffix>None</dsp:Suffix>
+            <dsp:Overwrite>false</dsp:Overwrite>
+            <dsp:Layout>ColumnMajor</dsp:Layout>
+          </Combinator>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>Random Numbers</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="scr:PythonSource">
+                <scr:Name>Random Numbers</scr:Name>
+                <scr:Description />
+                <scr:Script>import clr
+clr.AddReference("OpenCV.Net")
+from OpenCV.Net import *
+from System import Array
+from System import Random, TimeSpan
+
+@returns(int)
+def generate():
+
+  random = Random()
+  duration = random.Next()
+  
+  yield duration</scr:Script>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Repeat" />
+              </Expression>
+              <Expression xsi:type="WorkflowOutput" />
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="GroupWorkflow">
+          <Name>Interval 0</Name>
+          <Workflow>
+            <Nodes>
+              <Expression xsi:type="scr:PythonSource">
+                <scr:Name>Random Numbers</scr:Name>
+                <scr:Description />
+                <scr:Script>import clr
+clr.AddReference("OpenCV.Net")
+from OpenCV.Net import *
+from System import Array
+from System import Random, TimeSpan
+
+@returns(int)
+def generate():
+
+  
+  yield 0
+
+
+
+</scr:Script>
+              </Expression>
+              <Expression xsi:type="Combinator">
+                <Combinator xsi:type="rx:Repeat" />
+              </Expression>
+              <Expression xsi:type="WorkflowOutput" />
+            </Nodes>
+            <Edges>
+              <Edge From="0" To="1" Label="Source1" />
+              <Edge From="1" To="2" Label="Source1" />
+            </Edges>
+          </Workflow>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timer">
+            <rx:DueTime>PT5S</rx:DueTime>
+            <rx:Period>PT0S</rx:Period>
+          </Combinator>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:TakeUntil" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Timer">
+            <rx:DueTime>PT10S</rx:DueTime>
+            <rx:Period>PT0S</rx:Period>
+          </Combinator>
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:TakeUntil" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Concat" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="rx:Repeat" />
+        </Builder>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Random Vectors</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="scr:PythonSource">
+              <scr:Name>Random Numbers</scr:Name>
+              <scr:Description />
+              <scr:Script>import clr
+clr.AddReference("OpenCV.Net")
+from OpenCV.Net import *
+from System import Array
+from System import Random, TimeSpan
+
+@returns(Mat)
+def generate():
+  vector = 100
+  random = Random()
+  duration = random.Next(vector)
+  interval  = Array.CreateInstance(float, vector)
+  
+  for i in range(vector):
+    if i &gt;= duration:
+      interval[i] = 1
+    else:
+      interval[i] = 0
+      
+  yield Mat.FromArray(interval,1,vector,Depth.F64,1)
+</scr:Script>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Repeat" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>Interval 0</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="scr:PythonSource">
+              <scr:Name>Random Numbers</scr:Name>
+              <scr:Description />
+              <scr:Script>import clr
+clr.AddReference("OpenCV.Net")
+from OpenCV.Net import *
+from System import Array
+from System import Random, TimeSpan
+
+@returns(Mat)
+def generate():
+  vector = 100
+  interval  = Array.CreateInstance(float, vector)
+      
+  yield Mat.FromArray(interval,1,vector,Depth.F64,1)
+
+
+
+
+</scr:Script>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Repeat" />
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Timer">
+          <rx:DueTime>PT5S</rx:DueTime>
+          <rx:Period>PT0S</rx:Period>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:TakeUntil" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Timer">
+          <rx:DueTime>PT10S</rx:DueTime>
+          <rx:Period>PT0S</rx:Period>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:TakeUntil" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Concat" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Repeat" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="mx:AnalogOutput">
+          <mx:SignalSource />
+          <mx:SampleRate>0</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1000</mx:BufferSize>
+          <mx:Channels>
+            <mx:AnalogOutputChannelConfiguration>
+              <mx:ChannelName>Sync signal</mx:ChannelName>
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ao0</mx:PhysicalChannel>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogOutputChannelConfiguration>
+          </mx:Channels>
+        </Combinator>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="1" Label="Source1" />
+      <Edge From="1" To="2" Label="Source1" />
+      <Edge From="3" To="6" Label="Source1" />
+      <Edge From="4" To="8" Label="Source1" />
+      <Edge From="5" To="6" Label="Source2" />
+      <Edge From="6" To="9" Label="Source1" />
+      <Edge From="7" To="8" Label="Source2" />
+      <Edge From="8" To="9" Label="Source2" />
+      <Edge From="9" To="10" Label="Source1" />
+      <Edge From="11" To="14" Label="Source1" />
+      <Edge From="12" To="16" Label="Source1" />
+      <Edge From="13" To="14" Label="Source2" />
+      <Edge From="14" To="17" Label="Source1" />
+      <Edge From="15" To="16" Label="Source2" />
+      <Edge From="16" To="17" Label="Source2" />
+      <Edge From="17" To="18" Label="Source1" />
+      <Edge From="18" To="19" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>

@@ -5,6 +5,9 @@ Created on Wed Apr 13 09:26:53 2022
 @author: Liad J. Baruchin
 """
 
+import numpy as np
+import scipy as sp
+
 def GetMetadataChannels(niDaqFilePath, numChannels = 7):
     """
     
@@ -23,7 +26,7 @@ def GetMetadataChannels(niDaqFilePath, numChannels = 7):
 
     """
     niDaq = np.fromfile(niDaqFile, dtype= np.float64)
-    niDaq = np.reshape(niDaq,(int(len(niDaq)/7),7))
+    niDaq = np.reshape(niDaq,(int(len(niDaq)/numChannels),numChannels))
     return niDaq
 
 def AssignFrameTime(frameClock,th = 0.5,plot=False):
@@ -130,7 +133,7 @@ def DetectPhotodiodeChangesComplicated(photodiode,plot=False,lowPass=30,kernel =
     
     return crossings
 
-def DetectPhotodiodeChanges(photodiode,plot=False,lowPass=30,kernel = 101,fs=1000, waitTime=5000):
+def DetectPhotodiodeChanges(photodiode,plot=False,lowPass=30,kernel = 101,fs=1000, waitTime=5000, sameThreshold = False, filtSig = False):
     """
     The function detects photodiode changes using a 'Schmitt Trigger', that is, by
     detecting the signal going up at an earlier point than the signal going down,
@@ -149,8 +152,12 @@ def DetectPhotodiodeChanges(photodiode,plot=False,lowPass=30,kernel = 101,fs=100
     
     b,a = sp.signal.butter(1, lowPass, btype='low', fs=fs)
     # sigFilt = photodiode
-    sigFilt = sp.signal.filtfilt(b,a,photodiode)
-    sigFilt = sp.signal.medfilt(sigFilt,kernel)
+    if (filtSig):
+        sigFilt = sp.signal.filtfilt(b,a,photodiode)
+        sigFilt = sp.signal.medfilt(sigFilt,kernel)
+    else:
+        sigFilt = photodiode
+    
    
   
     maxSig = np.max(sigFilt)
@@ -159,6 +166,11 @@ def DetectPhotodiodeChanges(photodiode,plot=False,lowPass=30,kernel = 101,fs=100
     thresholdD = (maxSig-minSig)*0.8
     threshold =  (maxSig-minSig)*0.5
     
+    
+    if (sameThreshold):
+        thresholdD = thresholdU
+        thresholdU = thresholdU
+        
     # find thesehold crossings
     crossingsU = np.where(np.diff(np.array(sigFilt > thresholdU).astype(int),prepend=False)>0)[0]
     crossingsD = np.where(np.diff(np.array(sigFilt > thresholdD).astype(int),prepend=False)<0)[0]
@@ -166,6 +178,7 @@ def DetectPhotodiodeChanges(photodiode,plot=False,lowPass=30,kernel = 101,fs=100
     # crossingsD = np.delete(crossingsD,np.where(crossingsD<waitTime)[0])   
     crossings = np.sort(np.unique(np.hstack((crossingsU,crossingsD))))
   
+    crossings = crossings[crossings>=waitTime]
     
     if (plot):
         f,ax = plt.subplots(1,1,sharex=True)
@@ -287,24 +300,18 @@ def GetLogEntry(filePath,entryString):
     """
     
     
-
-    StimProperties  = []
-    
+    a = []   
     with open(filePath, newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        reader = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in reader:
-            a = []
-            for p in range(len(props)):
-                # m = re.findall(props[p]+'=(\d*)', row[np.min([len(row)-1,p])])
-                m = re.findall(entryString, row[np.min([len(row)-1,p])])
-                if (len(m)>0):
-                    a.append(m[0])            
-            if (len(a)>0):
-                stimProps = {}
-                for p in range(len(props)):
-                    stimProps[props[p]] = a[p]
-                StimProperties.append(stimProps)
-    return StimProperties
+                    
+            m = re.findall('^'+entryString.lower()+'*', row[2].lower())
+            if (len(m)>0):
+                a.append(row)          
+            
+    if (len(a)==0):
+        return []           
+    return np.vstack(a)
 
 def GetStimulusInfo(filePath,props):
     """
@@ -352,3 +359,37 @@ def DeriveDfSignal(F,N,fr,ws = 180):
     Nf = N-N0
     #### Implement alpha factor finding Fc = F-alpha*N with what was found above
     None
+#%% TEST
+# plt.close('all')
+filepath = 'Z:\\RawData\\SS109\\2022-04-20\\1\\'
+# # filepath = 'Z:\\RawData\\Eos\\2022-02-28\\'
+
+niDaq = np.fromfile(filepath+'NiDaqInput0.bin', dtype= np.float64)
+# niDaq = np.reshape(niDaq,(int(len(niDaq)/7),7))
+niDaq = np.reshape(niDaq,(int(len(niDaq)/4),4))
+
+# props = ['Ori','SFreq','TFreq','Contrast']
+# # props = ['SparseNoiseFrame']
+
+# fr = AssignFrameTime(niDaq[:,1],th = 0.1,plot=True)
+
+# st = DetectPhotodiodeChangesV11(niDaq[:,0],plot=True,lowPass=30,kernel = 101,fs=1000)
+
+# # dist = DetectWheelMove(niDaq[:,4],niDaq[:,5],plot = True)
+
+# sparse = GetSparseNoise(filepath+'SparseNoise0.bin',(8,9))
+
+# # stimProps = GetStimulusInfo(filepath+'Log0.csv',props)
+# # stimProps = GetLogEntry(filepath+'Log1.csv','SparseNoiseFrame')
+
+# st = st[2:]
+# # st = st[::2]
+
+# fr=fr[::2]
+# edge =972500
+
+
+# np.save('D:\\sparseNoise.npy',sparse)
+# np.save('D:\\frameTimes.npy',fr)
+# np.save('D:\\stimTimes.npy',st)
+a = GetLogEntry(filepath+'Log0.csv','forward')
