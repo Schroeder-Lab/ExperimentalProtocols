@@ -77,15 +77,15 @@ How it does it:
 
 """
 #specifying the paths
-drive= 'D://Tiff_stacks'
-animal=  'Glaucus'
-date= '2022-03-28'
+drive= 'Z://RawData'
+animal=  'Hedes'
+date= '2022-06-28'
 #to get the unregistered number need to go to folder where the raw tiff is and check the format, usually it's file_0000x_000001 where x depends on the no. of the folder 
-unreg_number= 7
+unreg_number= 4
 unreg_number_str= str(unreg_number)
 date_today= str(today)
 
-filePath=drive+'//'+animal+ '//'+date+ '//''file_0000'+unreg_number_str+'_00001.tif'
+filePath=drive+'//'+animal+ '//'+date+ '//'+unreg_number_str+'//file_0000'+unreg_number_str+'_00001.tif'
 
 
 
@@ -113,6 +113,6 @@ for i in range(image.shape[0]):
     meanreg_arrays[i,:,:] = np.mean(reg_arrays, axis=0)
 
 
-#save the registered array as a tiff
+# save the registered array as a tiff
 save_image(path= path_reg, img=meanreg_arrays)
-#save_image(path= path_reg_Zdrive,img=meanreg_arrays)
+save_image(path= path_reg_Zdrive,img=meanreg_arrays)
