@@ -973,11 +973,24 @@ def generate():
                       <ColorA>1</ColorA>
                     </Builder>
                   </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>GratingParams</Name>
+                  <Expression xsi:type="scr:PythonSource">
+                    <scr:Script>from System import Random, TimeSpan
+random = Random()
+
+@returns(bool)
+def generate():
+  ind = random.Next(0,4)
+  yield bool(random.NextInt64(1))</scr:Script>
                   </Expression>
-                  <Expression xsi:type="MemberSelector">
-                    <Selector>Reward</Selector>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Value" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="BooleanProperty">
+                      <Value>false</Value>
+                    </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
@@ -1051,6 +1064,7 @@ def generate():
                   <Edge From="33" To="34" Label="Source1" />
                   <Edge From="34" To="35" Label="Source1" />
                   <Edge From="35" To="36" Label="Source1" />
+                  <Edge From="36" To="37" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1223,82 +1237,6 @@ def generate():
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:SerialStringRead">
-          <io:PortName>ArduinoAnalog</io:PortName>
-          <io:NewLine>\n</io:NewLine>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Condition">
-        <Workflow>
-          <Nodes>
-            <Expression xsi:type="WorkflowInput">
-              <Name>Source1</Name>
-            </Expression>
-            <Expression xsi:type="scr:PythonTransform">
-              <scr:Script>@returns(bool)
-def process(value):
-  mylist = value.split("\t")
-
-  if len(mylist) == 4:
-    return True
-  else:
-    return False
-
-</scr:Script>
-            </Expression>
-            <Expression xsi:type="WorkflowOutput" />
-          </Nodes>
-          <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="2" Label="Source1" />
-          </Edges>
-        </Workflow>
-      </Expression>
-      <Expression xsi:type="Parse">
-        <Pattern>%I\t%I\t%I\t%I</Pattern>
-        <Separator />
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Item2</Selector>
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Item1</Selector>
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Item3</Selector>
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Item4</Selector>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Timestamp" />
-      </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Timestamp.TimeOfDay.TotalMilliseconds</Selector>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
-      </Expression>
-      <Expression xsi:type="scr:ExpressionTransform">
-        <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Sync,  Item5 as Time)</scr:Expression>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>ArduinoInput</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
-      </Expression>
-      <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2022-05-31\ArduinoInput.csv</io:FileName>
-        <io:Delimiter>,</io:Delimiter>
-        <io:Append>false</io:Append>
-        <io:Overwrite>false</io:Overwrite>
-        <io:Suffix>FileCount</io:Suffix>
-        <io:IncludeHeader>false</io:IncludeHeader>
-      </Expression>
-      <Expression xsi:type="Combinator">
         <Combinator xsi:type="spk:SpinnakerCapture">
           <spk:Index xsi:nil="true" />
           <spk:SerialNumber>21038392</spk:SerialNumber>
@@ -1359,6 +1297,90 @@ def process(value):
       </Expression>
       <Expression xsi:type="BehaviorSubject">
         <Name>VideoPathBottom</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="io:SerialStringRead">
+          <io:PortName>ArduinoAnalog</io:PortName>
+          <io:NewLine>\n</io:NewLine>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Skip">
+          <rx:Count>20</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Condition">
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="WorkflowInput">
+              <Name>Source1</Name>
+            </Expression>
+            <Expression xsi:type="scr:PythonTransform">
+              <scr:Script>@returns(bool)
+def process(value):
+  mylist = value.split("\t")
+
+  if len(mylist) == 5:
+    return True
+  else:
+    return False
+
+</scr:Script>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Parse">
+        <Pattern>%I\t%I\t%I\t%I\t%I,</Pattern>
+        <Separator />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item2</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item1</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item3</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item4</Selector>
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Item5</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Timestamp" />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Timestamp.TimeOfDay.TotalMilliseconds</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Zip" />
+      </Expression>
+      <Expression xsi:type="scr:ExpressionTransform">
+        <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Camera2, Item5 as Sync,  Item6 as Time)</scr:Expression>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>ArduinoInput</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="io:CsvWriter">
+        <io:FileName>C:\Data\Test\2022-06-24\ArduinoInput.csv</io:FileName>
+        <io:Delimiter>,</io:Delimiter>
+        <io:Append>false</io:Append>
+        <io:Overwrite>false</io:Overwrite>
+        <io:Suffix>FileCount</io:Suffix>
+        <io:IncludeHeader>false</io:IncludeHeader>
       </Expression>
     </Nodes>
     <Edges>
@@ -1457,33 +1479,36 @@ def process(value):
       <Edge From="115" To="116" Label="Source1" />
       <Edge From="116" To="117" Label="Source1" />
       <Edge From="118" To="119" Label="Source1" />
-      <Edge From="118" To="125" Label="Source1" />
-      <Edge From="119" To="120" Label="Source1" />
+      <Edge From="119" To="122" Label="Source1" />
       <Edge From="120" To="121" Label="Source1" />
-      <Edge From="120" To="122" Label="Source1" />
-      <Edge From="120" To="123" Label="Source1" />
-      <Edge From="120" To="124" Label="Source1" />
-      <Edge From="121" To="127" Label="Source2" />
-      <Edge From="122" To="127" Label="Source1" />
-      <Edge From="123" To="127" Label="Source3" />
-      <Edge From="124" To="127" Label="Source4" />
-      <Edge From="125" To="126" Label="Source1" />
-      <Edge From="126" To="127" Label="Source5" />
-      <Edge From="127" To="128" Label="Source1" />
-      <Edge From="128" To="131" Label="Source1" />
+      <Edge From="121" To="122" Label="Source2" />
+      <Edge From="122" To="123" Label="Source1" />
+      <Edge From="123" To="124" Label="Source1" />
+      <Edge From="125" To="128" Label="Source3" />
+      <Edge From="126" To="128" Label="Source1" />
+      <Edge From="127" To="128" Label="Source2" />
+      <Edge From="128" To="129" Label="Source1" />
       <Edge From="129" To="130" Label="Source1" />
-      <Edge From="130" To="131" Label="Source2" />
+      <Edge From="131" To="132" Label="Source1" />
       <Edge From="132" To="133" Label="Source1" />
-      <Edge From="133" To="136" Label="Source1" />
+      <Edge From="132" To="140" Label="Source1" />
+      <Edge From="133" To="134" Label="Source1" />
       <Edge From="134" To="135" Label="Source1" />
-      <Edge From="135" To="136" Label="Source2" />
-      <Edge From="136" To="137" Label="Source1" />
-      <Edge From="137" To="138" Label="Source1" />
-      <Edge From="139" To="142" Label="Source3" />
-      <Edge From="140" To="142" Label="Source1" />
-      <Edge From="141" To="142" Label="Source2" />
+      <Edge From="134" To="136" Label="Source1" />
+      <Edge From="134" To="137" Label="Source1" />
+      <Edge From="134" To="138" Label="Source1" />
+      <Edge From="134" To="139" Label="Source1" />
+      <Edge From="135" To="142" Label="Source2" />
+      <Edge From="136" To="142" Label="Source1" />
+      <Edge From="137" To="142" Label="Source3" />
+      <Edge From="138" To="142" Label="Source4" />
+      <Edge From="139" To="142" Label="Source5" />
+      <Edge From="140" To="141" Label="Source1" />
+      <Edge From="141" To="142" Label="Source6" />
       <Edge From="142" To="143" Label="Source1" />
-      <Edge From="143" To="144" Label="Source1" />
+      <Edge From="143" To="146" Label="Source1" />
+      <Edge From="144" To="145" Label="Source1" />
+      <Edge From="145" To="146" Label="Source2" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
