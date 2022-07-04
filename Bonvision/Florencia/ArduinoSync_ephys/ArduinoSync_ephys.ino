@@ -44,7 +44,7 @@ void loop()
   wheelVal2 = analogRead(wheelPin_2);
   CameraVal = analogRead(cameraPin);
 
-  if ((millis()-lastTime)>random(5,20))
+  if ((millis()-lastTime)>random(20,50))
   {
     toggle = !toggle;
     digitalWrite(syncPin,toggle);
