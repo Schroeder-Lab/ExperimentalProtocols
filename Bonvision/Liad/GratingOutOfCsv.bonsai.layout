@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VisualizerLayout xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<VisualizerLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                  >
   <DialogSettings>
     <Visible>false</Visible>
@@ -421,8 +421,8 @@
       <MatVisualizer>
         <XMin>0</XMin>
         <XMax>500</XMax>
-        <YMin>0.1</YMin>
-        <YMax>0.70000000000000007</YMax>
+        <YMin>0.165</YMin>
+        <YMax>0.2</YMax>
         <AutoScaleX>true</AutoScaleX>
         <AutoScaleY>true</AutoScaleY>
         <SelectedPage>0</SelectedPage>
