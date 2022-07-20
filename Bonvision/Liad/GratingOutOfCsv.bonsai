@@ -450,7 +450,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="StringProperty">
-          <Value>C:\Data\Hedes\</Value>
+          <Value>C:\Data\SS113\</Value>
         </Combinator>
       </Expression>
       <Expression xsi:type="BehaviorSubject">
@@ -864,7 +864,7 @@ def generate():
         <Workflow>
           <Nodes>
             <Expression xsi:type="io:CsvReader">
-              <io:FileName>csvGratingsSpatialChange.csv</io:FileName>
+              <io:FileName>csvGratings.csv</io:FileName>
               <io:ListSeparator>,</io:ListSeparator>
               <io:ScanPattern />
               <io:SkipRows>1</io:SkipRows>
