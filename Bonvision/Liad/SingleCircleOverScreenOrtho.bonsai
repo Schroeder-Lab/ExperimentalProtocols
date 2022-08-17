@@ -184,8 +184,8 @@ def process(value):
             <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
               <ExtentX>10</ExtentX>
               <ExtentY>10</ExtentY>
-              <LocationX>-58</LocationX>
-              <LocationY>35</LocationY>
+              <LocationX>-59</LocationX>
+              <LocationY>-21</LocationY>
               <Layer>100</Layer>
               <Angle>15</Angle>
               <ColorR>0</ColorR>
@@ -283,10 +283,10 @@ def process(value):
         <Combinator xsi:type="rx:SubscribeWhen" />
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.OrthographicView.bonsai">
-        <Left>-145</Left>
-        <Right>-54</Right>
-        <Bottom>-41</Bottom>
-        <Top>41</Top>
+        <Left>-150</Left>
+        <Right>-57</Right>
+        <Bottom>-32</Bottom>
+        <Top>48</Top>
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.NormalizedView.bonsai" />
@@ -308,13 +308,13 @@ def process(value):
         <Height>30</Height>
         <Rotation>
           <X>0</X>
-          <Y>90.000002504478161</Y>
+          <Y>103.99999834060421</Y>
           <Z>0</Z>
         </Rotation>
         <Translation>
           <X>-17.5</X>
-          <Y>0</Y>
-          <Z>5.95</Z>
+          <Y>4</Y>
+          <Z>4.2</Z>
         </Translation>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.DrawViewport.bonsai">
