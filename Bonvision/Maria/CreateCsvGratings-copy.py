@@ -21,21 +21,21 @@ data = np.array([0,0,0,0]).T
 
 ####Changing Spatial Frequencies
 
-# fileName = 'csvGratingsSpatialChange'
-# orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
-# Sfrequencies = [0.01,0.02,0.04,0.08,0.16,0.32]
-# Tfrequencies = [2]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
-# contrasts = [1]#[0,0.25,0.5,1]
+fileName = 'csvGratings'
+orientations = [30, 60, 90, 120, 150, 180, 210, 240,270, 300, 330, 360]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
+Sfrequencies = [0.08]#[0.01,0.02,0.04,0.08,0.16,0.32]
+Tfrequencies = [2]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+contrasts = [1]#[0,0.25,0.5,1]
 
 #########################################################################################
 
 ####Changing Temporal Frequencies
 
-fileName = 'csvGratingsTemporalChange'
-orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
-Sfrequencies = [0.08]
-Tfrequencies = [0.5, 1, 2, 4, 8 ,16]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
-contrasts = [1]#[0,0.25,0.5,1]
+# fileName = 'csvGratingsTemporalChange'
+# orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
+# Sfrequencies = [0.08]
+# Tfrequencies = [0.5, 1, 2, 4, 8 ,16]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+# contrasts = [1]#[0,0.25,0.5,1]
 
 #########################################################################################
 
