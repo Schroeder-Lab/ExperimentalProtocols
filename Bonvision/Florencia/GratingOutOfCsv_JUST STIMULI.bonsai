@@ -246,7 +246,7 @@ Double.Parse(it[3]) as Contrast
                     <LocationX>0</LocationX>
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
-                    <Angle>10313.24</Angle>
+                    <Angle>13750.9873</Angle>
                     <SpatialFrequency>0.08</SpatialFrequency>
                     <TemporalFrequency>2</TemporalFrequency>
                     <Phase>0</Phase>
@@ -288,7 +288,7 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="gl:Delay">
-                      <gl:DueTime>PT2.062S</gl:DueTime>
+                      <gl:DueTime>PT2.306S</gl:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
