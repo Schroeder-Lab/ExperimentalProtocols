@@ -77,8 +77,8 @@ axs[0].plot(np.mean(arrays[0],1),'o', color= "red")
 axs[1].plot(np.mean(arrays[1],1),'o', color="green")
 axs[2].plot(np.mean(arrays[2],1),'o', color= "blue")
 
-    
-#interpolation    
+ #%%   
+#interpolation and LUT creation
 
 tck = interpolate.splrep(g, y_points)
 tck2= interpolate.splrep(b, y_points)
@@ -98,16 +98,16 @@ for y in np.arange(0,0.9,0.01):
 arrayg= np.array(range_of_xvaluesg)
 arrayb= np.array(range_of_xvaluesb)
 
-# zeros=np.zeros((1,90,1))
+zeros=np.zeros((1,90,1))
 
 
-# arraygb= np.dstack((zeros,arrayg, arrayb))
+arraygb= np.dstack((zeros,arrayg, arrayb))
 
 
 
 
-# plt.imshow(arraygb)
-# plt.axis('off')
+plt.imshow(arraygb)
+plt.axis('off')
 # plt.savefig(fname= 'C://Users//maria//Documents//GitHub//ExperimentalProtocols//Bonvision//Maria//monitor_calibration//ourLUT.png')
 
 
