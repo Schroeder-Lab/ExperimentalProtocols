@@ -5,6 +5,10 @@ Created on Mon Feb  7 16:30:14 2022
 @author: maria
 """
 
+"""
+This script creates the LUT which needs to be plugged into the Gamma calibration node in Bonsai
+"""
+
 import numpy as np
 import pandas as pd
 from scipy.interpolate import interp1d
