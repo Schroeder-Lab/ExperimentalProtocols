@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.6.2"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -9,7 +9,7 @@
                  xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
+                 xmlns:p1="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:ard="clr-namespace:Bonsai.Arduino;assembly=Bonsai.Arduino"
                  xmlns:bv="clr-namespace:BonVision;assembly=BonVision"
@@ -584,10 +584,10 @@ def process(value):
         </Workflow>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="spk:SpinnakerCapture">
-          <spk:Index xsi:nil="true" />
-          <spk:SerialNumber>21225772</spk:SerialNumber>
-          <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
+        <Combinator xsi:type="p1:SpinnakerCapture">
+          <p1:Index xsi:nil="true" />
+          <p1:SerialNumber>21225772</p1:SerialNumber>
+          <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -1154,24 +1154,30 @@ Double.Parse(it[4]) as Phase
                       <Property Name="Contrast" Selector="Contrast" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="scr:PythonSource">
-                    <scr:Script>from System import Random, TimeSpan
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="scr:PythonSource">
+                      <scr:Script>from System import Random, TimeSpan
 random = Random()
 
 @returns(TimeSpan)
 def generate():
   ind = random.Next(0,4)
   yield TimeSpan.FromSeconds(random.NextDouble() * (3 - 2) + 2)</scr:Script>
+                    </Builder>
                   </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                    <Format>ISI:{0}</Format>
-                    <Selector>TotalSeconds</Selector>
-                    <Name>Events</Name>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+                      <Format>ISI:{0}</Format>
+                      <Selector>TotalSeconds</Selector>
+                      <Name>Events</Name>
+                    </Builder>
                   </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="DueTime" />
-                    </PropertyMappings>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="PropertyMapping">
+                      <PropertyMappings>
+                        <Property Name="DueTime" />
+                      </PropertyMappings>
+                    </Builder>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="gl:Timer">
@@ -1224,10 +1230,12 @@ def generate():
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:TakeUntil" />
                   </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="gl:Delay">
-                      <gl:DueTime>PT2.661S</gl:DueTime>
-                    </Combinator>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="Combinator">
+                      <Combinator xsi:type="gl:Delay">
+                        <gl:DueTime>PT0.5S</gl:DueTime>
+                      </Combinator>
+                    </Builder>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                   <Expression xsi:type="WorkflowInput">
