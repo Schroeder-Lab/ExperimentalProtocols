@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.2"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -9,7 +9,7 @@
                  xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:p1="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
+                 xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:ard="clr-namespace:Bonsai.Arduino;assembly=Bonsai.Arduino"
                  xmlns:bv="clr-namespace:BonVision;assembly=BonVision"
@@ -584,10 +584,10 @@ def process(value):
         </Workflow>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p1:SpinnakerCapture">
-          <p1:Index xsi:nil="true" />
-          <p1:SerialNumber>21225772</p1:SerialNumber>
-          <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
+        <Combinator xsi:type="spk:SpinnakerCapture">
+          <spk:Index xsi:nil="true" />
+          <spk:SerialNumber>21225772</spk:SerialNumber>
+          <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -1108,7 +1108,7 @@ def generate():
               <Combinator xsi:type="num:Permutation" />
             </Expression>
             <Expression xsi:type="scr:ExpressionTransform">
-              <scr:Expression>new(Double.Parse(it[0]) as Ori,
+              <scr:Expression>new(Double.Parse(it[0]) * Math.PI / 180 as Ori,
 Double.Parse(it[1]) as SFreq,
 Double.Parse(it[2]) as TFreq,
 Double.Parse(it[3]) as Contrast,
