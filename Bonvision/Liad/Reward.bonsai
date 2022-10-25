@@ -58,14 +58,24 @@
               </Combinator>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timestamp" />
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+              <Format>Stim {0}</Format>
+              <Selector>Timestamp</Selector>
+              <Name>Events</Name>
+            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="1" To="2" Label="Source1" />
+            <Edge From="1" To="7" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
@@ -185,7 +195,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="StringProperty">
-          <Value>C:\Data\Cassiopeia\Training\</Value>
+          <Value>C:\Data\Test</Value>
         </Combinator>
       </Expression>
       <Expression xsi:type="BehaviorSubject">
@@ -231,7 +241,7 @@ def generate():
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Cassiopeia\Training\2022-08-26\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>C:\Data\Test2022-10-19\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -281,7 +291,7 @@ def generate():
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Test\2022-09-05\nidaqChannels.csv</io:FileName>
+              <io:FileName>C:\Data\Test2022-10-19\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -343,7 +353,7 @@ def generate():
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Test\2022-09-05\nidaqChannels.csv</io:FileName>
+              <io:FileName>C:\Data\Test2022-10-19\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -408,7 +418,7 @@ def generate():
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Cassiopeia\Training\2022-08-26\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\Test2022-10-19\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -460,7 +470,7 @@ def generate():
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.EventLogger.bonsai">
         <Name>Events</Name>
-        <FileName>C:\Data\Cassiopeia\Training\2022-08-26\Log.csv</FileName>
+        <FileName>C:\Data\Test2022-10-19\Log.csv</FileName>
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
@@ -527,7 +537,7 @@ def generate():
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Cassiopeia\Training\2022-08-26\VideoBottom.avi</cv:FileName>
+          <cv:FileName>C:\Data\Test2022-10-19\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -646,12 +656,113 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Cassiopeia\Training\2022-08-26\ArduinoInput.csv</io:FileName>
+        <io:FileName>C:\Data\Test2022-10-19\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>FileCount</io:Suffix>
         <io:IncludeHeader>false</io:IncludeHeader>
+      </Expression>
+      <Expression xsi:type="CreateObservable">
+        <Name>Decoy</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="BooleanProperty">
+                <Value>true</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="mx:DigitalOutput">
+                <mx:Channels>
+                  <mx:DigitalOutputChannelConfiguration>
+                    <mx:ChannelName />
+                    <mx:Grouping>OneChannelForAllLines</mx:Grouping>
+                    <mx:Lines>Dev1/port2/line3</mx:Lines>
+                  </mx:DigitalOutputChannelConfiguration>
+                </mx:Channels>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Delay">
+                <rx:DueTime>PT0.01S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="BooleanProperty">
+                <Value>false</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="mx:DigitalOutput">
+                <mx:Channels>
+                  <mx:DigitalOutputChannelConfiguration>
+                    <mx:ChannelName />
+                    <mx:Grouping>OneChannelForAllLines</mx:Grouping>
+                    <mx:Lines>Dev1/port2/line3</mx:Lines>
+                  </mx:DigitalOutputChannelConfiguration>
+                </mx:Channels>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="scr:PythonSource">
+              <scr:Script>from System import Random, TimeSpan
+random = Random()
+
+@returns(TimeSpan)
+def generate():
+  ind = random.Next(0,4)
+  yield TimeSpan.FromSeconds(random.NextDouble() * (5 - 1) + 1)</scr:Script>
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+              <Format>Decoy ISI: {0}</Format>
+              <Selector>TotalSeconds</Selector>
+              <Name>Events</Name>
+            </Expression>
+            <Expression xsi:type="PropertyMapping">
+              <PropertyMappings>
+                <Property Name="DueTime" />
+              </PropertyMappings>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Delay">
+                <rx:DueTime>PT4.389S</rx:DueTime>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="WorkflowOutput" />
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Timestamp" />
+            </Expression>
+            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+              <Format>Decoy {0}</Format>
+              <Selector>Timestamp</Selector>
+              <Name>Events</Name>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="1" To="2" Label="Source1" />
+            <Edge From="1" To="10" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
+            <Edge From="4" To="8" Label="Source1" />
+            <Edge From="5" To="6" Label="Source1" />
+            <Edge From="6" To="7" Label="Source1" />
+            <Edge From="7" To="8" Label="Source2" />
+            <Edge From="8" To="9" Label="Source1" />
+            <Edge From="10" To="11" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Concat" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Take">
+          <rx:Count>1</rx:Count>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Repeat" />
       </Expression>
     </Nodes>
     <Edges>
@@ -742,6 +853,9 @@ def process(value):
       <Edge From="96" To="99" Label="Source1" />
       <Edge From="97" To="98" Label="Source1" />
       <Edge From="98" To="99" Label="Source2" />
+      <Edge From="100" To="101" Label="Source1" />
+      <Edge From="101" To="102" Label="Source1" />
+      <Edge From="102" To="103" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
