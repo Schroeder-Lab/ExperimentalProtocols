@@ -163,7 +163,7 @@ def DetectPhotodiodeChanges(photodiode,plot=False,lowPass=30,kernel = 101,fs=100
     maxSig = np.max(sigFilt)
     minSig = np.min(sigFilt)
     thresholdU = (maxSig-minSig)*0.2
-    thresholdD = (maxSig-minSig)*0.8
+    thresholdD = (maxSig-minSig)*0.4
     threshold =  (maxSig-minSig)*0.5
     
     

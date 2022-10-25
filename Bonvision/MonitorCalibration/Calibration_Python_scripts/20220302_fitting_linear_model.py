@@ -4,7 +4,9 @@ Created on Wed Mar  2 11:37:38 2022
 
 @author: maria
 """
-
+"""
+this is to compare how well the calibration worked by applying a linear regression model
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression

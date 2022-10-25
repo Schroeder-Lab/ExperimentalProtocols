@@ -78,14 +78,18 @@ How it does it:
 """
 #specifying the paths
 drive= 'Z://RawData'
-animal=  'Hedes'
-date= '2022-06-28'
+animal=  'Bellinda'
+date= '2022-07-25'
 #to get the unregistered number need to go to folder where the raw tiff is and check the format, usually it's file_0000x_000001 where x depends on the no. of the folder 
-unreg_number= 4
+unreg_number= 6
 unreg_number_str= str(unreg_number)
+#unreg_number_str= str(1)
+
 date_today= str(today)
 
-filePath=drive+'//'+animal+ '//'+date+ '//'+unreg_number_str+'//file_0000'+unreg_number_str+'_00001.tif'
+filePath='Z://RawData//'+animal+ '//'+date+ '//'+unreg_number_str+'//file_0000'+unreg_number_str+'_00001.tif'
+
+#filePath='Z://RawData//'+animal+ '//'+date+ '//'+unreg_number_str+'//file_0000_00001.tif'
 
 
 
