@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.2"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
@@ -18,8 +18,8 @@
           <gl:CursorVisible>true</gl:CursorVisible>
           <gl:Location xsi:nil="true" />
           <gl:WindowBorder>Resizable</gl:WindowBorder>
-          <gl:WindowState>Normal</gl:WindowState>
-          <gl:DisplayDevice>Primary</gl:DisplayDevice>
+          <gl:WindowState>Fullscreen</gl:WindowState>
+          <gl:DisplayDevice>Second</gl:DisplayDevice>
           <gl:TargetRenderFrequency>60</gl:TargetRenderFrequency>
           <gl:TargetUpdateFrequency xsi:nil="true" />
           <gl:RenderState />
@@ -119,7 +119,35 @@
         <LocationX>0</LocationX>
         <LocationY>0</LocationY>
         <Layer>0</Layer>
-        <Angle>180</Angle>
+        <Angle>90</Angle>
+        <SpatialFrequency>8</SpatialFrequency>
+        <TemporalFrequency>0</TemporalFrequency>
+        <Phase>0</Phase>
+        <SquareWave>false</SquareWave>
+        <Contrast>0</Contrast>
+        <DutyCycle xsi:nil="true" />
+        <Radius>1</Radius>
+        <Aperture>0</Aperture>
+        <Opacity>1</Opacity>
+        <ExtentX>1000</ExtentX>
+        <ExtentY>1000</ExtentY>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="gl:Timer">
+          <gl:DueTime>PT0.5S</gl:DueTime>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:TakeUntil" />
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>DrawStimulus</Name>
+      </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
+        <LocationX>0</LocationX>
+        <LocationY>0</LocationY>
+        <Layer>0</Layer>
+        <Angle>90</Angle>
         <SpatialFrequency>8</SpatialFrequency>
         <TemporalFrequency>0</TemporalFrequency>
         <Phase>0</Phase>
@@ -147,7 +175,7 @@
         <LocationX>0</LocationX>
         <LocationY>0</LocationY>
         <Layer>0</Layer>
-        <Angle>180</Angle>
+        <Angle>90</Angle>
         <SpatialFrequency>8</SpatialFrequency>
         <TemporalFrequency>0</TemporalFrequency>
         <Phase>180</Phase>
@@ -168,12 +196,40 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:TakeUntil" />
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>DrawStimulus</Name>
+      </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
+        <LocationX>0</LocationX>
+        <LocationY>0</LocationY>
+        <Layer>0</Layer>
+        <Angle>90</Angle>
+        <SpatialFrequency>8</SpatialFrequency>
+        <TemporalFrequency>0</TemporalFrequency>
+        <Phase>180</Phase>
+        <SquareWave>false</SquareWave>
+        <Contrast>0</Contrast>
+        <DutyCycle xsi:nil="true" />
+        <Radius>1</Radius>
+        <Aperture>0</Aperture>
+        <Opacity>1</Opacity>
+        <ExtentX>1000</ExtentX>
+        <ExtentY>1000</ExtentY>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="gl:Timer">
+          <gl:DueTime>PT0.5S</gl:DueTime>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:TakeUntil" />
+      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Concat" />
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:RepeatCount">
-          <rx:Count>100</rx:Count>
+          <rx:Count>30</rx:Count>
         </Combinator>
       </Expression>
     </Nodes>
@@ -186,20 +242,28 @@
       <Edge From="7" To="8" Label="Source1" />
       <Edge From="8" To="10" Label="Source1" />
       <Edge From="9" To="10" Label="Source2" />
-      <Edge From="10" To="23" Label="Source1" />
+      <Edge From="10" To="31" Label="Source1" />
       <Edge From="11" To="12" Label="Source1" />
       <Edge From="12" To="14" Label="Source1" />
       <Edge From="13" To="14" Label="Source2" />
-      <Edge From="14" To="23" Label="Source2" />
+      <Edge From="14" To="31" Label="Source2" />
       <Edge From="15" To="16" Label="Source1" />
       <Edge From="16" To="18" Label="Source1" />
       <Edge From="17" To="18" Label="Source2" />
-      <Edge From="18" To="23" Label="Source3" />
+      <Edge From="18" To="31" Label="Source3" />
       <Edge From="19" To="20" Label="Source1" />
       <Edge From="20" To="22" Label="Source1" />
       <Edge From="21" To="22" Label="Source2" />
-      <Edge From="22" To="23" Label="Source4" />
+      <Edge From="22" To="31" Label="Source4" />
       <Edge From="23" To="24" Label="Source1" />
+      <Edge From="24" To="26" Label="Source1" />
+      <Edge From="25" To="26" Label="Source2" />
+      <Edge From="26" To="31" Label="Source5" />
+      <Edge From="27" To="28" Label="Source1" />
+      <Edge From="28" To="30" Label="Source1" />
+      <Edge From="29" To="30" Label="Source2" />
+      <Edge From="30" To="31" Label="Source6" />
+      <Edge From="31" To="32" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
