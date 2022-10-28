@@ -1,0 +1,11 @@
+The gamma chosen for device DELL P1917S is 1:45
+
+Blue Red Green Files/gamma:
+0/1.22
+1/1.40
+2/1.60
+3/1.50
+4/1.30
+5/1.45
+6/1.42
+7/1.45
