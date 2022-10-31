@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.0"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
@@ -663,6 +663,139 @@ TimeSpan.FromSeconds(Double.Parse(it[5])) as DurT
             <Edge From="12" To="13" Label="Source1" />
             <Edge From="13" To="14" Label="Source1" />
             <Edge From="14" To="15" Label="Source1" />
+          </Edges>
+        </Workflow>
+      </Expression>
+      <Expression xsi:type="GroupWorkflow">
+        <Name>SetSave</Name>
+        <Workflow>
+          <Nodes>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>C:\Data\SS113\</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="scr:PythonSource">
+              <scr:Script>from System import DateTime,String
+
+@returns(String)
+def generate(): 
+  yield (DateTime.Now).ToString("yyyy-MM-dd")</scr:Script>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\Video.avi</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="Format">
+              <Format>{0}{1}{2}</Format>
+              <Selector>Item1,Item2,Item3</Selector>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>VideoPath</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\Log.csv</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="Format">
+              <Format>{0}{1}{2}</Format>
+              <Selector>Item1,Item2,Item3</Selector>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>LogPath</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\NiDaqInput.bin</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="Format">
+              <Format>{0}{1}{2}</Format>
+              <Selector>Item1,Item2,Item3</Selector>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>NidaqPath</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\VideoBottom.avi</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="Format">
+              <Format>{0}{1}{2}</Format>
+              <Selector>Item1,Item2,Item3</Selector>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>VideoPathBottom</Name>
+            </Expression>
+          </Nodes>
+          <Edges>
+            <Edge From="0" To="1" Label="Source1" />
+            <Edge From="2" To="3" Label="Source1" />
+            <Edge From="4" To="7" Label="Source3" />
+            <Edge From="5" To="7" Label="Source1" />
+            <Edge From="6" To="7" Label="Source2" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="9" Label="Source1" />
+            <Edge From="10" To="13" Label="Source1" />
+            <Edge From="11" To="13" Label="Source2" />
+            <Edge From="12" To="13" Label="Source3" />
+            <Edge From="13" To="14" Label="Source1" />
+            <Edge From="14" To="15" Label="Source1" />
+            <Edge From="16" To="19" Label="Source1" />
+            <Edge From="17" To="19" Label="Source2" />
+            <Edge From="18" To="19" Label="Source3" />
+            <Edge From="19" To="20" Label="Source1" />
+            <Edge From="20" To="21" Label="Source1" />
+            <Edge From="22" To="25" Label="Source3" />
+            <Edge From="23" To="25" Label="Source1" />
+            <Edge From="24" To="25" Label="Source2" />
+            <Edge From="25" To="26" Label="Source1" />
+            <Edge From="26" To="27" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
