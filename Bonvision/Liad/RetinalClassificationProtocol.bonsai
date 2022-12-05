@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
@@ -15,6 +15,25 @@
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="io:CreateSerialPort">
+          <io:Name>ArduinoAnalog</io:Name>
+          <io:PortName>COM3</io:PortName>
+          <io:BaudRate>115200</io:BaudRate>
+          <io:Encoding>utf-8</io:Encoding>
+          <io:Parity>None</io:Parity>
+          <io:ParityReplace>63</io:ParityReplace>
+          <io:DataBits>8</io:DataBits>
+          <io:StopBits>One</io:StopBits>
+          <io:Handshake>None</io:Handshake>
+          <io:DiscardNull>false</io:DiscardNull>
+          <io:DtrEnable>true</io:DtrEnable>
+          <io:RtsEnable>false</io:RtsEnable>
+          <io:ReadBufferSize>2048</io:ReadBufferSize>
+          <io:WriteBufferSize>2048</io:WriteBufferSize>
+          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
+        </Combinator>
+      </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>SetSave</Name>
         <Workflow>
@@ -100,6 +119,27 @@ def generate():
             <Expression xsi:type="BehaviorSubject">
               <Name>NidaqPath</Name>
             </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\ArduinoInput.csv</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
+            <Expression xsi:type="Format">
+              <Format>{0}{1}{2}</Format>
+              <Selector>Item1,Item2,Item3</Selector>
+            </Expression>
+            <Expression xsi:type="BehaviorSubject">
+              <Name>ArduinoInput</Name>
+            </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
@@ -119,27 +159,13 @@ def generate():
             <Edge From="18" To="19" Label="Source3" />
             <Edge From="19" To="20" Label="Source1" />
             <Edge From="20" To="21" Label="Source1" />
+            <Edge From="22" To="25" Label="Source1" />
+            <Edge From="23" To="25" Label="Source2" />
+            <Edge From="24" To="25" Label="Source3" />
+            <Edge From="25" To="26" Label="Source1" />
+            <Edge From="26" To="27" Label="Source1" />
           </Edges>
         </Workflow>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:CreateSerialPort">
-          <io:Name>ArduinoAnalog</io:Name>
-          <io:PortName>COM3</io:PortName>
-          <io:BaudRate>115200</io:BaudRate>
-          <io:Encoding>utf-8</io:Encoding>
-          <io:Parity>None</io:Parity>
-          <io:ParityReplace>63</io:ParityReplace>
-          <io:DataBits>8</io:DataBits>
-          <io:StopBits>One</io:StopBits>
-          <io:Handshake>None</io:Handshake>
-          <io:DiscardNull>false</io:DiscardNull>
-          <io:DtrEnable>true</io:DtrEnable>
-          <io:RtsEnable>false</io:RtsEnable>
-          <io:ReadBufferSize>2048</io:ReadBufferSize>
-          <io:WriteBufferSize>2048</io:WriteBufferSize>
-          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
-        </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="io:SerialStringRead">
@@ -215,33 +241,12 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\SS113\2022-09-06\ArduinoInput.csv</io:FileName>
+        <io:FileName>C:\Data\SS113\2022-10-31\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
         <io:Suffix>FileCount</io:Suffix>
         <io:IncludeHeader>false</io:IncludeHeader>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>Saving Dir</Name>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>DateDir</Name>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="StringProperty">
-          <Value>\ArduinoInput.csv</Value>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:Zip" />
-      </Expression>
-      <Expression xsi:type="Format">
-        <Format>{0}{1}{2}</Format>
-        <Selector>Item1,Item2,Item3</Selector>
-      </Expression>
-      <Expression xsi:type="BehaviorSubject">
-        <Name>ArduinoInput</Name>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:CreateWindow">
@@ -341,7 +346,7 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\SS113\2022-09-06\Log.csv</FileName>
+        <FileName>C:\Data\SS113\2022-10-31\Log.csv</FileName>
       </Expression>
       <Expression xsi:type="Sink">
         <Name>Metadata</Name>
@@ -402,7 +407,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\SS113\2022-09-06\nidaqChannels.csv</io:FileName>
+              <io:FileName>C:\Data\SS113\2022-10-31\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -438,7 +443,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\SS113\2022-09-06\props.csv</io:FileName>
+              <io:FileName>C:\Data\SS113\2022-10-31\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -499,7 +504,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\SS113\2022-09-06\arduinoChannels.csv</io:FileName>
+              <io:FileName>C:\Data\SS113\2022-10-31\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -817,9 +822,9 @@ def process(value):
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
                     <Angle>0</Angle>
-                    <ColorR>1.08778524</ColorR>
-                    <ColorG>1.08778524</ColorG>
-                    <ColorB>1.08778524</ColorB>
+                    <ColorR>0.5</ColorR>
+                    <ColorG>0.5</ColorG>
+                    <ColorB>0.5</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -954,9 +959,9 @@ def process(value):
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
                     <Angle>0</Angle>
-                    <ColorR>0.5941083</ColorR>
-                    <ColorG>0.5941083</ColorG>
-                    <ColorB>0.5941083</ColorB>
+                    <ColorR>0.303369284</ColorR>
+                    <ColorG>0.303369284</ColorG>
+                    <ColorB>0.303369284</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -1941,7 +1946,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\SS113\2022-09-06\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\SS113\2022-10-31\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -2026,7 +2031,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\SS113\2022-09-06\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>C:\Data\SS113\2022-10-31\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -2060,42 +2065,37 @@ def process(value):
       <Edge From="13" To="16" Label="Source1" />
       <Edge From="14" To="15" Label="Source1" />
       <Edge From="15" To="16" Label="Source2" />
-      <Edge From="17" To="20" Label="Source1" />
-      <Edge From="18" To="20" Label="Source2" />
-      <Edge From="19" To="20" Label="Source3" />
+      <Edge From="17" To="18" Label="Source1" />
+      <Edge From="18" To="19" Label="Source1" />
       <Edge From="20" To="21" Label="Source1" />
+      <Edge From="20" To="29" Label="Source2" />
+      <Edge From="20" To="30" Label="Source1" />
       <Edge From="21" To="22" Label="Source1" />
+      <Edge From="22" To="23" Label="Source1" />
       <Edge From="23" To="24" Label="Source1" />
       <Edge From="24" To="25" Label="Source1" />
-      <Edge From="26" To="27" Label="Source1" />
-      <Edge From="26" To="35" Label="Source2" />
-      <Edge From="26" To="36" Label="Source1" />
+      <Edge From="25" To="26" Label="Source1" />
       <Edge From="27" To="28" Label="Source1" />
       <Edge From="28" To="29" Label="Source1" />
-      <Edge From="29" To="30" Label="Source1" />
-      <Edge From="30" To="31" Label="Source1" />
       <Edge From="31" To="32" Label="Source1" />
       <Edge From="33" To="34" Label="Source1" />
-      <Edge From="34" To="35" Label="Source1" />
+      <Edge From="35" To="36" Label="Source1" />
       <Edge From="37" To="38" Label="Source1" />
       <Edge From="39" To="40" Label="Source1" />
-      <Edge From="41" To="42" Label="Source1" />
+      <Edge From="42" To="43" Label="Source1" />
       <Edge From="43" To="44" Label="Source1" />
-      <Edge From="45" To="46" Label="Source1" />
-      <Edge From="48" To="49" Label="Source1" />
+      <Edge From="45" To="49" Label="Source1" />
+      <Edge From="46" To="47" Label="Source1" />
+      <Edge From="47" To="51" Label="Source2" />
+      <Edge From="48" To="49" Label="Source2" />
       <Edge From="49" To="50" Label="Source1" />
-      <Edge From="51" To="55" Label="Source1" />
-      <Edge From="52" To="53" Label="Source1" />
-      <Edge From="53" To="57" Label="Source2" />
-      <Edge From="54" To="55" Label="Source2" />
+      <Edge From="50" To="51" Label="Source1" />
+      <Edge From="51" To="52" Label="Source1" />
+      <Edge From="53" To="54" Label="Source1" />
+      <Edge From="54" To="57" Label="Source2" />
       <Edge From="55" To="56" Label="Source1" />
       <Edge From="56" To="57" Label="Source1" />
       <Edge From="57" To="58" Label="Source1" />
-      <Edge From="59" To="60" Label="Source1" />
-      <Edge From="60" To="63" Label="Source2" />
-      <Edge From="61" To="62" Label="Source1" />
-      <Edge From="62" To="63" Label="Source1" />
-      <Edge From="63" To="64" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
