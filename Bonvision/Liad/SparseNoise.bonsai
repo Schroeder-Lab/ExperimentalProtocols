@@ -40,7 +40,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\Giuseppina\</Value>
+                <Value>C:\Data\Test\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -267,7 +267,7 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Giuseppina\2022-10-28\ArduinoInput.csv</io:FileName>
+        <io:FileName>C:\Data\SS113\2022-12-14\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -416,7 +416,7 @@ def process(value):
               <Append>false</Append>
               <Overwrite>false</Overwrite>
               <Suffix>FileCount</Suffix>
-              <FileName>C:\Data\Giuseppina\2022-10-28\Log.csv</FileName>
+              <FileName>C:\Data\SS113\2022-12-14\Log.csv</FileName>
             </Expression>
             <Expression xsi:type="Sink">
               <Name>Metadata</Name>
@@ -477,7 +477,7 @@ def process(value):
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Data\Giuseppina\2022-10-28\nidaqChannels.csv</io:FileName>
+                    <io:FileName>C:\Data\SS113\2022-12-14\nidaqChannels.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>FileCount</io:Suffix>
@@ -486,16 +486,13 @@ def process(value):
                   <Expression xsi:type="WorkflowOutput" />
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="StringProperty">
-                      <Value>9</Value>
+                      <Value>18</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="StringProperty">
-                      <Value>8</Value>
+                      <Value>16</Value>
                     </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Zip" />
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>Saving Dir</Name>
@@ -520,8 +517,31 @@ def process(value):
                       <Property Name="FileName" />
                     </PropertyMappings>
                   </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>-32</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>48</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>-57</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>-150</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Zip" />
+                  </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Data\Giuseppina\2022-10-28\props.csv</io:FileName>
+                    <io:FileName>C:\Data\SS113\2022-12-14\props.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>FileCount</io:Suffix>
@@ -582,7 +602,7 @@ def process(value):
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Data\Giuseppina\2022-10-28\arduinoChannels.csv</io:FileName>
+                    <io:FileName>C:\Data\SS113\2022-12-14\arduinoChannels.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>FileCount</io:Suffix>
@@ -604,28 +624,32 @@ def process(value):
                   <Edge From="11" To="12" Label="Source1" />
                   <Edge From="12" To="13" Label="Source2" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="15" To="17" Label="Source1" />
-                  <Edge From="16" To="17" Label="Source2" />
-                  <Edge From="17" To="24" Label="Source1" />
-                  <Edge From="18" To="21" Label="Source1" />
-                  <Edge From="19" To="21" Label="Source3" />
-                  <Edge From="20" To="21" Label="Source2" />
+                  <Edge From="15" To="27" Label="Source1" />
+                  <Edge From="16" To="27" Label="Source2" />
+                  <Edge From="17" To="20" Label="Source1" />
+                  <Edge From="18" To="20" Label="Source3" />
+                  <Edge From="19" To="20" Label="Source2" />
+                  <Edge From="20" To="21" Label="Source1" />
                   <Edge From="21" To="22" Label="Source1" />
-                  <Edge From="22" To="23" Label="Source1" />
-                  <Edge From="23" To="24" Label="Source2" />
-                  <Edge From="25" To="26" Label="Source1" />
-                  <Edge From="26" To="31" Label="Source1" />
-                  <Edge From="27" To="31" Label="Source2" />
-                  <Edge From="28" To="31" Label="Source3" />
-                  <Edge From="29" To="31" Label="Source4" />
-                  <Edge From="30" To="31" Label="Source5" />
-                  <Edge From="31" To="38" Label="Source1" />
-                  <Edge From="32" To="35" Label="Source1" />
-                  <Edge From="33" To="35" Label="Source3" />
-                  <Edge From="34" To="35" Label="Source2" />
-                  <Edge From="35" To="36" Label="Source1" />
-                  <Edge From="36" To="37" Label="Source1" />
-                  <Edge From="37" To="38" Label="Source2" />
+                  <Edge From="22" To="28" Label="Source2" />
+                  <Edge From="23" To="27" Label="Source3" />
+                  <Edge From="24" To="27" Label="Source4" />
+                  <Edge From="25" To="27" Label="Source6" />
+                  <Edge From="26" To="27" Label="Source5" />
+                  <Edge From="27" To="28" Label="Source1" />
+                  <Edge From="29" To="30" Label="Source1" />
+                  <Edge From="30" To="35" Label="Source1" />
+                  <Edge From="31" To="35" Label="Source2" />
+                  <Edge From="32" To="35" Label="Source3" />
+                  <Edge From="33" To="35" Label="Source4" />
+                  <Edge From="34" To="35" Label="Source5" />
+                  <Edge From="35" To="42" Label="Source1" />
+                  <Edge From="36" To="39" Label="Source1" />
+                  <Edge From="37" To="39" Label="Source3" />
+                  <Edge From="38" To="39" Label="Source2" />
+                  <Edge From="39" To="40" Label="Source1" />
+                  <Edge From="40" To="41" Label="Source1" />
+                  <Edge From="41" To="42" Label="Source2" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -845,10 +869,10 @@ def process(value):
           <Nodes>
             <Expression xsi:type="IncludeWorkflow" Path="BonVision:Collections.SparseNoise.bonsai">
               <Duration>PT0.166666S</Duration>
-              <ActiveQuads>5</ActiveQuads>
+              <ActiveQuads>20</ActiveQuads>
               <GridSize>
-                <Width>9</Width>
-                <Height>8</Height>
+                <Width>18</Width>
+                <Height>16</Height>
               </GridSize>
             </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
@@ -866,7 +890,7 @@ def process(value):
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="dsp:MatrixWriter">
-                <dsp:Path>C:\Data\Giuseppina\2022-10-28\SparseNoise.bin</dsp:Path>
+                <dsp:Path>C:\Data\SS113\2022-12-14\SparseNoise.bin</dsp:Path>
                 <dsp:Suffix>FileCount</dsp:Suffix>
                 <dsp:Overwrite>false</dsp:Overwrite>
                 <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -1175,7 +1199,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Giuseppina\2022-10-28\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>C:\Data\SS113\2022-12-14\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -1214,7 +1238,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Giuseppina\2022-10-28\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\SS113\2022-12-14\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -1303,7 +1327,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Giuseppina\2022-10-28\VideoBottom.avi</cv:FileName>
+          <cv:FileName>C:\Data\SS113\2022-12-14\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
