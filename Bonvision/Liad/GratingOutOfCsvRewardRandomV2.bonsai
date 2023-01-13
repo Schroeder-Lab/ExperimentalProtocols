@@ -7,11 +7,11 @@
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
                  xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
-                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
-                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
+                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:gli="clr-namespace:Bonsai.Shaders.Input;assembly=Bonsai.Shaders"
+                 xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -40,7 +40,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\Glaucus\</Value>
+                <Value>C:\Data\Test\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -241,7 +241,7 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Glaucus\2022-11-10\ArduinoInput.csv</io:FileName>
+        <io:FileName>C:\Data\Test\2022-11-11\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -334,92 +334,6 @@ def process(value):
         <ColorA>1</ColorA>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="mx:AnalogInput">
-          <mx:SignalSource />
-          <mx:SampleRate>1000</mx:SampleRate>
-          <mx:ActiveEdge>Rising</mx:ActiveEdge>
-          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
-          <mx:BufferSize>1</mx:BufferSize>
-          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
-          <mx:Channels>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>Photodiode</mx:ChannelName>
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>FrameClock</mx:ChannelName>
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai7</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>PockelFeedback</mx:ChannelName>
-              <mx:MinimumValue>-5</mx:MinimumValue>
-              <mx:MaximumValue>5</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai5</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>Piezo</mx:ChannelName>
-              <mx:MinimumValue>-10</mx:MinimumValue>
-              <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai6</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>Licking</mx:ChannelName>
-              <mx:MinimumValue>-5</mx:MinimumValue>
-              <mx:MaximumValue>5</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai2</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-            <mx:AnalogInputChannelConfiguration>
-              <mx:ChannelName>ArduinoSync</mx:ChannelName>
-              <mx:MinimumValue>-1</mx:MinimumValue>
-              <mx:MaximumValue>1</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev1/ai4</mx:PhysicalChannel>
-              <mx:TerminalConfiguration>Rse</mx:TerminalConfiguration>
-              <mx:VoltageUnits>Volts</mx:VoltageUnits>
-            </mx:AnalogInputChannelConfiguration>
-          </mx:Channels>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-        <Format>AnalogIn</Format>
-        <Selector xsi:nil="true" />
-        <Name>Events</Name>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>NidaqPath</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="Path" />
-        </PropertyMappings>
-      </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Glaucus\2022-11-10\NiDaqInput.bin</dsp:Path>
-          <dsp:Suffix>FileCount</dsp:Suffix>
-          <dsp:Overwrite>false</dsp:Overwrite>
-          <dsp:Layout>RowMajor</dsp:Layout>
-        </Combinator>
-      </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-        <Format>NIDAQ</Format>
-        <Selector>Rows,Cols,Step</Selector>
-        <Name>Events</Name>
-      </Expression>
-      <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:RenderFrame" />
       </Expression>
       <Expression xsi:type="Combinator">
@@ -484,7 +398,7 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\Glaucus\2022-11-10\Log.csv</FileName>
+        <FileName>C:\Data\Test\2022-11-11\Log.csv</FileName>
       </Expression>
       <Expression xsi:type="Sink">
         <Name>Metadata</Name>
@@ -515,7 +429,7 @@ def process(value):
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>lick</Value>
+                <Value>sync</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -543,14 +457,14 @@ def process(value):
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>sync</Value>
+                <Value>lick</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Glaucus\2022-11-10\nidaqChannels.csv</io:FileName>
+              <io:FileName>C:\Data\Test\2022-11-11\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -602,14 +516,14 @@ def process(value):
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>Item2</Value>
+                <Value>Reward</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Glaucus\2022-11-10\props.csv</io:FileName>
+              <io:FileName>C:\Data\Test\2022-11-11\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -670,7 +584,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Glaucus\2022-11-10\arduinoChannels.csv</io:FileName>
+              <io:FileName>C:\Data\Test\2022-11-11\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -683,14 +597,14 @@ def process(value):
             <Edge From="2" To="13" Label="Source2" />
             <Edge From="3" To="13" Label="Source3" />
             <Edge From="4" To="13" Label="Source4" />
-            <Edge From="5" To="13" Label="Source5" />
+            <Edge From="5" To="13" Label="Source6" />
             <Edge From="6" To="9" Label="Source1" />
             <Edge From="7" To="9" Label="Source3" />
             <Edge From="8" To="9" Label="Source2" />
             <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
             <Edge From="11" To="14" Label="Source2" />
-            <Edge From="12" To="13" Label="Source6" />
+            <Edge From="12" To="13" Label="Source5" />
             <Edge From="13" To="14" Label="Source1" />
             <Edge From="14" To="15" Label="Source1" />
             <Edge From="16" To="27" Label="Source1" />
@@ -749,7 +663,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Glaucus\2022-11-10\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\Test\2022-11-11\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -891,7 +805,7 @@ Boolean.Parse(it[4]) as Reward
                     <LocationX>0</LocationX>
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
-                    <Angle>0</Angle>
+                    <Angle>90</Angle>
                     <SpatialFrequency>0.08</SpatialFrequency>
                     <TemporalFrequency>2</TemporalFrequency>
                     <Phase>0</Phase>
@@ -911,7 +825,7 @@ random = Random()
 @returns(TimeSpan)
 def generate():
   ind = random.Next(0,4)
-  yield TimeSpan.FromSeconds(random.NextDouble() * (15- 10) + 15)</scr:Script>
+  yield TimeSpan.FromSeconds(random.NextDouble() * (5- 1) + 5)</scr:Script>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
                     <Format>ISI:{0}</Format>
@@ -933,7 +847,7 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="gl:Delay">
-                      <gl:DueTime>PT16.649S</gl:DueTime>
+                      <gl:DueTime>PT7.444S</gl:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
@@ -968,7 +882,7 @@ random = Random()
 @returns(bool)
 def generate():
   ind = random.Next(0,4)
-  yield bool(random.NextInt64(1))</scr:Script>
+  yield bool(random.Next(2))</scr:Script>
                   </Expression>
                   <Expression xsi:type="PropertyMapping">
                     <PropertyMappings>
@@ -977,12 +891,12 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="BooleanProperty">
-                      <Value>false</Value>
+                      <Value>true</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Delay">
-                      <rx:DueTime>PT1S</rx:DueTime>
+                      <rx:DueTime>PT3S</rx:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -1024,11 +938,16 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="BooleanProperty">
-                      <Value>false</Value>
+                      <Value>true</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>it</Selector>
+                  </Expression>
+                  <Expression xsi:type="scr:ExpressionTransform">
+                    <scr:Expression>new(it as Reward
+
+)</scr:Expression>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
@@ -1037,56 +956,6 @@ def generate():
                     <Format xsi:nil="true" />
                     <Selector>Ori,SFreq,TFreq,Contrast,Item2</Selector>
                     <Name>Events</Name>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="SubscribeSubject">
-                      <Name>drawStim</Name>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="Combinator">
-                      <Combinator xsi:type="gl:RenderFrame" />
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="Combinator">
-                      <Combinator xsi:type="rx:ElementIndex" />
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="MemberSelector">
-                      <Selector>Index</Selector>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="Mod">
-                      <Operand xsi:type="IntProperty">
-                        <Value>2</Value>
-                      </Operand>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="PropertyMapping">
-                      <PropertyMappings>
-                        <Property Name="ColorR" />
-                        <Property Name="ColorG" />
-                        <Property Name="ColorB" />
-                      </PropertyMappings>
-                    </Builder>
-                  </Expression>
-                  <Expression xsi:type="Disable">
-                    <Builder xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-                      <ExtentX>10</ExtentX>
-                      <ExtentY>10</ExtentY>
-                      <LocationX>100</LocationX>
-                      <LocationY>-40</LocationY>
-                      <Layer>100</Layer>
-                      <Angle>0</Angle>
-                      <ColorR>1</ColorR>
-                      <ColorG>1</ColorG>
-                      <ColorB>1</ColorB>
-                      <ColorA>1</ColorA>
-                    </Builder>
                   </Expression>
                 </Nodes>
                 <Edges>
@@ -1112,7 +981,7 @@ def generate():
                   <Edge From="19" To="20" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
                   <Edge From="22" To="23" Label="Source1" />
-                  <Edge From="22" To="35" Label="Source1" />
+                  <Edge From="22" To="36" Label="Source1" />
                   <Edge From="24" To="25" Label="Source1" />
                   <Edge From="24" To="32" Label="Source1" />
                   <Edge From="25" To="26" Label="Source1" />
@@ -1123,14 +992,9 @@ def generate():
                   <Edge From="30" To="31" Label="Source1" />
                   <Edge From="32" To="33" Label="Source1" />
                   <Edge From="33" To="34" Label="Source1" />
-                  <Edge From="34" To="35" Label="Source2" />
-                  <Edge From="35" To="36" Label="Source1" />
-                  <Edge From="37" To="43" Label="Source1" />
-                  <Edge From="38" To="39" Label="Source1" />
-                  <Edge From="39" To="40" Label="Source1" />
-                  <Edge From="40" To="41" Label="Source1" />
-                  <Edge From="41" To="42" Label="Source1" />
-                  <Edge From="42" To="43" Label="Source2" />
+                  <Edge From="34" To="35" Label="Source1" />
+                  <Edge From="35" To="36" Label="Source2" />
+                  <Edge From="36" To="37" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -1139,7 +1003,7 @@ def generate():
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:RepeatCount">
-                <rx:Count>10</rx:Count>
+                <rx:Count>4</rx:Count>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -1147,7 +1011,7 @@ def generate():
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="gl:Delay">
-                <gl:DueTime>PT10S</gl:DueTime>
+                <gl:DueTime>PT5S</gl:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="GroupWorkflow">
@@ -1322,7 +1186,7 @@ def generate():
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Test\2022-05-31\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\Test\2022-11-11\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -1340,6 +1204,95 @@ def generate():
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
         <Format>Video,{0}</Format>
+        <Selector>Timestamp</Selector>
+        <Name>Events</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>NidaqPath</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="Path" />
+        </PropertyMappings>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="mx:AnalogInput">
+          <mx:SignalSource />
+          <mx:SampleRate>1000</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1</mx:BufferSize>
+          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:Channels>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>Photodiode</mx:ChannelName>
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai3</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>FrameClock</mx:ChannelName>
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai7</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>PockelFeedback</mx:ChannelName>
+              <mx:MinimumValue>-5</mx:MinimumValue>
+              <mx:MaximumValue>5</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai5</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>Piezo</mx:ChannelName>
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai6</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>Spout</mx:ChannelName>
+              <mx:MinimumValue>-1</mx:MinimumValue>
+              <mx:MaximumValue>1</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai2</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>ArduinoSync</mx:ChannelName>
+              <mx:MinimumValue>-1</mx:MinimumValue>
+              <mx:MaximumValue>1</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev1/ai4</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Rse</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+          </mx:Channels>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+        <Format>AnalogIn</Format>
+        <Selector xsi:nil="true" />
+        <Name>Events</Name>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="dsp:MatrixWriter">
+          <dsp:Path>C:\Data\Test\2022-11-11\NiDaqInput.bin</dsp:Path>
+          <dsp:Suffix>FileCount</dsp:Suffix>
+          <dsp:Overwrite>false</dsp:Overwrite>
+          <dsp:Layout>RowMajor</dsp:Layout>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:Timestamp" />
+      </Expression>
+      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+        <Format>NIDAQ, {0}</Format>
         <Selector>Timestamp</Selector>
         <Name>Events</Name>
       </Expression>
@@ -1405,7 +1358,7 @@ def generate():
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Delay">
-                <rx:DueTime>PT1.662S</rx:DueTime>
+                <rx:DueTime>PT1.451S</rx:DueTime>
               </Combinator>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
@@ -1474,42 +1427,43 @@ def generate():
       <Edge From="24" To="25" Label="Source1" />
       <Edge From="26" To="27" Label="Source1" />
       <Edge From="28" To="29" Label="Source1" />
-      <Edge From="30" To="31" Label="Source1" />
-      <Edge From="31" To="34" Label="Source2" />
+      <Edge From="30" To="32" Label="Source1" />
+      <Edge From="30" To="41" Label="Source1" />
+      <Edge From="30" To="42" Label="Source1" />
+      <Edge From="31" To="32" Label="Source2" />
       <Edge From="32" To="33" Label="Source1" />
       <Edge From="33" To="34" Label="Source1" />
       <Edge From="34" To="35" Label="Source1" />
-      <Edge From="36" To="38" Label="Source1" />
-      <Edge From="36" To="47" Label="Source1" />
-      <Edge From="36" To="48" Label="Source1" />
-      <Edge From="37" To="38" Label="Source2" />
-      <Edge From="38" To="39" Label="Source1" />
+      <Edge From="35" To="36" Label="Source1" />
+      <Edge From="36" To="37" Label="Source1" />
+      <Edge From="37" To="38" Label="Source1" />
       <Edge From="39" To="40" Label="Source1" />
-      <Edge From="40" To="41" Label="Source1" />
-      <Edge From="41" To="42" Label="Source1" />
-      <Edge From="42" To="43" Label="Source1" />
-      <Edge From="43" To="44" Label="Source1" />
-      <Edge From="45" To="46" Label="Source1" />
+      <Edge From="40" To="41" Label="Source2" />
+      <Edge From="43" To="47" Label="Source1" />
+      <Edge From="44" To="45" Label="Source1" />
+      <Edge From="45" To="49" Label="Source2" />
       <Edge From="46" To="47" Label="Source2" />
-      <Edge From="49" To="53" Label="Source1" />
-      <Edge From="50" To="51" Label="Source1" />
-      <Edge From="51" To="55" Label="Source2" />
-      <Edge From="52" To="53" Label="Source2" />
+      <Edge From="47" To="48" Label="Source1" />
+      <Edge From="48" To="49" Label="Source1" />
+      <Edge From="49" To="50" Label="Source1" />
+      <Edge From="51" To="52" Label="Source1" />
       <Edge From="53" To="54" Label="Source1" />
       <Edge From="54" To="55" Label="Source1" />
-      <Edge From="55" To="56" Label="Source1" />
-      <Edge From="57" To="58" Label="Source1" />
-      <Edge From="59" To="60" Label="Source1" />
+      <Edge From="56" To="57" Label="Source1" />
+      <Edge From="57" To="60" Label="Source1" />
+      <Edge From="58" To="59" Label="Source1" />
+      <Edge From="59" To="60" Label="Source2" />
       <Edge From="60" To="61" Label="Source1" />
-      <Edge From="62" To="63" Label="Source1" />
-      <Edge From="63" To="66" Label="Source1" />
-      <Edge From="64" To="65" Label="Source1" />
-      <Edge From="65" To="66" Label="Source2" />
-      <Edge From="66" To="67" Label="Source1" />
+      <Edge From="61" To="62" Label="Source1" />
+      <Edge From="63" To="64" Label="Source1" />
+      <Edge From="64" To="67" Label="Source1" />
+      <Edge From="65" To="66" Label="Source1" />
+      <Edge From="66" To="67" Label="Source2" />
       <Edge From="67" To="68" Label="Source1" />
-      <Edge From="69" To="70" Label="Source1" />
+      <Edge From="68" To="69" Label="Source1" />
       <Edge From="70" To="71" Label="Source1" />
       <Edge From="71" To="72" Label="Source1" />
+      <Edge From="72" To="73" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
