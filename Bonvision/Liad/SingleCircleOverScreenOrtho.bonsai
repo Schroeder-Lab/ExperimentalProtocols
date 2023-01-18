@@ -822,7 +822,7 @@ def process(value):
         <Workflow>
           <Nodes>
             <Expression xsi:type="io:CsvReader">
-              <io:FileName>csvCircleStationary.csv</io:FileName>
+              <io:FileName>csvCircleStationary5DegreeSeparation.csv</io:FileName>
               <io:ListSeparator>,</io:ListSeparator>
               <io:SkipRows>1</io:SkipRows>
             </Expression>
@@ -959,7 +959,7 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:RepeatCount">
-                <rx:Count>5</rx:Count>
+                <rx:Count>10</rx:Count>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
