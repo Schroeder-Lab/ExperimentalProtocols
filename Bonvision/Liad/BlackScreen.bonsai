@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.6.2"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
@@ -10,7 +10,7 @@
                  xmlns:gli="clr-namespace:Bonsai.Shaders.Input;assembly=Bonsai.Shaders"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
+                 xmlns:p1="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -512,12 +512,7 @@ def process(value):
                   <Expression xsi:type="WorkflowOutput" />
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="StringProperty">
-                      <Value>18</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>16</Value>
+                      <Value>Spont</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -542,29 +537,6 @@ def process(value):
                     <PropertyMappings>
                       <Property Name="FileName" />
                     </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>-32</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>48</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>-57</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="StringProperty">
-                      <Value>-150</Value>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Zip" />
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
                     <io:FileName>C:\Data\Test\2023-01-18\props.csv</io:FileName>
@@ -650,32 +622,26 @@ def process(value):
                   <Edge From="11" To="12" Label="Source1" />
                   <Edge From="12" To="13" Label="Source2" />
                   <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="15" To="27" Label="Source1" />
-                  <Edge From="16" To="27" Label="Source2" />
-                  <Edge From="17" To="20" Label="Source1" />
-                  <Edge From="18" To="20" Label="Source3" />
-                  <Edge From="19" To="20" Label="Source2" />
+                  <Edge From="15" To="22" Label="Source1" />
+                  <Edge From="16" To="19" Label="Source1" />
+                  <Edge From="17" To="19" Label="Source3" />
+                  <Edge From="18" To="19" Label="Source2" />
+                  <Edge From="19" To="20" Label="Source1" />
                   <Edge From="20" To="21" Label="Source1" />
-                  <Edge From="21" To="22" Label="Source1" />
-                  <Edge From="22" To="28" Label="Source2" />
-                  <Edge From="23" To="27" Label="Source3" />
-                  <Edge From="24" To="27" Label="Source4" />
-                  <Edge From="25" To="27" Label="Source6" />
-                  <Edge From="26" To="27" Label="Source5" />
-                  <Edge From="27" To="28" Label="Source1" />
-                  <Edge From="29" To="30" Label="Source1" />
-                  <Edge From="30" To="35" Label="Source1" />
-                  <Edge From="31" To="35" Label="Source2" />
-                  <Edge From="32" To="35" Label="Source3" />
-                  <Edge From="33" To="35" Label="Source4" />
-                  <Edge From="34" To="35" Label="Source5" />
-                  <Edge From="35" To="42" Label="Source1" />
-                  <Edge From="36" To="39" Label="Source1" />
-                  <Edge From="37" To="39" Label="Source3" />
-                  <Edge From="38" To="39" Label="Source2" />
-                  <Edge From="39" To="40" Label="Source1" />
-                  <Edge From="40" To="41" Label="Source1" />
-                  <Edge From="41" To="42" Label="Source2" />
+                  <Edge From="21" To="22" Label="Source2" />
+                  <Edge From="23" To="24" Label="Source1" />
+                  <Edge From="24" To="29" Label="Source1" />
+                  <Edge From="25" To="29" Label="Source2" />
+                  <Edge From="26" To="29" Label="Source3" />
+                  <Edge From="27" To="29" Label="Source4" />
+                  <Edge From="28" To="29" Label="Source5" />
+                  <Edge From="29" To="36" Label="Source1" />
+                  <Edge From="30" To="33" Label="Source1" />
+                  <Edge From="31" To="33" Label="Source3" />
+                  <Edge From="32" To="33" Label="Source2" />
+                  <Edge From="33" To="34" Label="Source1" />
+                  <Edge From="34" To="35" Label="Source1" />
+                  <Edge From="35" To="36" Label="Source2" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -967,10 +933,10 @@ def process(value):
         <Name>Events</Name>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="spk:SpinnakerCapture">
-          <spk:Index xsi:nil="true" />
-          <spk:SerialNumber>21225772</spk:SerialNumber>
-          <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
+        <Combinator xsi:type="p1:SpinnakerCapture">
+          <p1:Index xsi:nil="true" />
+          <p1:SerialNumber>21225772</p1:SerialNumber>
+          <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
         </Combinator>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -1064,10 +1030,10 @@ def process(value):
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="spk:SpinnakerCapture">
-          <spk:Index xsi:nil="true" />
-          <spk:SerialNumber>21038392</spk:SerialNumber>
-          <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
+        <Combinator xsi:type="p1:SpinnakerCapture">
+          <p1:Index xsi:nil="true" />
+          <p1:SerialNumber>21038392</p1:SerialNumber>
+          <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
         </Combinator>
       </Expression>
       <Expression xsi:type="MemberSelector">
