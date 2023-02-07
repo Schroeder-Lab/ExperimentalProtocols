@@ -41,7 +41,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\SS113\</Value>
+                <Value>C:\Data\Test\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -822,7 +822,7 @@ def process(value):
         <Workflow>
           <Nodes>
             <Expression xsi:type="io:CsvReader">
-              <io:FileName>csvCircleStationary5DegreeSeparation.csv</io:FileName>
+              <io:FileName>csvCircleStationaryAccordingToSparseNoie.csv</io:FileName>
               <io:ListSeparator>,</io:ListSeparator>
               <io:SkipRows>1</io:SkipRows>
             </Expression>
