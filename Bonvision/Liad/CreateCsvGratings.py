@@ -9,14 +9,12 @@ import csv
 import os
 import numpy as np
 
-rangeX, rangeY, Dia, White = 0,0,0,0
+rangeX, rangeY, Dia, White = 0, 0, 0, 0
 
-header = ['Orientations','Spatial Frequencies','Temporal Frequencies','Contrasts']
-
-
+header = ["Orientations", "Spatial Frequencies", "Temporal Frequencies", "Contrasts"]
 
 
-data = np.array([0,0,0,0]).T
+data = np.array([0, 0, 0, 0]).T
 ### Following: Visual Receptive Field Properties of Neurons in the Superficial Superior Colliculus of the Mouse
 
 ####Changing Spatial Frequencies
@@ -39,14 +37,23 @@ data = np.array([0,0,0,0]).T
 
 #########################################################################################
 
-####Changing Contrast
+# ####Changing Contrast
 
-fileName = 'csvGratingsContrastChange'
-orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
+# fileName = 'csvGratingsContrastChange'
+# orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
+# Sfrequencies = [0.08]
+# Tfrequencies = [2]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+# contrasts = [0,0.125,0.25,0.5,0.75,1]
+
+##############################################################################################Changing Contrast
+
+fileName = "csvGratingsContrastChangeFull"
+orientations = np.arange(
+    0, 360, 45
+)  # np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
 Sfrequencies = [0.08]
-Tfrequencies = [2]#[0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
-contrasts = [0,0.125,0.25,0.5,0.75,1]
-
+Tfrequencies = [2]  # [0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+contrasts = [0, 0.125, 0.25, 0.5, 0.75, 1]
 #########################################################################################
 
 # orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
@@ -55,13 +62,13 @@ contrasts = [0,0.125,0.25,0.5,0.75,1]
 # contrasts = [0,0.125,0.25,0.5,0.75,1]#[1]#[0,0.25,0.5,1]
 
 
-filePath = 'D:\Bonsai\VisualProtocols\\' +fileName + '.csv'
+filePath = "D:\Bonsai\VisualProtocols\\" + fileName + ".csv"
 # # Create Data
 # os.getcwd()
 # contents = []
 # with open('C:\\BonsaiExamples\\settingStationary.csv', mode='r') as file:
 #     csv_reader = csv.reader(file, delimiter=',')
-    
+
 #     for row in csv_reader:
 #         contents.append(row)
 # settings= np.array(contents[1])
@@ -75,20 +82,19 @@ filePath = 'D:\Bonsai\VisualProtocols\\' +fileName + '.csv'
 # xRange = np.arange(xs,xe,skip)
 # yRange = np.arange(ys,ye,skip)
 # sizeRange = sizes
-# speedRange = speeds # degress per second      
+# speedRange = speeds # degress per second
 
 for ori in orientations:
-    for sf in Sfrequencies: 
-        for tf in Tfrequencies:  
-            for c in contrasts:                    
-                data = np.vstack((data,[ori,sf,tf,c]))           
-            
-data = np.unique(data[1:,:],axis=0)
-totTime = len(data)*2
-print('Total Time: ' + str((totTime + totTime*3)/60) +' Minutes')
-              
+    for sf in Sfrequencies:
+        for tf in Tfrequencies:
+            for c in contrasts:
+                data = np.vstack((data, [ori, sf, tf, c]))
+data = np.unique(data[1:, :], axis=0)
+totTime = len(data) * 2
+print("Total Time: " + str((totTime + totTime * 3) / 60) + " Minutes")
 
-with open(filePath, 'w', encoding='UTF8', newline='') as f:
+
+with open(filePath, "w", encoding="UTF8", newline="") as f:
     writer = csv.writer(f)
 
     # write the header
@@ -96,4 +102,3 @@ with open(filePath, 'w', encoding='UTF8', newline='') as f:
 
     # write multiple rows
     writer.writerows(data)
-    

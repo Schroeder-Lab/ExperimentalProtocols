@@ -34,8 +34,8 @@ import matplotlib.pyplot as plt
 #%%
 #M:here just choosing the ops, added the below 4 lines to change file path more quickly
 ops = default_ops()
-animal=  'Hedes'
-date= '2022-03-23'
+animal=  'SS113'
+date= '2022-07-11'
 experiment= 'suite2p'
 
 filePath= 'D://Suite2Pprocessedfiles//'+animal+ '//'+date+'//'
