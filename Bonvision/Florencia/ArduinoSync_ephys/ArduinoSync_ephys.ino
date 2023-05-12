@@ -57,7 +57,7 @@ void loop()
   CameraVal = analogRead(cameraPin);
   CameraVal2 = analogRead(cameraPin2);
 
-  if ((millis()-lastTime)>random(20,50))
+  if ((millis()-lastTime)>random(20,500))
   {
     toggle = !toggle;
     digitalWrite(syncPin,toggle);

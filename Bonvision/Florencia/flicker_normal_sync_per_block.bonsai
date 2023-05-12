@@ -10,7 +10,7 @@
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
-                 xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
+                 xmlns:p1="clr-namespace:Bonsai.Numerics.Distributions;assembly=Bonsai.Numerics"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -463,7 +463,7 @@ def process(value):
           <gl:ClearMask>DepthBufferBit ColorBufferBit</gl:ClearMask>
           <gl:CursorVisible>true</gl:CursorVisible>
           <gl:Location xsi:nil="true" />
-          <gl:WindowBorder>Fixed</gl:WindowBorder>
+          <gl:WindowBorder>Resizable</gl:WindowBorder>
           <gl:WindowState>Fullscreen</gl:WindowState>
           <gl:DisplayDevice>Second</gl:DisplayDevice>
           <gl:TargetRenderFrequency>60</gl:TargetRenderFrequency>
@@ -495,34 +495,27 @@ def process(value):
         <Combinator xsi:type="res:LoadResources" />
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="num:CreateRandom">
-          <num:Seed xsi:nil="true" />
+        <Combinator xsi:type="DoubleProperty">
+          <Value>0.175</Value>
         </Combinator>
       </Expression>
       <Expression xsi:type="BehaviorSubject">
-        <Name>rand</Name>
+        <Name>sd_high</Name>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>drawStim</Name>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="DoubleProperty">
+          <Value>0.05</Value>
+        </Combinator>
       </Expression>
-      <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-        <ExtentX>10</ExtentX>
-        <ExtentY>10</ExtentY>
-        <LocationX>-3</LocationX>
-        <LocationY>-16</LocationY>
-        <Layer>10</Layer>
-        <Angle>15</Angle>
-        <ColorR>1</ColorR>
-        <ColorG>1</ColorG>
-        <ColorB>1</ColorB>
-        <ColorA>1</ColorA>
+      <Expression xsi:type="BehaviorSubject">
+        <Name>sd_low</Name>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:RenderFrame" />
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:Timer">
-          <gl:DueTime>PT10S</gl:DueTime>
+          <gl:DueTime>PT30S</gl:DueTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -534,11 +527,11 @@ def process(value):
         <Bottom>-27</Bottom>
         <Top>51</Top>
       </Expression>
+      <Expression xsi:type="BehaviorSubject">
+        <Name>drawStimuli</Name>
+      </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.NormalizedView.bonsai" />
-      </Expression>
-      <Expression xsi:type="BehaviorSubject">
-        <Name>drawStim</Name>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.SphereMapping.bonsai">
         <FaceSize xsi:nil="true" />
@@ -637,22 +630,12 @@ def process(value):
             <Expression xsi:type="WorkflowOutput" />
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>Ori_oddball</Value>
+                <Value>LowC_SD_0.05</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>SFreq_oddball</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>TFreq_oddball</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>Contrast_oddball</Value>
+                <Value>HighC_SD_0.175</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -762,426 +745,174 @@ def process(value):
             <Edge From="8" To="9" Label="Source1" />
             <Edge From="9" To="10" Label="Source2" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="12" To="16" Label="Source1" />
-            <Edge From="13" To="16" Label="Source2" />
-            <Edge From="14" To="16" Label="Source3" />
-            <Edge From="15" To="16" Label="Source4" />
-            <Edge From="16" To="23" Label="Source1" />
-            <Edge From="17" To="20" Label="Source1" />
-            <Edge From="18" To="20" Label="Source3" />
-            <Edge From="19" To="20" Label="Source2" />
-            <Edge From="20" To="21" Label="Source1" />
-            <Edge From="21" To="22" Label="Source1" />
-            <Edge From="22" To="23" Label="Source2" />
-            <Edge From="24" To="25" Label="Source1" />
-            <Edge From="25" To="30" Label="Source1" />
-            <Edge From="26" To="30" Label="Source2" />
-            <Edge From="27" To="30" Label="Source3" />
-            <Edge From="28" To="30" Label="Source4" />
-            <Edge From="29" To="30" Label="Source5" />
-            <Edge From="30" To="37" Label="Source1" />
-            <Edge From="31" To="34" Label="Source1" />
-            <Edge From="32" To="34" Label="Source3" />
-            <Edge From="33" To="34" Label="Source2" />
-            <Edge From="34" To="35" Label="Source1" />
-            <Edge From="35" To="36" Label="Source1" />
-            <Edge From="36" To="37" Label="Source2" />
+            <Edge From="12" To="14" Label="Source1" />
+            <Edge From="13" To="14" Label="Source2" />
+            <Edge From="14" To="21" Label="Source1" />
+            <Edge From="15" To="18" Label="Source1" />
+            <Edge From="16" To="18" Label="Source3" />
+            <Edge From="17" To="18" Label="Source2" />
+            <Edge From="18" To="19" Label="Source1" />
+            <Edge From="19" To="20" Label="Source1" />
+            <Edge From="20" To="21" Label="Source2" />
+            <Edge From="22" To="23" Label="Source1" />
+            <Edge From="23" To="28" Label="Source1" />
+            <Edge From="24" To="28" Label="Source2" />
+            <Edge From="25" To="28" Label="Source3" />
+            <Edge From="26" To="28" Label="Source4" />
+            <Edge From="27" To="28" Label="Source5" />
+            <Edge From="28" To="35" Label="Source1" />
+            <Edge From="29" To="32" Label="Source1" />
+            <Edge From="30" To="32" Label="Source3" />
+            <Edge From="31" To="32" Label="Source2" />
+            <Edge From="32" To="33" Label="Source1" />
+            <Edge From="33" To="34" Label="Source1" />
+            <Edge From="34" To="35" Label="Source2" />
           </Edges>
         </Workflow>
       </Expression>
       <Expression xsi:type="CreateAsync">
-        <Name>Oddball Protocol</Name>
+        <Name>Flicker_ContrastAdaptation</Name>
         <Workflow>
           <Nodes>
-            <Expression xsi:type="NestedWorkflow">
-              <Name>Inverse Oddball</Name>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>lowContrast</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="io:CsvReader">
-                    <io:FileName>inverse_oddball.csv</io:FileName>
-                    <io:ListSeparator>,</io:ListSeparator>
-                    <io:ScanPattern />
-                    <io:SkipRows>1</io:SkipRows>
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
-                    <Name>rand</Name>
+                    <Name>sd_low</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="StdDev" />
+                    </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="num:Permutation" />
+                    <Combinator xsi:type="p1:CreateNormal">
+                      <p1:Mean>0.5</p1:Mean>
+                      <p1:StdDev>0.05</p1:StdDev>
+                    </Combinator>
                   </Expression>
-                  <Expression xsi:type="scr:ExpressionTransform">
-                    <scr:Expression>new(Double.Parse(it[0]) as Ori,
-Double.Parse(it[1]) as SFreq,
-Double.Parse(it[2]) as TFreq,
-Double.Parse(it[3]) as Contrast
-)</scr:Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="p1:Sample" />
                   </Expression>
                   <Expression xsi:type="CreateObservable">
-                    <Name>GratingPres</Name>
+                    <Name>lowC</Name>
                     <Workflow>
                       <Nodes>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>drawStim</Name>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="gl:Timer">
+                            <gl:DueTime>PT0.03S</gl:DueTime>
+                          </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
+                          <Name>drawStimuli</Name>
                         </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="SpatialFrequency" Selector="SFreq" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="TemporalFrequency" Selector="TFreq" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Contrast" Selector="Contrast" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="scr:PythonSource">
-                          <scr:Script>from System import TimeSpan
-
-@returns(TimeSpan)
-def generate():
-  yield TimeSpan.FromSeconds(0.3)</scr:Script>
+                        <Expression xsi:type="WorkflowInput">
+                          <Name>Source1</Name>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                          <Format>ISI:{0}</Format>
-                          <Selector>TotalSeconds</Selector>
+                          <Format>Low;{0}</Format>
+                          <Selector>it</Selector>
                           <Name>Events</Name>
                         </Expression>
                         <Expression xsi:type="PropertyMapping">
                           <PropertyMappings>
-                            <Property Name="DueTime" />
+                            <Property Name="Amplitude" Selector="it" />
                           </PropertyMappings>
                         </Expression>
                         <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="gl:Timer">
-                            <gl:DueTime>PT0.3S</gl:DueTime>
+                          <Combinator xsi:type="dsp:FunctionGenerator">
+                            <dsp:BufferLength>1</dsp:BufferLength>
+                            <dsp:Frequency>12.5</dsp:Frequency>
+                            <dsp:Waveform>Square</dsp:Waveform>
+                            <dsp:SampleRate>10000</dsp:SampleRate>
+                            <dsp:Amplitude>0.50007639970355555</dsp:Amplitude>
+                            <dsp:Offset>0</dsp:Offset>
+                            <dsp:Phase>0</dsp:Phase>
                           </Combinator>
                         </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>drawStim</Name>
+                        <Expression xsi:type="Index">
+                          <Operand xsi:type="IntProperty">
+                            <Value>0</Value>
+                          </Operand>
+                        </Expression>
+                        <Expression xsi:type="MemberSelector">
+                          <Selector>Val0</Selector>
+                        </Expression>
+                        <Expression xsi:type="PropertyMapping">
+                          <PropertyMappings>
+                            <Property Name="ColorR" />
+                            <Property Name="ColorG" />
+                            <Property Name="ColorB" />
+                          </PropertyMappings>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-                          <ExtentX>10</ExtentX>
-                          <ExtentY>10</ExtentY>
-                          <LocationX>-3</LocationX>
-                          <LocationY>-16</LocationY>
-                          <Layer>10</Layer>
-                          <Angle>15</Angle>
-                          <ColorR>0</ColorR>
-                          <ColorG>0</ColorG>
-                          <ColorB>0</ColorB>
-                          <ColorA>1</ColorA>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:TakeUntil" />
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Value" Selector="Ori" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="DoubleProperty">
-                            <Value>0</Value>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="num:DegreeToRadian" />
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Angle" Selector="it" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
+                          <ExtentX>360</ExtentX>
+                          <ExtentY>360</ExtentY>
                           <LocationX>0</LocationX>
                           <LocationY>0</LocationY>
                           <Layer>0</Layer>
                           <Angle>0</Angle>
-                          <SpatialFrequency>0.08</SpatialFrequency>
-                          <TemporalFrequency>0</TemporalFrequency>
-                          <Phase>0</Phase>
-                          <SquareWave>false</SquareWave>
-                          <Contrast>1</Contrast>
-                          <DutyCycle xsi:nil="true" />
-                          <Radius>1</Radius>
-                          <Aperture>0</Aperture>
-                          <Opacity>1</Opacity>
-                          <ExtentX>360</ExtentX>
-                          <ExtentY>360</ExtentY>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:TakeUntil" />
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="gl:Delay">
-                            <gl:DueTime>PT0.3S</gl:DueTime>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                          <Format xsi:nil="true" />
-                          <Selector>Ori,SFreq,TFreq,Contrast</Selector>
-                          <Name>Events</Name>
-                        </Expression>
-                        <Expression xsi:type="AsyncSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                      </Nodes>
-                      <Edges>
-                        <Edge From="0" To="19" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="19" Label="Source3" />
-                        <Edge From="3" To="4" Label="Source1" />
-                        <Edge From="4" To="19" Label="Source4" />
-                        <Edge From="5" To="6" Label="Source1" />
-                        <Edge From="6" To="19" Label="Source5" />
-                        <Edge From="7" To="8" Label="Source1" />
-                        <Edge From="8" To="9" Label="Source1" />
-                        <Edge From="9" To="21" Label="Source2" />
-                        <Edge From="10" To="20" Label="Source2" />
-                        <Edge From="10" To="13" Label="Source2" />
-                        <Edge From="11" To="12" Label="Source1" />
-                        <Edge From="12" To="13" Label="Source1" />
-                        <Edge From="14" To="15" Label="Source1" />
-                        <Edge From="15" To="16" Label="Source1" />
-                        <Edge From="16" To="17" Label="Source1" />
-                        <Edge From="17" To="18" Label="Source1" />
-                        <Edge From="18" To="19" Label="Source2" />
-                        <Edge From="19" To="20" Label="Source1" />
-                        <Edge From="20" To="21" Label="Source1" />
-                        <Edge From="21" To="22" Label="Source1" />
-                        <Edge From="23" To="24" Label="Source1" />
-                        <Edge From="24" To="25" Label="Source1" />
-                      </Edges>
-                    </Workflow>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Concat" />
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:RepeatCount">
-                      <rx:Count>1</rx:Count>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Last" />
-                  </Expression>
-                  <Expression xsi:type="WorkflowOutput" />
-                </Nodes>
-                <Edges>
-                  <Edge From="0" To="2" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source2" />
-                  <Edge From="2" To="3" Label="Source1" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="5" Label="Source1" />
-                  <Edge From="5" To="6" Label="Source1" />
-                  <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="8" Label="Source1" />
-                </Edges>
-              </Workflow>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="gl:Delay">
-                <gl:DueTime>PT10S</gl:DueTime>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="NestedWorkflow">
-              <Name>Oddball</Name>
-              <Workflow>
-                <Nodes>
-                  <Expression xsi:type="io:CsvReader">
-                    <io:FileName>oddball_home.csv</io:FileName>
-                    <io:ListSeparator>,</io:ListSeparator>
-                    <io:ScanPattern />
-                    <io:SkipRows>1</io:SkipRows>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>rand</Name>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="num:Permutation" />
-                  </Expression>
-                  <Expression xsi:type="scr:ExpressionTransform">
-                    <scr:Expression>new(Double.Parse(it[0]) as Ori,
-Double.Parse(it[1]) as SFreq,
-Double.Parse(it[2]) as TFreq,
-Double.Parse(it[3]) as Contrast
-)</scr:Expression>
-                  </Expression>
-                  <Expression xsi:type="CreateObservable">
-                    <Name>GratingPres</Name>
-                    <Workflow>
-                      <Nodes>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>drawStim</Name>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="SpatialFrequency" Selector="SFreq" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="TemporalFrequency" Selector="TFreq" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Contrast" Selector="Contrast" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="scr:PythonSource">
-                          <scr:Script>from System import TimeSpan
-
-@returns(TimeSpan)
-def generate():
-  yield TimeSpan.FromSeconds(0.3)</scr:Script>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                          <Format>ISI:{0}</Format>
-                          <Selector>TotalSeconds</Selector>
-                          <Name>Events</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="DueTime" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="gl:Timer">
-                            <gl:DueTime>PT0.3S</gl:DueTime>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>drawStim</Name>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-                          <ExtentX>10</ExtentX>
-                          <ExtentY>10</ExtentY>
-                          <LocationX>-3</LocationX>
-                          <LocationY>-16</LocationY>
-                          <Layer>10</Layer>
-                          <Angle>15</Angle>
-                          <ColorR>0</ColorR>
-                          <ColorG>0</ColorG>
-                          <ColorB>0</ColorB>
+                          <ColorR>0.5000764</ColorR>
+                          <ColorG>0.5000764</ColorG>
+                          <ColorB>0.5000764</ColorB>
                           <ColorA>1</ColorA>
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:TakeUntil" />
                         </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Value" Selector="Ori" />
-                          </PropertyMappings>
-                        </Expression>
                         <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="DoubleProperty">
-                            <Value>90</Value>
-                          </Combinator>
+                          <Combinator xsi:type="rx:LastOrDefault" />
                         </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="num:DegreeToRadian" />
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="Combinator">
+                            <Combinator xsi:type="BooleanProperty">
+                              <Value>true</Value>
+                            </Combinator>
+                          </Builder>
                         </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Angle" Selector="it" />
-                          </PropertyMappings>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="MulticastSubject">
+                            <Name>Sync</Name>
+                          </Builder>
                         </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
-                          <LocationX>0</LocationX>
-                          <LocationY>0</LocationY>
-                          <Layer>0</Layer>
-                          <Angle>90</Angle>
-                          <SpatialFrequency>0.08</SpatialFrequency>
-                          <TemporalFrequency>0</TemporalFrequency>
-                          <Phase>0</Phase>
-                          <SquareWave>false</SquareWave>
-                          <Contrast>1</Contrast>
-                          <DutyCycle xsi:nil="true" />
-                          <Radius>1</Radius>
-                          <Aperture>0</Aperture>
-                          <Opacity>1</Opacity>
-                          <ExtentX>360</ExtentX>
-                          <ExtentY>360</ExtentY>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="Combinator">
+                            <Combinator xsi:type="BooleanProperty">
+                              <Value>false</Value>
+                            </Combinator>
+                          </Builder>
                         </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:TakeUntil" />
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="Combinator">
+                            <Combinator xsi:type="rx:Take">
+                              <rx:Count>1</rx:Count>
+                            </Combinator>
+                          </Builder>
                         </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="gl:Delay">
-                            <gl:DueTime>PT0.3S</gl:DueTime>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                          <Format xsi:nil="true" />
-                          <Selector>Ori,SFreq,TFreq,Contrast</Selector>
-                          <Name>Events</Name>
-                        </Expression>
-                        <Expression xsi:type="AsyncSubject">
-                          <Name>GratingParams</Name>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="MulticastSubject">
+                            <Name>Sync</Name>
+                          </Builder>
                         </Expression>
                       </Nodes>
                       <Edges>
-                        <Edge From="0" To="19" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="19" Label="Source3" />
+                        <Edge From="0" To="10" Label="Source2" />
+                        <Edge From="1" To="9" Label="Source1" />
+                        <Edge From="1" To="14" Label="Source1" />
+                        <Edge From="2" To="3" Label="Source1" />
                         <Edge From="3" To="4" Label="Source1" />
-                        <Edge From="4" To="19" Label="Source4" />
+                        <Edge From="4" To="5" Label="Source1" />
                         <Edge From="5" To="6" Label="Source1" />
-                        <Edge From="6" To="19" Label="Source5" />
+                        <Edge From="6" To="7" Label="Source1" />
                         <Edge From="7" To="8" Label="Source1" />
-                        <Edge From="8" To="9" Label="Source1" />
-                        <Edge From="9" To="21" Label="Source2" />
-                        <Edge From="10" To="20" Label="Source2" />
-                        <Edge From="10" To="13" Label="Source2" />
+                        <Edge From="8" To="9" Label="Source2" />
+                        <Edge From="9" To="10" Label="Source1" />
+                        <Edge From="10" To="11" Label="Source1" />
                         <Edge From="11" To="12" Label="Source1" />
                         <Edge From="12" To="13" Label="Source1" />
                         <Edge From="14" To="15" Label="Source1" />
                         <Edge From="15" To="16" Label="Source1" />
-                        <Edge From="16" To="17" Label="Source1" />
-                        <Edge From="17" To="18" Label="Source1" />
-                        <Edge From="18" To="19" Label="Source2" />
-                        <Edge From="19" To="20" Label="Source1" />
-                        <Edge From="20" To="21" Label="Source1" />
-                        <Edge From="21" To="22" Label="Source1" />
-                        <Edge From="23" To="24" Label="Source1" />
-                        <Edge From="24" To="25" Label="Source1" />
                       </Edges>
                     </Workflow>
                   </Expression>
@@ -1190,265 +921,192 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:RepeatCount">
-                      <rx:Count>1</rx:Count>
+                      <rx:Count>1000</rx:Count>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Last" />
+                    <Combinator xsi:type="rx:LastOrDefault" />
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Last" />
+                    </Builder>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>drawStimuli</Name>
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+                    <ExtentX>10</ExtentX>
+                    <ExtentY>10</ExtentY>
+                    <LocationX>-3</LocationX>
+                    <LocationY>-16</LocationY>
+                    <Layer>10</Layer>
+                    <Angle>15</Angle>
+                    <ColorR>1</ColorR>
+                    <ColorG>1</ColorG>
+                    <ColorB>1</ColorB>
+                    <ColorA>1</ColorA>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:TakeUntil" />
+                  </Expression>
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="2" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source2" />
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
                   <Edge From="4" To="5" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
                   <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source2" />
+                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="10" To="11" Label="Source2" />
+                  <Edge From="11" To="12" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="gl:Delay">
-                <gl:DueTime>PT10S</gl:DueTime>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="NestedWorkflow">
-              <Name>Control Equal Probability</Name>
+            <Expression xsi:type="GroupWorkflow">
+              <Name>highContrast</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="io:CsvReader">
-                    <io:FileName>control_oddball.csv</io:FileName>
-                    <io:ListSeparator>,</io:ListSeparator>
-                    <io:ScanPattern />
-                    <io:SkipRows>1</io:SkipRows>
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
-                    <Name>rand</Name>
+                    <Name>sd_high</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="StdDev" />
+                    </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="num:Permutation" />
+                    <Combinator xsi:type="p1:CreateNormal">
+                      <p1:Mean>0.5</p1:Mean>
+                      <p1:StdDev>0.175</p1:StdDev>
+                    </Combinator>
                   </Expression>
-                  <Expression xsi:type="scr:ExpressionTransform">
-                    <scr:Expression>new(Double.Parse(it[0]) as Ori,
-Double.Parse(it[1]) as SFreq,
-Double.Parse(it[2]) as TFreq,
-Double.Parse(it[3]) as Contrast
-)</scr:Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="p1:Sample" />
                   </Expression>
                   <Expression xsi:type="CreateObservable">
-                    <Name>GratingPres</Name>
+                    <Name>highContrast</Name>
                     <Workflow>
                       <Nodes>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>drawStim</Name>
+                        <Expression xsi:type="Combinator">
+                          <Combinator xsi:type="gl:Timer">
+                            <gl:DueTime>PT0.03S</gl:DueTime>
+                          </Combinator>
                         </Expression>
                         <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
+                          <Name>drawStimuli</Name>
                         </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="SpatialFrequency" Selector="SFreq" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="TemporalFrequency" Selector="TFreq" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Contrast" Selector="Contrast" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="scr:PythonSource">
-                          <scr:Script>from System import TimeSpan
-
-@returns(TimeSpan)
-def generate():
-  yield TimeSpan.FromSeconds(0.3)</scr:Script>
+                        <Expression xsi:type="WorkflowInput">
+                          <Name>Source1</Name>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                          <Format>ISI:{0}</Format>
-                          <Selector>TotalSeconds</Selector>
+                          <Format>High;{0}</Format>
+                          <Selector>it</Selector>
                           <Name>Events</Name>
                         </Expression>
                         <Expression xsi:type="PropertyMapping">
                           <PropertyMappings>
-                            <Property Name="DueTime" />
+                            <Property Name="Amplitude" Selector="it" />
                           </PropertyMappings>
                         </Expression>
                         <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="gl:Timer">
-                            <gl:DueTime>PT0.3S</gl:DueTime>
+                          <Combinator xsi:type="dsp:FunctionGenerator">
+                            <dsp:BufferLength>1</dsp:BufferLength>
+                            <dsp:Frequency>12.5</dsp:Frequency>
+                            <dsp:Waveform>Square</dsp:Waveform>
+                            <dsp:SampleRate>10000</dsp:SampleRate>
+                            <dsp:Amplitude>0.60047810135787716</dsp:Amplitude>
+                            <dsp:Offset>0</dsp:Offset>
+                            <dsp:Phase>0</dsp:Phase>
                           </Combinator>
                         </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>drawStim</Name>
+                        <Expression xsi:type="Index">
+                          <Operand xsi:type="IntProperty">
+                            <Value>0</Value>
+                          </Operand>
+                        </Expression>
+                        <Expression xsi:type="MemberSelector">
+                          <Selector>Val0</Selector>
+                        </Expression>
+                        <Expression xsi:type="PropertyMapping">
+                          <PropertyMappings>
+                            <Property Name="ColorR" />
+                            <Property Name="ColorG" />
+                            <Property Name="ColorB" />
+                          </PropertyMappings>
                         </Expression>
                         <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-                          <ExtentX>10</ExtentX>
-                          <ExtentY>10</ExtentY>
-                          <LocationX>-3</LocationX>
-                          <LocationY>-16</LocationY>
-                          <Layer>10</Layer>
-                          <Angle>15</Angle>
-                          <ColorR>0</ColorR>
-                          <ColorG>0</ColorG>
-                          <ColorB>0</ColorB>
+                          <ExtentX>360</ExtentX>
+                          <ExtentY>360</ExtentY>
+                          <LocationX>0</LocationX>
+                          <LocationY>0</LocationY>
+                          <Layer>0</Layer>
+                          <Angle>0</Angle>
+                          <ColorR>0.6004781</ColorR>
+                          <ColorG>0.6004781</ColorG>
+                          <ColorB>0.6004781</ColorB>
                           <ColorA>1</ColorA>
                         </Expression>
                         <Expression xsi:type="Combinator">
                           <Combinator xsi:type="rx:TakeUntil" />
                         </Expression>
-                        <Expression xsi:type="SubscribeSubject">
-                          <Name>GratingParams</Name>
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Value" Selector="Ori" />
-                          </PropertyMappings>
-                        </Expression>
                         <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="DoubleProperty">
-                            <Value>120</Value>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="num:DegreeToRadian" />
-                        </Expression>
-                        <Expression xsi:type="PropertyMapping">
-                          <PropertyMappings>
-                            <Property Name="Angle" Selector="it" />
-                          </PropertyMappings>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawGratings.bonsai">
-                          <LocationX>0</LocationX>
-                          <LocationY>0</LocationY>
-                          <Layer>0</Layer>
-                          <Angle>120</Angle>
-                          <SpatialFrequency>0.08</SpatialFrequency>
-                          <TemporalFrequency>0</TemporalFrequency>
-                          <Phase>0</Phase>
-                          <SquareWave>false</SquareWave>
-                          <Contrast>1</Contrast>
-                          <DutyCycle xsi:nil="true" />
-                          <Radius>1</Radius>
-                          <Aperture>0</Aperture>
-                          <Opacity>1</Opacity>
-                          <ExtentX>360</ExtentX>
-                          <ExtentY>360</ExtentY>
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="rx:TakeUntil" />
-                        </Expression>
-                        <Expression xsi:type="Combinator">
-                          <Combinator xsi:type="gl:Delay">
-                            <gl:DueTime>PT0.3S</gl:DueTime>
-                          </Combinator>
-                        </Expression>
-                        <Expression xsi:type="WorkflowOutput" />
-                        <Expression xsi:type="WorkflowInput">
-                          <Name>Source1</Name>
-                        </Expression>
-                        <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                          <Format xsi:nil="true" />
-                          <Selector>Ori,SFreq,TFreq,Contrast</Selector>
-                          <Name>Events</Name>
-                        </Expression>
-                        <Expression xsi:type="AsyncSubject">
-                          <Name>GratingParams</Name>
+                          <Combinator xsi:type="rx:LastOrDefault" />
                         </Expression>
                         <Expression xsi:type="Disable">
-                          <Builder xsi:type="SubscribeSubject">
-                            <Name>drawStim</Name>
+                          <Builder xsi:type="Combinator">
+                            <Combinator xsi:type="BooleanProperty">
+                              <Value>true</Value>
+                            </Combinator>
+                          </Builder>
+                        </Expression>
+                        <Expression xsi:type="Disable">
+                          <Builder xsi:type="MulticastSubject">
+                            <Name>Sync</Name>
                           </Builder>
                         </Expression>
                         <Expression xsi:type="Disable">
                           <Builder xsi:type="Combinator">
-                            <Combinator xsi:type="gl:RenderFrame" />
+                            <Combinator xsi:type="BooleanProperty">
+                              <Value>false</Value>
+                            </Combinator>
                           </Builder>
                         </Expression>
                         <Expression xsi:type="Disable">
                           <Builder xsi:type="Combinator">
-                            <Combinator xsi:type="rx:ElementIndex" />
+                            <Combinator xsi:type="rx:Take">
+                              <rx:Count>1</rx:Count>
+                            </Combinator>
                           </Builder>
                         </Expression>
                         <Expression xsi:type="Disable">
-                          <Builder xsi:type="MemberSelector">
-                            <Selector>Index</Selector>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="Mod">
-                            <Operand xsi:type="IntProperty">
-                              <Value>2</Value>
-                            </Operand>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="PropertyMapping">
-                            <PropertyMappings>
-                              <Property Name="ColorR" />
-                              <Property Name="ColorG" />
-                              <Property Name="ColorB" />
-                            </PropertyMappings>
-                          </Builder>
-                        </Expression>
-                        <Expression xsi:type="Disable">
-                          <Builder xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
-                            <ExtentX>10</ExtentX>
-                            <ExtentY>10</ExtentY>
-                            <LocationX>100</LocationX>
-                            <LocationY>-40</LocationY>
-                            <Layer>100</Layer>
-                            <Angle>0</Angle>
-                            <ColorR>1</ColorR>
-                            <ColorG>1</ColorG>
-                            <ColorB>1</ColorB>
-                            <ColorA>1</ColorA>
+                          <Builder xsi:type="MulticastSubject">
+                            <Name>Sync</Name>
                           </Builder>
                         </Expression>
                       </Nodes>
                       <Edges>
-                        <Edge From="0" To="19" Label="Source1" />
-                        <Edge From="1" To="2" Label="Source1" />
-                        <Edge From="2" To="19" Label="Source3" />
+                        <Edge From="0" To="10" Label="Source2" />
+                        <Edge From="1" To="9" Label="Source1" />
+                        <Edge From="1" To="14" Label="Source1" />
+                        <Edge From="2" To="3" Label="Source1" />
                         <Edge From="3" To="4" Label="Source1" />
-                        <Edge From="4" To="19" Label="Source4" />
+                        <Edge From="4" To="5" Label="Source1" />
                         <Edge From="5" To="6" Label="Source1" />
-                        <Edge From="6" To="19" Label="Source5" />
+                        <Edge From="6" To="7" Label="Source1" />
                         <Edge From="7" To="8" Label="Source1" />
-                        <Edge From="8" To="9" Label="Source1" />
-                        <Edge From="9" To="21" Label="Source2" />
-                        <Edge From="10" To="20" Label="Source2" />
-                        <Edge From="10" To="13" Label="Source2" />
+                        <Edge From="8" To="9" Label="Source2" />
+                        <Edge From="9" To="10" Label="Source1" />
+                        <Edge From="10" To="11" Label="Source1" />
                         <Edge From="11" To="12" Label="Source1" />
                         <Edge From="12" To="13" Label="Source1" />
                         <Edge From="14" To="15" Label="Source1" />
                         <Edge From="15" To="16" Label="Source1" />
-                        <Edge From="16" To="17" Label="Source1" />
-                        <Edge From="17" To="18" Label="Source1" />
-                        <Edge From="18" To="19" Label="Source2" />
-                        <Edge From="19" To="20" Label="Source1" />
-                        <Edge From="20" To="21" Label="Source1" />
-                        <Edge From="21" To="22" Label="Source1" />
-                        <Edge From="23" To="24" Label="Source1" />
-                        <Edge From="24" To="25" Label="Source1" />
-                        <Edge From="26" To="32" Label="Source1" />
-                        <Edge From="27" To="28" Label="Source1" />
-                        <Edge From="28" To="29" Label="Source1" />
-                        <Edge From="29" To="30" Label="Source1" />
-                        <Edge From="30" To="31" Label="Source1" />
-                        <Edge From="31" To="32" Label="Source2" />
                       </Edges>
                     </Workflow>
                   </Expression>
@@ -1457,50 +1115,93 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:RepeatCount">
-                      <rx:Count>1</rx:Count>
+                      <rx:Count>1000</rx:Count>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Last" />
+                    <Combinator xsi:type="rx:LastOrDefault" />
+                  </Expression>
+                  <Expression xsi:type="Disable">
+                    <Builder xsi:type="Combinator">
+                      <Combinator xsi:type="rx:Last" />
+                    </Builder>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>drawStimuli</Name>
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawQuad.bonsai">
+                    <ExtentX>10</ExtentX>
+                    <ExtentY>10</ExtentY>
+                    <LocationX>-3</LocationX>
+                    <LocationY>-16</LocationY>
+                    <Layer>10</Layer>
+                    <Angle>15</Angle>
+                    <ColorR>0</ColorR>
+                    <ColorG>0</ColorG>
+                    <ColorB>0</ColorB>
+                    <ColorA>1</ColorA>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:TakeUntil" />
+                  </Expression>
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="2" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source2" />
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source1" />
                   <Edge From="2" To="3" Label="Source1" />
                   <Edge From="3" To="4" Label="Source1" />
                   <Edge From="4" To="5" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
                   <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="7" To="12" Label="Source2" />
+                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="10" To="11" Label="Source2" />
+                  <Edge From="11" To="12" Label="Source1" />
                 </Edges>
               </Workflow>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="gl:Delay">
-                <gl:DueTime>PT10S</gl:DueTime>
-              </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Concat" />
             </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:RepeatCount">
+                <rx:Count>10</rx:Count>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Delay">
+                <rx:DueTime>PT10S</rx:DueTime>
+              </Combinator>
+            </Expression>
             <Expression xsi:type="WorkflowOutput" />
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="Combinator">
+                <Combinator xsi:type="BooleanProperty">
+                  <Value>false</Value>
+                </Combinator>
+              </Builder>
+            </Expression>
+            <Expression xsi:type="Disable">
+              <Builder xsi:type="MulticastSubject">
+                <Name>Sync</Name>
+              </Builder>
+            </Expression>
           </Nodes>
           <Edges>
-            <Edge From="0" To="1" Label="Source1" />
-            <Edge From="1" To="6" Label="Source2" />
+            <Edge From="0" To="2" Label="Source1" />
+            <Edge From="1" To="2" Label="Source2" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="3" To="6" Label="Source1" />
+            <Edge From="3" To="4" Label="Source1" />
             <Edge From="4" To="5" Label="Source1" />
-            <Edge From="5" To="6" Label="Source3" />
             <Edge From="6" To="7" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="rx:DelaySubscription">
-          <rx:DueTime>PT10S</rx:DueTime>
+        <Combinator xsi:type="gl:DelaySubscription">
+          <gl:DueTime>PT30S</gl:DueTime>
         </Combinator>
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
@@ -1553,7 +1254,7 @@ def generate():
       <Edge From="50" To="51" Label="Source1" />
       <Edge From="52" To="53" Label="Source1" />
       <Edge From="54" To="56" Label="Source1" />
-      <Edge From="54" To="65" Label="Source1" />
+      <Edge From="54" To="65" Label="Source2" />
       <Edge From="54" To="66" Label="Source1" />
       <Edge From="55" To="56" Label="Source2" />
       <Edge From="56" To="57" Label="Source1" />
@@ -1563,7 +1264,7 @@ def generate():
       <Edge From="60" To="61" Label="Source1" />
       <Edge From="61" To="62" Label="Source1" />
       <Edge From="63" To="64" Label="Source1" />
-      <Edge From="64" To="65" Label="Source2" />
+      <Edge From="64" To="65" Label="Source1" />
       <Edge From="67" To="68" Label="Source1" />
       <Edge From="68" To="69" Label="Source1" />
     </Edges>
