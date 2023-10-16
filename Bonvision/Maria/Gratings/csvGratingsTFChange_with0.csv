@@ -1,5 +1,6 @@
 Orientations,Spatial Frequencies,Temporal Frequencies,Contrasts
 0.0,0.08,0.0,1.0
+0.0,0.08,0.5,1.0
 0.0,0.08,1.0,1.0
 0.0,0.08,2.0,1.0
 0.0,0.08,4.0,1.0
@@ -7,6 +8,7 @@ Orientations,Spatial Frequencies,Temporal Frequencies,Contrasts
 0.0,0.08,16.0,1.0
 0.0,0.08,32.0,1.0
 90.0,0.08,0.0,1.0
+90.0,0.08,0.5,1.0
 90.0,0.08,1.0,1.0
 90.0,0.08,2.0,1.0
 90.0,0.08,4.0,1.0
@@ -14,6 +16,7 @@ Orientations,Spatial Frequencies,Temporal Frequencies,Contrasts
 90.0,0.08,16.0,1.0
 90.0,0.08,32.0,1.0
 180.0,0.08,0.0,1.0
+180.0,0.08,0.5,1.0
 180.0,0.08,1.0,1.0
 180.0,0.08,2.0,1.0
 180.0,0.08,4.0,1.0
@@ -21,6 +24,7 @@ Orientations,Spatial Frequencies,Temporal Frequencies,Contrasts
 180.0,0.08,16.0,1.0
 180.0,0.08,32.0,1.0
 270.0,0.08,0.0,1.0
+270.0,0.08,0.5,1.0
 270.0,0.08,1.0,1.0
 270.0,0.08,2.0,1.0
 270.0,0.08,4.0,1.0

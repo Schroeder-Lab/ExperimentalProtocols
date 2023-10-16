@@ -47,13 +47,13 @@ data = np.array([0, 0, 0, 0]).T
 
 ##############################################################################################Changing Contrast
 
-fileName = "csvGratingsContrastChangeTFChange"
+fileName = "csvGratingsTFChange_with0"
 orientations = np.arange(
     0, 360, 90
 )  # np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
 Sfrequencies = [0.08]
-Tfrequencies = [0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
-contrasts = [0, 0.25, 0.5, 1]
+Tfrequencies = [0,0.5,1,2,4,8,16,32]#[1,2,5,10,20,40]#[0.5,1,2,4,8,16,32]
+contrasts = [1]
 #########################################################################################
 
 # orientations = [0, 90, 180,270]#np.arange(0,360,30)#np.array([0,45,90,135,180,225,270,315])
@@ -62,7 +62,7 @@ contrasts = [0, 0.25, 0.5, 1]
 # contrasts = [0,0.125,0.25,0.5,0.75,1]#[1]#[0,0.25,0.5,1]
 
 
-filePath = "D:\Bonsai\VisualProtocols\\" + fileName + ".csv"
+filePath = "D:\\" + fileName + ".csv"
 # # Create Data
 # os.getcwd()
 # contents = []
