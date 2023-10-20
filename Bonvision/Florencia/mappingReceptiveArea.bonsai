@@ -17,7 +17,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\FG003\</Value>
+                <Value>C:\Data\FG005\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -593,7 +593,7 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>C:\Data\FG003\2023-03-10\Experimental_grid.csv</io:FileName>
+                    <io:FileName>C:\Data\FG003\2023-06-09\Experimental_grid.csv</io:FileName>
                     <io:Append>true</io:Append>
                     <io:Overwrite>true</io:Overwrite>
                     <io:Suffix>None</io:Suffix>
