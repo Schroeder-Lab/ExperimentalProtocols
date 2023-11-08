@@ -772,12 +772,12 @@
     <EditorDialogSettings>
       <Visible>false</Visible>
       <Location>
-        <X>2273</X>
-        <Y>108</Y>
+        <X>435</X>
+        <Y>261</Y>
       </Location>
       <Size>
-        <Width>874</Width>
-        <Height>598</Height>
+        <Width>1008</Width>
+        <Height>578</Height>
       </Size>
       <WindowState>Normal</WindowState>
     </EditorDialogSettings>

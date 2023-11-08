@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.7.0"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
-                 xmlns:ipy="clr-namespace:Bonsai.Scripting.IronPython;assembly=Bonsai.Scripting.IronPython"
-                 xmlns:p1="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
+                 xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
@@ -44,17 +43,17 @@
                 <Value>C:\Data\FG005\</Value>
               </Combinator>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>Saving Dir</Name>
             </Expression>
-            <Expression xsi:type="ipy:PythonSource">
-              <ipy:Script>from System import DateTime,String
+            <Expression xsi:type="scr:PythonSource">
+              <scr:Script>from System import DateTime,String
 
 @returns(String)
 def generate(): 
-  yield (DateTime.Now).ToString("yyyy-MM-dd")</ipy:Script>
+  yield (DateTime.Now).ToString("yyyy-MM-dd")</scr:Script>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -75,7 +74,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>VideoPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -96,7 +95,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>LogPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -117,7 +116,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>NidaqPath</Name>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -138,7 +137,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>VideoBottomPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -159,7 +158,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="rx:BehaviorSubject">
+            <Expression xsi:type="BehaviorSubject">
               <Name>ArduinoInput</Name>
             </Expression>
           </Nodes>
@@ -200,38 +199,38 @@ def generate():
           <io:NewLine>\n</io:NewLine>
         </Combinator>
       </Expression>
-      <Expression xsi:type="rx:PublishSubject">
+      <Expression xsi:type="PublishSubject">
         <Name>Arduino</Name>
       </Expression>
       <Expression xsi:type="Combinator">
-        <Combinator xsi:type="p1:AnalogInput">
-          <p1:SignalSource />
-          <p1:SampleRate>1000</p1:SampleRate>
-          <p1:ActiveEdge>Rising</p1:ActiveEdge>
-          <p1:SampleMode>ContinuousSamples</p1:SampleMode>
-          <p1:BufferSize>1</p1:BufferSize>
-          <p1:SamplesPerRead>-1</p1:SamplesPerRead>
-          <p1:Channels>
-            <p1:AnalogInputChannelConfiguration>
-              <p1:ChannelName>Photodiode</p1:ChannelName>
-              <p1:MinimumValue>-10</p1:MinimumValue>
-              <p1:MaximumValue>10</p1:MaximumValue>
-              <p1:PhysicalChannel>Dev2/ai0</p1:PhysicalChannel>
-              <p1:TerminalConfiguration>Differential</p1:TerminalConfiguration>
-              <p1:VoltageUnits>Volts</p1:VoltageUnits>
-            </p1:AnalogInputChannelConfiguration>
-            <p1:AnalogInputChannelConfiguration>
-              <p1:ChannelName>ArduinoSync</p1:ChannelName>
-              <p1:MinimumValue>-5</p1:MinimumValue>
-              <p1:MaximumValue>5</p1:MaximumValue>
-              <p1:PhysicalChannel>Dev2/ai1</p1:PhysicalChannel>
-              <p1:TerminalConfiguration>Rse</p1:TerminalConfiguration>
-              <p1:VoltageUnits>Volts</p1:VoltageUnits>
-            </p1:AnalogInputChannelConfiguration>
-          </p1:Channels>
+        <Combinator xsi:type="mx:AnalogInput">
+          <mx:SignalSource />
+          <mx:SampleRate>1000</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1</mx:BufferSize>
+          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:Channels>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>Photodiode</mx:ChannelName>
+              <mx:MinimumValue>-10</mx:MinimumValue>
+              <mx:MaximumValue>10</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev2/ai0</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+            <mx:AnalogInputChannelConfiguration>
+              <mx:ChannelName>ArduinoSync</mx:ChannelName>
+              <mx:MinimumValue>-5</mx:MinimumValue>
+              <mx:MaximumValue>5</mx:MaximumValue>
+              <mx:PhysicalChannel>Dev2/ai1</mx:PhysicalChannel>
+              <mx:TerminalConfiguration>Rse</mx:TerminalConfiguration>
+              <mx:VoltageUnits>Volts</mx:VoltageUnits>
+            </mx:AnalogInputChannelConfiguration>
+          </mx:Channels>
         </Combinator>
       </Expression>
-      <Expression xsi:type="rx:PublishSubject">
+      <Expression xsi:type="PublishSubject">
         <Name>NIDAQ</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -250,14 +249,14 @@ def generate():
           <rx:Count>20</rx:Count>
         </Combinator>
       </Expression>
-      <Expression xsi:type="rx:Condition">
+      <Expression xsi:type="Condition">
         <Workflow>
           <Nodes>
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
-            <Expression xsi:type="ipy:PythonTransform">
-              <ipy:Script>@returns(bool)
+            <Expression xsi:type="scr:PythonTransform">
+              <scr:Script>@returns(bool)
 def process(value):
   mylist = value.split("\t")
 
@@ -266,7 +265,7 @@ def process(value):
   else:
     return False
 
-</ipy:Script>
+</scr:Script>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
@@ -305,7 +304,7 @@ def process(value):
         <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Camera2, Item5 as Sync,  Item6 as Time)</scr:Expression>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\testcamdelay\2023-06-07\ArduinoInput.csv</io:FileName>
+        <io:FileName>C:\Data\FG005\2023-11-07\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -340,7 +339,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\testcamdelay\2023-06-07\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\FG005\2023-11-07\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -386,7 +385,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\testcamdelay\2023-06-07\VideoBottom.avi</cv:FileName>
+          <cv:FileName>C:\Data\FG005\2023-11-07\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -422,7 +421,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\testcamdelay\2023-06-07\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>C:\Data\FG005\2023-11-07\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -481,7 +480,7 @@ def process(value):
           <num:Seed xsi:nil="true" />
         </Combinator>
       </Expression>
-      <Expression xsi:type="rx:BehaviorSubject">
+      <Expression xsi:type="BehaviorSubject">
         <Name>rand</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -519,7 +518,7 @@ def process(value):
       <Expression xsi:type="Disable">
         <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.NormalizedView.bonsai" />
       </Expression>
-      <Expression xsi:type="rx:BehaviorSubject">
+      <Expression xsi:type="BehaviorSubject">
         <Name>drawStim</Name>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.SphereMapping.bonsai">
@@ -564,9 +563,9 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\testcamdelay\2023-06-07\Log.csv</FileName>
+        <FileName>C:\Data\FG005\2023-11-07\Log.csv</FileName>
       </Expression>
-      <Expression xsi:type="rx:Sink">
+      <Expression xsi:type="Sink">
         <Name>Metadata</Name>
         <Workflow>
           <Nodes>
@@ -610,7 +609,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\testcamdelay\2023-06-07\nidaqChannels.csv</io:FileName>
+              <io:FileName>C:\Data\FG005\2023-11-07\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -664,7 +663,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\testcamdelay\2023-06-07\props.csv</io:FileName>
+              <io:FileName>C:\Data\FG005\2023-11-07\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -725,7 +724,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\testcamdelay\2023-06-07\arduinoChannels.csv</io:FileName>
+              <io:FileName>C:\Data\FG005\2023-11-07\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -794,7 +793,7 @@ Double.Parse(it[2]) as TFreq,
 Double.Parse(it[3]) as Contrast
 )</scr:Expression>
             </Expression>
-            <Expression xsi:type="rx:CreateObservable">
+            <Expression xsi:type="CreateObservable">
               <Name>GratingPres</Name>
               <Workflow>
                 <Nodes>
@@ -825,14 +824,14 @@ Double.Parse(it[3]) as Contrast
                       <Property Name="Contrast" Selector="Contrast" />
                     </PropertyMappings>
                   </Expression>
-                  <Expression xsi:type="ipy:PythonSource">
-                    <ipy:Script>from System import Random, TimeSpan
+                  <Expression xsi:type="scr:PythonSource">
+                    <scr:Script>from System import Random, TimeSpan
 random = Random()
 
 @returns(TimeSpan)
 def generate():
   ind = random.Next(0,4)
-  yield TimeSpan.FromSeconds(random.NextDouble() * (3 - 2) + 2)</ipy:Script>
+  yield TimeSpan.FromSeconds(random.NextDouble() * (3 - 2) + 2)</scr:Script>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
                     <Format>ISI:{0}</Format>
@@ -922,7 +921,7 @@ def generate():
                     <Selector>Ori,SFreq,TFreq,Contrast</Selector>
                     <Name>Events</Name>
                   </Expression>
-                  <Expression xsi:type="rx:AsyncSubject">
+                  <Expression xsi:type="AsyncSubject">
                     <Name>GratingParams</Name>
                   </Expression>
                   <Expression xsi:type="Disable">
@@ -1040,14 +1039,14 @@ def generate():
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="p1:DigitalOutput">
-                        <p1:Channels>
-                          <p1:DigitalOutputChannelConfiguration>
-                            <p1:ChannelName />
-                            <p1:Grouping>OneChannelForEachLine</p1:Grouping>
-                            <p1:Lines>Dev1/port2/line6</p1:Lines>
-                          </p1:DigitalOutputChannelConfiguration>
-                        </p1:Channels>
+                      <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:Channels>
+                          <mx:DigitalOutputChannelConfiguration>
+                            <mx:ChannelName />
+                            <mx:Grouping>OneChannelForEachLine</mx:Grouping>
+                            <mx:Lines>Dev1/port2/line6</mx:Lines>
+                          </mx:DigitalOutputChannelConfiguration>
+                        </mx:Channels>
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="Combinator">
@@ -1061,14 +1060,14 @@ def generate():
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="p1:DigitalOutput">
-                        <p1:Channels>
-                          <p1:DigitalOutputChannelConfiguration>
-                            <p1:ChannelName />
-                            <p1:Grouping>OneChannelForEachLine</p1:Grouping>
-                            <p1:Lines>Dev1/port2/line6</p1:Lines>
-                          </p1:DigitalOutputChannelConfiguration>
-                        </p1:Channels>
+                      <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:Channels>
+                          <mx:DigitalOutputChannelConfiguration>
+                            <mx:ChannelName />
+                            <mx:Grouping>OneChannelForEachLine</mx:Grouping>
+                            <mx:Lines>Dev1/port2/line6</mx:Lines>
+                          </mx:DigitalOutputChannelConfiguration>
+                        </mx:Channels>
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="WorkflowOutput" />
@@ -1113,14 +1112,14 @@ def generate():
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="p1:DigitalOutput">
-                        <p1:Channels>
-                          <p1:DigitalOutputChannelConfiguration>
-                            <p1:ChannelName />
-                            <p1:Grouping>OneChannelForEachLine</p1:Grouping>
-                            <p1:Lines>Dev1/port2/line6</p1:Lines>
-                          </p1:DigitalOutputChannelConfiguration>
-                        </p1:Channels>
+                      <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:Channels>
+                          <mx:DigitalOutputChannelConfiguration>
+                            <mx:ChannelName />
+                            <mx:Grouping>OneChannelForEachLine</mx:Grouping>
+                            <mx:Lines>Dev1/port2/line6</mx:Lines>
+                          </mx:DigitalOutputChannelConfiguration>
+                        </mx:Channels>
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="Combinator">
@@ -1134,14 +1133,14 @@ def generate():
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="Combinator">
-                      <Combinator xsi:type="p1:DigitalOutput">
-                        <p1:Channels>
-                          <p1:DigitalOutputChannelConfiguration>
-                            <p1:ChannelName />
-                            <p1:Grouping>OneChannelForEachLine</p1:Grouping>
-                            <p1:Lines>Dev1/port2/line6</p1:Lines>
-                          </p1:DigitalOutputChannelConfiguration>
-                        </p1:Channels>
+                      <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:Channels>
+                          <mx:DigitalOutputChannelConfiguration>
+                            <mx:ChannelName />
+                            <mx:Grouping>OneChannelForEachLine</mx:Grouping>
+                            <mx:Lines>Dev1/port2/line6</mx:Lines>
+                          </mx:DigitalOutputChannelConfiguration>
+                        </mx:Channels>
                       </Combinator>
                     </Expression>
                     <Expression xsi:type="WorkflowOutput" />
