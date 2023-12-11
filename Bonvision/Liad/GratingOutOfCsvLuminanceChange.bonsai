@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.2"
+<WorkflowBuilder Version="2.6.3"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -9,7 +9,7 @@
                  xmlns:num="clr-namespace:Bonsai.Numerics;assembly=Bonsai.Numerics"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:p1="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
+                 xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:gli="clr-namespace:Bonsai.Shaders.Input;assembly=Bonsai.Shaders"
                  xmlns="https://bonsai-rx.org/2018/workflow">
@@ -757,10 +757,10 @@ def process(value):
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
-          <Combinator xsi:type="p1:SpinnakerCapture">
-            <p1:Index xsi:nil="true" />
-            <p1:SerialNumber>21225772</p1:SerialNumber>
-            <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
+          <Combinator xsi:type="spk:SpinnakerCapture">
+            <spk:Index xsi:nil="true" />
+            <spk:SerialNumber>21225772</spk:SerialNumber>
+            <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
           </Combinator>
         </Builder>
       </Expression>
@@ -801,7 +801,7 @@ def process(value):
             <cv:Buffered>false</cv:Buffered>
             <cv:Overwrite>false</cv:Overwrite>
             <cv:FourCC>FMP4</cv:FourCC>
-            <cv:FrameRate>20</cv:FrameRate>
+            <cv:FrameRate>50</cv:FrameRate>
             <cv:FrameSize>
               <cv:Width>0</cv:Width>
               <cv:Height>0</cv:Height>
@@ -1458,10 +1458,10 @@ def generate():
       </Expression>
       <Expression xsi:type="Disable">
         <Builder xsi:type="Combinator">
-          <Combinator xsi:type="p1:SpinnakerCapture">
-            <p1:Index xsi:nil="true" />
-            <p1:SerialNumber>21038392</p1:SerialNumber>
-            <p1:ColorProcessing>NoColorProcessing</p1:ColorProcessing>
+          <Combinator xsi:type="spk:SpinnakerCapture">
+            <spk:Index xsi:nil="true" />
+            <spk:SerialNumber>21038392</spk:SerialNumber>
+            <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
           </Combinator>
         </Builder>
       </Expression>
@@ -1490,7 +1490,7 @@ def generate():
             <cv:Buffered>false</cv:Buffered>
             <cv:Overwrite>false</cv:Overwrite>
             <cv:FourCC>FMP4</cv:FourCC>
-            <cv:FrameRate>60</cv:FrameRate>
+            <cv:FrameRate>50</cv:FrameRate>
             <cv:FrameSize>
               <cv:Width>0</cv:Width>
               <cv:Height>0</cv:Height>

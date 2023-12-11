@@ -753,7 +753,7 @@ def process(value):
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
           <cv:FourCC>FMP4</cv:FourCC>
-          <cv:FrameRate>20</cv:FrameRate>
+          <cv:FrameRate>50</cv:FrameRate>
           <cv:FrameSize>
             <cv:Width>0</cv:Width>
             <cv:Height>0</cv:Height>
@@ -1209,9 +1209,6 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
           <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
         </Combinator>
       </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Image</Selector>
-      </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>VideoPathBottom</Name>
       </Expression>
@@ -1221,13 +1218,24 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="Combinator">
+        <Combinator xsi:type="gl:Timer">
+          <gl:DueTime>PT5S</gl:DueTime>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:SubscribeWhen" />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Image</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
           <cv:FileName>C:\Data\SS113\2022-12-14\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
           <cv:FourCC>FMP4</cv:FourCC>
-          <cv:FrameRate>60</cv:FrameRate>
+          <cv:FrameRate>50</cv:FrameRate>
           <cv:FrameSize>
             <cv:Width>0</cv:Width>
             <cv:Height>0</cv:Height>
@@ -1294,12 +1302,14 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
       <Edge From="51" To="52" Label="Source1" />
       <Edge From="52" To="53" Label="Source1" />
       <Edge From="53" To="54" Label="Source1" />
-      <Edge From="55" To="56" Label="Source1" />
-      <Edge From="56" To="59" Label="Source1" />
-      <Edge From="57" To="58" Label="Source1" />
+      <Edge From="55" To="59" Label="Source1" />
+      <Edge From="56" To="57" Label="Source1" />
+      <Edge From="57" To="61" Label="Source2" />
       <Edge From="58" To="59" Label="Source2" />
       <Edge From="59" To="60" Label="Source1" />
       <Edge From="60" To="61" Label="Source1" />
+      <Edge From="61" To="62" Label="Source1" />
+      <Edge From="62" To="63" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>

@@ -40,7 +40,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\Janus\</Value>
+                <Value>C:\Data\Test\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -965,7 +965,7 @@ def process(value):
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
           <cv:FourCC>FMP4</cv:FourCC>
-          <cv:FrameRate>20</cv:FrameRate>
+          <cv:FrameRate>50</cv:FrameRate>
           <cv:FrameSize>
             <cv:Width>0</cv:Width>
             <cv:Height>0</cv:Height>
@@ -1036,9 +1036,6 @@ def process(value):
           <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
         </Combinator>
       </Expression>
-      <Expression xsi:type="MemberSelector">
-        <Selector>Image</Selector>
-      </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>VideoPathBottom</Name>
       </Expression>
@@ -1048,13 +1045,24 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="Combinator">
+        <Combinator xsi:type="gl:Timer">
+          <gl:DueTime>PT5S</gl:DueTime>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="rx:SubscribeWhen" />
+      </Expression>
+      <Expression xsi:type="MemberSelector">
+        <Selector>Image</Selector>
+      </Expression>
+      <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
           <cv:FileName>C:\Data\Io\2023-02-07\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
           <cv:FourCC>FMP4</cv:FourCC>
-          <cv:FrameRate>60</cv:FrameRate>
+          <cv:FrameRate>50</cv:FrameRate>
           <cv:FrameSize>
             <cv:Width>0</cv:Width>
             <cv:Height>0</cv:Height>
@@ -1112,12 +1120,14 @@ def process(value):
       <Edge From="40" To="41" Label="Source1" />
       <Edge From="41" To="42" Label="Source1" />
       <Edge From="43" To="44" Label="Source1" />
-      <Edge From="45" To="46" Label="Source1" />
-      <Edge From="46" To="49" Label="Source1" />
-      <Edge From="47" To="48" Label="Source1" />
+      <Edge From="45" To="49" Label="Source1" />
+      <Edge From="46" To="47" Label="Source1" />
+      <Edge From="47" To="51" Label="Source2" />
       <Edge From="48" To="49" Label="Source2" />
       <Edge From="49" To="50" Label="Source1" />
       <Edge From="50" To="51" Label="Source1" />
+      <Edge From="51" To="52" Label="Source1" />
+      <Edge From="52" To="53" Label="Source1" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
