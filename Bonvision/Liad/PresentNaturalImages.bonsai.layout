@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VisualizerLayout xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<VisualizerLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                  >
   <DialogSettings>
     <Visible>false</Visible>
@@ -488,8 +488,8 @@
       <MatVisualizer>
         <XMin>0</XMin>
         <XMax>500</XMax>
-        <YMin>0</YMin>
-        <YMax>0.80000000000000016</YMax>
+        <YMin>-0.002</YMin>
+        <YMax>0.006</YMax>
         <AutoScaleX>true</AutoScaleX>
         <AutoScaleY>true</AutoScaleY>
         <SelectedPage>0</SelectedPage>
@@ -1511,8 +1511,8 @@
                 <Y>3</Y>
               </Location>
               <Size>
-                <Width>1105</Width>
-                <Height>483</Height>
+                <Width>290</Width>
+                <Height>165</Height>
               </Size>
               <WindowState>Normal</WindowState>
             </EditorDialogSettings>
@@ -1559,8 +1559,8 @@
                     <Y>3</Y>
                   </Location>
                   <Size>
-                    <Width>1105</Width>
-                    <Height>498</Height>
+                    <Width>290</Width>
+                    <Height>165</Height>
                   </Size>
                   <WindowState>Normal</WindowState>
                 </EditorDialogSettings>
@@ -1705,8 +1705,8 @@
                     <Y>3</Y>
                   </Location>
                   <Size>
-                    <Width>1105</Width>
-                    <Height>498</Height>
+                    <Width>290</Width>
+                    <Height>165</Height>
                   </Size>
                   <WindowState>Normal</WindowState>
                 </EditorDialogSettings>
