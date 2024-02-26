@@ -40,7 +40,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\FG005\</Value>
+                <Value>C:\Data\FG006\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -709,6 +709,11 @@ def process(value):
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="StringProperty">
+                      <Value>Sparse</Value>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:Zip" />
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
@@ -792,32 +797,33 @@ def process(value):
                   <Edge From="8" To="9" Label="Source1" />
                   <Edge From="9" To="10" Label="Source2" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="12" To="24" Label="Source1" />
-                  <Edge From="13" To="24" Label="Source2" />
+                  <Edge From="12" To="25" Label="Source2" />
+                  <Edge From="13" To="25" Label="Source3" />
                   <Edge From="14" To="17" Label="Source1" />
                   <Edge From="15" To="17" Label="Source3" />
                   <Edge From="16" To="17" Label="Source2" />
                   <Edge From="17" To="18" Label="Source1" />
                   <Edge From="18" To="19" Label="Source1" />
-                  <Edge From="19" To="25" Label="Source2" />
-                  <Edge From="20" To="24" Label="Source3" />
-                  <Edge From="21" To="24" Label="Source6" />
-                  <Edge From="22" To="24" Label="Source5" />
-                  <Edge From="23" To="24" Label="Source4" />
+                  <Edge From="19" To="26" Label="Source2" />
+                  <Edge From="20" To="25" Label="Source4" />
+                  <Edge From="21" To="25" Label="Source7" />
+                  <Edge From="22" To="25" Label="Source6" />
+                  <Edge From="23" To="25" Label="Source5" />
                   <Edge From="24" To="25" Label="Source1" />
-                  <Edge From="26" To="27" Label="Source1" />
-                  <Edge From="27" To="32" Label="Source1" />
-                  <Edge From="28" To="32" Label="Source2" />
-                  <Edge From="29" To="32" Label="Source3" />
-                  <Edge From="30" To="32" Label="Source4" />
-                  <Edge From="31" To="32" Label="Source5" />
-                  <Edge From="32" To="39" Label="Source1" />
-                  <Edge From="33" To="36" Label="Source1" />
-                  <Edge From="34" To="36" Label="Source3" />
-                  <Edge From="35" To="36" Label="Source2" />
-                  <Edge From="36" To="37" Label="Source1" />
+                  <Edge From="25" To="26" Label="Source1" />
+                  <Edge From="27" To="28" Label="Source1" />
+                  <Edge From="28" To="33" Label="Source1" />
+                  <Edge From="29" To="33" Label="Source2" />
+                  <Edge From="30" To="33" Label="Source3" />
+                  <Edge From="31" To="33" Label="Source4" />
+                  <Edge From="32" To="33" Label="Source5" />
+                  <Edge From="33" To="40" Label="Source1" />
+                  <Edge From="34" To="37" Label="Source1" />
+                  <Edge From="35" To="37" Label="Source3" />
+                  <Edge From="36" To="37" Label="Source2" />
                   <Edge From="37" To="38" Label="Source1" />
-                  <Edge From="38" To="39" Label="Source2" />
+                  <Edge From="38" To="39" Label="Source1" />
+                  <Edge From="39" To="40" Label="Source2" />
                 </Edges>
               </Workflow>
             </Expression>

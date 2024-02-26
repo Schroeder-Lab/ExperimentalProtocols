@@ -17,7 +17,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\FG005\</Value>
+                <Value>C:\Data\FG006\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
