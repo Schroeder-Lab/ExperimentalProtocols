@@ -11,16 +11,16 @@ rangeX, rangeY, Dia, White = 0, 0, 0, 0
 
 header = ["X", "Y", "Diameter", "White", "Presentation Time"]
 
-filePath = "D:\Bonsai\VisualProtocols\csvCircleStationary.csv"
+filePath = "D://csvCircleStationary_Styx.csv"
 
 data = np.array([0, 0, 0, 0, 0]).T
 
 # Parameters to change
 gridSize = 5
 xRange = np.arange(
-    -150, -110, gridSize
+    -130, -95, gridSize
 )  # np.arange(-145,-90,5)#np.arange(-145,-45,10)
-yRange = np.arange(5, 45, gridSize)  # np.arange(-41,41,5)#np.arange(-41,41,10)
+yRange = np.arange(15, 40, gridSize)  # np.arange(-41,41,5)#np.arange(-41,41,10)
 diaRange = [0.5, 1, 2, 4, 8, 16, 32]  # [1,4,16,255]
 blackWhiteRange = [0, 1] 
 presentationT = 0.10
