@@ -41,7 +41,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\Tara\</Value>
+                <Value>D:\Data\Stereopes\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -1040,7 +1040,7 @@ def process(value):
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:RepeatCount">
-                <rx:Count>60</rx:Count>
+                <rx:Count>80</rx:Count>
               </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
