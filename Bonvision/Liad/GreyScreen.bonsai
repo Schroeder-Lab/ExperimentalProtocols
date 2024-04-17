@@ -293,7 +293,7 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>D:\Data\Test\2024-01-26\ArduinoInput.csv</io:FileName>
+        <io:FileName>D:\Data\Test\2024-02-08\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -381,30 +381,11 @@ def process(value):
             <Expression xsi:type="PublishSubject">
               <Name>DrawStimuli</Name>
             </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawImage.bonsai">
-              <Angle>0</Angle>
-              <TextureName>DynamicVideo</TextureName>
-              <ExtentX>93</ExtentX>
-              <ExtentY>80</ExtentY>
-              <LocationX>-103</LocationX>
-              <LocationY>8</LocationY>
-              <Layer>0</Layer>
-              <ScaleX>1</ScaleX>
-              <ScaleY>1</ScaleY>
-              <ShiftX>0</ShiftX>
-              <ShiftY>0</ShiftY>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Zip" />
-            </Expression>
-            <Expression xsi:type="MemberSelector">
-              <Selector>Item1</Selector>
-            </Expression>
             <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.SphereMapping.bonsai">
               <FaceSize xsi:nil="true" />
-              <ClearColor>Black</ClearColor>
-              <Width xsi:nil="true" />
-              <Height xsi:nil="true" />
+              <ClearColor>LightGrey</ClearColor>
+              <Width>360</Width>
+              <Height>360</Height>
               <RotationZ>0</RotationZ>
               <RotationY>0</RotationY>
               <RotationX>0</RotationX>
@@ -423,12 +404,6 @@ def process(value):
                 <Z>4.2</Z>
               </Translation>
             </Expression>
-            <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.DrawViewport.bonsai">
-              <X>0</X>
-              <Y>0</Y>
-              <Width>1</Width>
-              <Height>1</Height>
-            </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>LogDir</Name>
             </Expression>
@@ -442,7 +417,7 @@ def process(value):
               <Append>false</Append>
               <Overwrite>false</Overwrite>
               <Suffix>FileCount</Suffix>
-              <FileName>D:\Data\Test\2024-01-26\Log.csv</FileName>
+              <FileName>D:\Data\Test\2024-02-08\Log.csv</FileName>
             </Expression>
             <Expression xsi:type="Sink">
               <Name>Metadata</Name>
@@ -503,7 +478,7 @@ def process(value):
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>D:\Data\Test\2024-01-26\nidaqChannels.csv</io:FileName>
+                    <io:FileName>D:\Data\Test\2024-02-08\nidaqChannels.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>FileCount</io:Suffix>
@@ -512,7 +487,7 @@ def process(value):
                   <Expression xsi:type="WorkflowOutput" />
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="StringProperty">
-                      <Value>Spont</Value>
+                      <Value>SpontGrey</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -539,7 +514,7 @@ def process(value):
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>D:\Data\Test\2024-01-26\props.csv</io:FileName>
+                    <io:FileName>D:\Data\Test\2024-02-08\props.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>FileCount</io:Suffix>
@@ -600,7 +575,7 @@ def process(value):
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="io:CsvWriter">
-                    <io:FileName>D:\Data\Test\2024-01-26\arduinoChannels.csv</io:FileName>
+                    <io:FileName>D:\Data\Test\2024-02-08\arduinoChannels.csv</io:FileName>
                     <io:Append>false</io:Append>
                     <io:Overwrite>false</io:Overwrite>
                     <io:Suffix>FileCount</io:Suffix>
@@ -652,18 +627,13 @@ def process(value):
             <Edge From="2" To="3" Label="Source1" />
             <Edge From="3" To="4" Label="Source1" />
             <Edge From="5" To="6" Label="Source1" />
-            <Edge From="5" To="16" Label="Source1" />
-            <Edge From="5" To="17" Label="Source1" />
+            <Edge From="5" To="12" Label="Source1" />
+            <Edge From="5" To="13" Label="Source1" />
             <Edge From="6" To="7" Label="Source1" />
-            <Edge From="6" To="8" Label="Source1" />
-            <Edge From="7" To="9" Label="Source1" />
-            <Edge From="8" To="9" Label="Source2" />
-            <Edge From="9" To="10" Label="Source1" />
+            <Edge From="7" To="8" Label="Source1" />
+            <Edge From="8" To="9" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
-            <Edge From="11" To="12" Label="Source1" />
-            <Edge From="12" To="13" Label="Source1" />
-            <Edge From="14" To="15" Label="Source1" />
-            <Edge From="15" To="16" Label="Source2" />
+            <Edge From="11" To="12" Label="Source2" />
           </Edges>
         </Workflow>
       </Expression>
@@ -921,7 +891,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>D:\Data\Test\2024-01-26\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>D:\Data\Test\2024-02-08\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -960,7 +930,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>D:\Data\Test\2024-01-26\Video.avi</cv:FileName>
+          <cv:FileName>D:\Data\Test\2024-02-08\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -1057,7 +1027,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>D:\Data\Test\2024-01-26\VideoBottom.avi</cv:FileName>
+          <cv:FileName>D:\Data\Test\2024-02-08\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>

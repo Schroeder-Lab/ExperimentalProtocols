@@ -1114,8 +1114,8 @@
       <MatVisualizer>
         <XMin>0</XMin>
         <XMax>500</XMax>
-        <YMin>-0.012</YMin>
-        <YMax>-0.004</YMax>
+        <YMin>-0.013999999999999999</YMin>
+        <YMax>-0.006</YMax>
         <AutoScaleX>true</AutoScaleX>
         <AutoScaleY>true</AutoScaleY>
         <SelectedPage>0</SelectedPage>

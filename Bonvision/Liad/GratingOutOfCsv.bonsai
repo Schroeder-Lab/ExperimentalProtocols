@@ -40,7 +40,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\Test\</Value>
+                <Value>D:\Data\Test\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="BehaviorSubject">
@@ -338,7 +338,7 @@ def process(value):
         <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Camera2, Item5 as Sync,  Item6 as Time)</scr:Expression>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Test\2023-05-12\ArduinoInput.csv</io:FileName>
+        <io:FileName>D:\Data\Styx\2024-01-31\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -373,7 +373,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Test\2023-05-12\Video.avi</cv:FileName>
+          <cv:FileName>D:\Data\Styx\2024-01-31\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -419,7 +419,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Test\2023-05-12\VideoBottom.avi</cv:FileName>
+          <cv:FileName>D:\Data\Styx\2024-01-31\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -458,7 +458,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Test\2023-05-12\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>D:\Data\Styx\2024-01-31\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -605,7 +605,7 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\Test\2023-05-12\Log.csv</FileName>
+        <FileName>D:\Data\Styx\2024-01-31\Log.csv</FileName>
       </Expression>
       <Expression xsi:type="Sink">
         <Name>Metadata</Name>
@@ -666,7 +666,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Test\2023-05-12\nidaqChannels.csv</io:FileName>
+              <io:FileName>D:\Data\Styx\2024-01-31\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -725,7 +725,7 @@ def process(value):
               <Combinator xsi:type="rx:Zip" />
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Test\2023-05-12\props.csv</io:FileName>
+              <io:FileName>D:\Data\Styx\2024-01-31\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -786,7 +786,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Test\2023-05-12\arduinoChannels.csv</io:FileName>
+              <io:FileName>D:\Data\Styx\2024-01-31\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -959,9 +959,9 @@ Double.Parse(it[3]) as Contrast
                     <LocationX>0</LocationX>
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
-                    <Angle>210</Angle>
+                    <Angle>270</Angle>
                     <SpatialFrequency>0.08</SpatialFrequency>
-                    <TemporalFrequency>2</TemporalFrequency>
+                    <TemporalFrequency>4</TemporalFrequency>
                     <Phase>0</Phase>
                     <SquareWave>false</SquareWave>
                     <Contrast>1</Contrast>
@@ -1001,7 +1001,7 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="gl:Delay">
-                      <gl:DueTime>PT2.024S</gl:DueTime>
+                      <gl:DueTime>PT2.519S</gl:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
