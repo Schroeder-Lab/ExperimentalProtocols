@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
@@ -13,6 +13,11 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="mx:DigitalOutput">
+          <mx:SignalSource />
+          <mx:SampleRate>0</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1000</mx:BufferSize>
           <mx:Channels>
             <mx:DigitalOutputChannelConfiguration>
               <mx:ChannelName />
@@ -34,6 +39,11 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="mx:DigitalOutput">
+          <mx:SignalSource />
+          <mx:SampleRate>0</mx:SampleRate>
+          <mx:ActiveEdge>Rising</mx:ActiveEdge>
+          <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+          <mx:BufferSize>1000</mx:BufferSize>
           <mx:Channels>
             <mx:DigitalOutputChannelConfiguration>
               <mx:ChannelName />

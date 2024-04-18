@@ -1,7 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<VisualizerLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+<VisualizerLayout xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  >
+  <DialogSettings>
+    <Visible>false</Visible>
+    <Location>
+      <X>0</X>
+      <Y>0</Y>
+    </Location>
+    <Size>
+      <Width>0</Width>
+      <Height>0</Height>
+    </Size>
+    <WindowState>Normal</WindowState>
+  </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
     <Location>
@@ -447,6 +459,18 @@
         <WindowState>Normal</WindowState>
       </DialogSettings>
     </EditorVisualizerLayout>
+  </DialogSettings>
+  <DialogSettings>
+    <Visible>false</Visible>
+    <Location>
+      <X>0</X>
+      <Y>0</Y>
+    </Location>
+    <Size>
+      <Width>0</Width>
+      <Height>0</Height>
+    </Size>
+    <WindowState>Normal</WindowState>
   </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
@@ -1303,12 +1327,12 @@
     <EditorDialogSettings>
       <Visible>true</Visible>
       <Location>
-        <X>880</X>
-        <Y>354</Y>
+        <X>208</X>
+        <Y>208</Y>
       </Location>
       <Size>
-        <Width>676</Width>
-        <Height>239</Height>
+        <Width>970</Width>
+        <Height>628</Height>
       </Size>
       <WindowState>Normal</WindowState>
     </EditorDialogSettings>
@@ -1375,12 +1399,12 @@
         <EditorDialogSettings>
           <Visible>true</Visible>
           <Location>
-            <X>155</X>
-            <Y>224</Y>
+            <X>234</X>
+            <Y>234</Y>
           </Location>
           <Size>
-            <Width>640</Width>
-            <Height>476</Height>
+            <Width>1100</Width>
+            <Height>694</Height>
           </Size>
           <WindowState>Normal</WindowState>
         </EditorDialogSettings>

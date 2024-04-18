@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.8.1"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:port="clr-namespace:Bonsai.IO.Ports;assembly=Bonsai.System"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:ipy="clr-namespace:Bonsai.Scripting.IronPython;assembly=Bonsai.Scripting.IronPython"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -26,6 +28,26 @@
           <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
         </Combinator>
       </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="port:CreateSerialPort">
+          <port:Name>ArduinoAnalog</port:Name>
+          <port:PortName>COM3</port:PortName>
+          <port:BaudRate>115200</port:BaudRate>
+          <port:Encoding>utf-8</port:Encoding>
+          <port:NewLine>\n</port:NewLine>
+          <port:Parity>None</port:Parity>
+          <port:ParityReplace>63</port:ParityReplace>
+          <port:DataBits>8</port:DataBits>
+          <port:StopBits>One</port:StopBits>
+          <port:Handshake>None</port:Handshake>
+          <port:DiscardNull>false</port:DiscardNull>
+          <port:DtrEnable>true</port:DtrEnable>
+          <port:RtsEnable>false</port:RtsEnable>
+          <port:ReadBufferSize>2048</port:ReadBufferSize>
+          <port:WriteBufferSize>2048</port:WriteBufferSize>
+          <port:ReceivedBytesThreshold>1</port:ReceivedBytesThreshold>
+        </Combinator>
+      </Expression>
       <Expression xsi:type="GroupWorkflow">
         <Name>SetSave</Name>
         <Workflow>
@@ -35,29 +57,29 @@
                 <Value>C:\Data\Test\1\</Value>
               </Combinator>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>Saving Dir</Name>
             </Expression>
-            <Expression xsi:type="scr:PythonSource">
-              <scr:Script>from System import DateTime,String
+            <Expression xsi:type="ipy:PythonSource">
+              <ipy:Script>from System import DateTime,String
 
 @returns(String)
 def generate(): 
-  yield (DateTime.Now).ToString("yyyy-MM-dd")</scr:Script>
+  yield (DateTime.Now).ToString("yyyy-MM-dd")</ipy:Script>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
               <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
                 <Value>\Video.avi</Value>
               </Combinator>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Saving Dir</Name>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
@@ -66,7 +88,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>VideoPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -87,7 +109,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>LogPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -108,13 +130,8 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>NidaqPath</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>\VideoBottom.avi</Value>
-              </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>Saving Dir</Name>
@@ -123,13 +140,18 @@ def generate():
               <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\VideoBottom.avi</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
             </Expression>
             <Expression xsi:type="Format">
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>VideoPathBottom</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -150,16 +172,16 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>ArduinoInput</Name>
             </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="4" To="7" Label="Source3" />
-            <Edge From="5" To="7" Label="Source1" />
-            <Edge From="6" To="7" Label="Source2" />
+            <Edge From="4" To="7" Label="Source1" />
+            <Edge From="5" To="7" Label="Source2" />
+            <Edge From="6" To="7" Label="Source3" />
             <Edge From="7" To="8" Label="Source1" />
             <Edge From="8" To="9" Label="Source1" />
             <Edge From="10" To="13" Label="Source1" />
@@ -172,9 +194,9 @@ def generate():
             <Edge From="18" To="19" Label="Source3" />
             <Edge From="19" To="20" Label="Source1" />
             <Edge From="20" To="21" Label="Source1" />
-            <Edge From="22" To="25" Label="Source3" />
-            <Edge From="23" To="25" Label="Source1" />
-            <Edge From="24" To="25" Label="Source2" />
+            <Edge From="22" To="25" Label="Source1" />
+            <Edge From="23" To="25" Label="Source2" />
+            <Edge From="24" To="25" Label="Source3" />
             <Edge From="25" To="26" Label="Source1" />
             <Edge From="26" To="27" Label="Source1" />
             <Edge From="28" To="31" Label="Source1" />
@@ -191,16 +213,14 @@ def generate():
           <io:NewLine>\n</io:NewLine>
         </Combinator>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="port:SerialReadLine">
+          <port:PortName>ArduinoAnalog</port:PortName>
+          <port:NewLine>\n</port:NewLine>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="rx:PublishSubject">
         <Name>Arduino</Name>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>ArduinoInput</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Arduino</Name>
@@ -210,14 +230,14 @@ def generate():
           <rx:Count>20</rx:Count>
         </Combinator>
       </Expression>
-      <Expression xsi:type="Condition">
+      <Expression xsi:type="rx:Condition">
         <Workflow>
           <Nodes>
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
-            <Expression xsi:type="scr:PythonTransform">
-              <scr:Script>@returns(bool)
+            <Expression xsi:type="ipy:PythonTransform">
+              <ipy:Script>@returns(bool)
 def process(value):
   mylist = value.split("\t")
 
@@ -226,7 +246,7 @@ def process(value):
   else:
     return False
 
-</scr:Script>
+</ipy:Script>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
@@ -241,10 +261,10 @@ def process(value):
         <Separator />
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item2</Selector>
+        <Selector>Item1</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item1</Selector>
+        <Selector>Item2</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
         <Selector>Item3</Selector>
@@ -253,16 +273,24 @@ def process(value):
         <Selector>Item4</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item6</Selector>
+        <Selector>Item5</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item5</Selector>
+        <Selector>Item6</Selector>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Zip" />
       </Expression>
       <Expression xsi:type="scr:ExpressionTransform">
         <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Camera2, Item5 as Sync,  Item6 as Time)</scr:Expression>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>ArduinoInput</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
         <io:FileName>C:\Data\Test\1\2023-03-23\ArduinoInput.csv</io:FileName>
@@ -274,9 +302,8 @@ def process(value):
       </Expression>
     </Nodes>
     <Edges>
-      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
       <Edge From="4" To="5" Label="Source1" />
-      <Edge From="5" To="18" Label="Source2" />
       <Edge From="6" To="7" Label="Source1" />
       <Edge From="7" To="8" Label="Source1" />
       <Edge From="8" To="9" Label="Source1" />
@@ -286,14 +313,16 @@ def process(value):
       <Edge From="9" To="13" Label="Source1" />
       <Edge From="9" To="14" Label="Source1" />
       <Edge From="9" To="15" Label="Source1" />
-      <Edge From="10" To="16" Label="Source2" />
-      <Edge From="11" To="16" Label="Source1" />
+      <Edge From="10" To="16" Label="Source1" />
+      <Edge From="11" To="16" Label="Source2" />
       <Edge From="12" To="16" Label="Source3" />
       <Edge From="13" To="16" Label="Source4" />
-      <Edge From="14" To="16" Label="Source6" />
-      <Edge From="15" To="16" Label="Source5" />
+      <Edge From="14" To="16" Label="Source5" />
+      <Edge From="15" To="16" Label="Source6" />
       <Edge From="16" To="17" Label="Source1" />
-      <Edge From="17" To="18" Label="Source1" />
+      <Edge From="17" To="20" Label="Source1" />
+      <Edge From="18" To="19" Label="Source1" />
+      <Edge From="19" To="20" Label="Source2" />
     </Edges>
   </Workflow>
 </WorkflowBuilder>
