@@ -1123,7 +1123,7 @@
     <WindowState>Normal</WindowState>
   </DialogSettings>
   <DialogSettings>
-    <Visible>true</Visible>
+    <Visible>false</Visible>
     <Location>
       <X>78</X>
       <Y>78</Y>
@@ -1272,12 +1272,12 @@
         <EditorDialogSettings>
           <Visible>true</Visible>
           <Location>
-            <X>78</X>
-            <Y>78</Y>
+            <X>227</X>
+            <Y>216</Y>
           </Location>
           <Size>
-            <Width>1059</Width>
-            <Height>721</Height>
+            <Width>316</Width>
+            <Height>239</Height>
           </Size>
           <WindowState>Normal</WindowState>
         </EditorDialogSettings>
@@ -1683,7 +1683,7 @@
     <WindowState>Normal</WindowState>
   </DialogSettings>
   <DialogSettings>
-    <Visible>true</Visible>
+    <Visible>false</Visible>
     <Location>
       <X>489</X>
       <Y>108</Y>
@@ -1697,9 +1697,9 @@
     <VisualizerSettings>
       <MatVisualizer>
         <XMin>0</XMin>
-        <XMax>500</XMax>
-        <YMin>-0.004</YMin>
-        <YMax>0.004</YMax>
+        <XMax>1</XMax>
+        <YMin>0</YMin>
+        <YMax>1.1</YMax>
         <AutoScaleX>true</AutoScaleX>
         <AutoScaleY>true</AutoScaleY>
         <SelectedPage>0</SelectedPage>

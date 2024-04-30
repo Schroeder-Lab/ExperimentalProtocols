@@ -18,24 +18,26 @@
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:CreateSerialPort">
-          <io:Name>ArduinoAnalog</io:Name>
-          <io:PortName>COM3</io:PortName>
-          <io:BaudRate>115200</io:BaudRate>
-          <io:Encoding>utf-8</io:Encoding>
-          <io:Parity>None</io:Parity>
-          <io:ParityReplace>63</io:ParityReplace>
-          <io:DataBits>8</io:DataBits>
-          <io:StopBits>One</io:StopBits>
-          <io:Handshake>None</io:Handshake>
-          <io:DiscardNull>false</io:DiscardNull>
-          <io:DtrEnable>true</io:DtrEnable>
-          <io:RtsEnable>false</io:RtsEnable>
-          <io:ReadBufferSize>2048</io:ReadBufferSize>
-          <io:WriteBufferSize>2048</io:WriteBufferSize>
-          <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="io:CreateSerialPort">
+            <io:Name>ArduinoAnalog</io:Name>
+            <io:PortName>COM3</io:PortName>
+            <io:BaudRate>115200</io:BaudRate>
+            <io:Encoding>utf-8</io:Encoding>
+            <io:Parity>None</io:Parity>
+            <io:ParityReplace>63</io:ParityReplace>
+            <io:DataBits>8</io:DataBits>
+            <io:StopBits>One</io:StopBits>
+            <io:Handshake>None</io:Handshake>
+            <io:DiscardNull>false</io:DiscardNull>
+            <io:DtrEnable>true</io:DtrEnable>
+            <io:RtsEnable>false</io:RtsEnable>
+            <io:ReadBufferSize>2048</io:ReadBufferSize>
+            <io:WriteBufferSize>2048</io:WriteBufferSize>
+            <io:ReceivedBytesThreshold>1</io:ReceivedBytesThreshold>
+          </Combinator>
+        </Builder>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="port:CreateSerialPort">
@@ -216,11 +218,13 @@ def generate():
           </Edges>
         </Workflow>
       </Expression>
-      <Expression xsi:type="Combinator">
-        <Combinator xsi:type="io:SerialStringRead">
-          <io:PortName>ArduinoAnalog</io:PortName>
-          <io:NewLine>\n</io:NewLine>
-        </Combinator>
+      <Expression xsi:type="Disable">
+        <Builder xsi:type="Combinator">
+          <Combinator xsi:type="io:SerialStringRead">
+            <io:PortName>ArduinoAnalog</io:PortName>
+            <io:NewLine>\n</io:NewLine>
+          </Combinator>
+        </Builder>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="port:SerialReadLine">
@@ -296,7 +300,7 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Styx\2024-01-23\ArduinoInput.csv</io:FileName>
+        <io:FileName>D:\Data\Test\2024-04-30\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -460,7 +464,7 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\Styx\2024-01-23\Log.csv</FileName>
+        <FileName>D:\Data\Test\2024-04-30\Log.csv</FileName>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:Timer">
@@ -570,7 +574,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Styx\2024-01-23\nidaqChannels.csv</io:FileName>
+              <io:FileName>D:\Data\Test\2024-04-30\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -634,7 +638,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Styx\2024-01-23\props.csv</io:FileName>
+              <io:FileName>D:\Data\Test\2024-04-30\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -695,7 +699,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Styx\2024-01-23\arduinoChannels.csv</io:FileName>
+              <io:FileName>D:\Data\Test\2024-04-30\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -782,7 +786,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Styx\2024-01-23\Video.avi</cv:FileName>
+          <cv:FileName>D:\Data\Test\2024-04-30\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -927,9 +931,9 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.DrawCircle.bonsai">
-                    <Diameter>2</Diameter>
-                    <LocationX>-110</LocationX>
-                    <LocationY>15</LocationY>
+                    <Diameter>1</Diameter>
+                    <LocationX>-100</LocationX>
+                    <LocationY>35</LocationY>
                     <Layer>0</Layer>
                     <ColorR>1</ColorR>
                     <ColorG>1</ColorG>
@@ -1253,7 +1257,7 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Styx\2024-01-23\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>D:\Data\Test\2024-04-30\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -1294,7 +1298,7 @@ TimeSpan.FromSeconds(Double.Parse(it[4])) as dueTime
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Styx\2024-01-23\VideoBottom.avi</cv:FileName>
+          <cv:FileName>D:\Data\Test\2024-04-30\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
