@@ -21,9 +21,9 @@ data = np.array([0, 0, 0, 0, 0]).T
 
 gridSize = 5
 xRange = np.arange(
-    -75, -45, gridSize
+    -55, -25, gridSize
 )  # np.arange(-145,-90,5)#np.arange(-145,-45,10)
-yRange = np.arange(25, 45, gridSize)  # np.arange(-41,41,5)#np.arange(-41,41,10)
+yRange = np.arange(15, 45, gridSize)  # np.arange(-41,41,5)#np.arange(-41,41,10)
 diaRange = [0.5, 1, 2, 4, 8, 16, 32]  # [1,4,16,255]
 blackWhiteRange = [0, 1] 
 presentationT = 0.10
