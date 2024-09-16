@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.8.5"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
                  xmlns:dsp="clr-namespace:Bonsai.Dsp;assembly=Bonsai.Dsp"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
+                 xmlns:ipy="clr-namespace:Bonsai.Scripting.IronPython;assembly=Bonsai.Scripting.IronPython"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
     <Nodes>
@@ -55,7 +55,7 @@
         <Combinator xsi:type="gl:RenderFrame" />
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.NormalizedView.bonsai" />
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>DrawStimuli</Name>
       </Expression>
       <Expression xsi:type="Disable">
@@ -66,9 +66,9 @@
       </Expression>
       <Expression xsi:type="WorkflowOutput" />
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Primitives.ParameterRange.bonsai">
+        <Count>10</Count>
         <RangeMin>0</RangeMin>
         <RangeMax>1</RangeMax>
-        <Count>10</Count>
       </Expression>
       <Expression xsi:type="PropertyMapping">
         <PropertyMappings>
@@ -80,7 +80,7 @@
           <Value>1</Value>
         </Combinator>
       </Expression>
-      <Expression xsi:type="CreateObservable">
+      <Expression xsi:type="rx:CreateObservable">
         <Name>green</Name>
         <Workflow>
           <Nodes>
@@ -99,12 +99,6 @@
                   <Expression xsi:type="SubscribeSubject">
                     <Name>DrawStimuli</Name>
                   </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="rx:Timer">
-                      <rx:DueTime>PT2S</rx:DueTime>
-                      <rx:Period>PT0S</rx:Period>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="ExternalizedMapping">
                     <Property Name="ColorG" />
                   </Expression>
@@ -121,15 +115,21 @@
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="rx:Timer">
+                      <rx:DueTime>PT2S</rx:DueTime>
+                      <rx:Period>PT0S</rx:Period>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:TakeUntil" />
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="3" Label="Source1" />
-                  <Edge From="1" To="4" Label="Source2" />
-                  <Edge From="2" To="3" Label="Source2" />
-                  <Edge From="3" To="4" Label="Source1" />
+                  <Edge From="0" To="2" Label="Source1" />
+                  <Edge From="1" To="2" Label="Source2" />
+                  <Edge From="2" To="4" Label="Source1" />
+                  <Edge From="3" To="4" Label="Source2" />
                   <Edge From="4" To="5" Label="Source1" />
                 </Edges>
               </Workflow>
@@ -153,13 +153,13 @@
           <mx:ActiveEdge>Rising</mx:ActiveEdge>
           <mx:SampleMode>ContinuousSamples</mx:SampleMode>
           <mx:BufferSize>1000</mx:BufferSize>
-          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:SamplesPerChannel xsi:nil="true" />
           <mx:Channels>
             <mx:AnalogInputChannelConfiguration>
               <mx:ChannelName />
               <mx:MinimumValue>-10</mx:MinimumValue>
               <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev2/ai0</mx:PhysicalChannel>
+              <mx:PhysicalChannel>Dev1/ai0</mx:PhysicalChannel>
               <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
               <mx:VoltageUnits>Volts</mx:VoltageUnits>
             </mx:AnalogInputChannelConfiguration>
@@ -181,7 +181,7 @@
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Users\LABadmin\Desktop\Green\2022-10-19\Green.bin</dsp:Path>
+          <dsp:Path>C:\Users\LABadmin\Desktop\Green\2024-09-11\Green.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>ColumnMajor</dsp:Layout>
@@ -192,29 +192,29 @@
           <Value>C:\Users\LABadmin\Desktop\Green\</Value>
         </Combinator>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>Saving Dir</Name>
       </Expression>
-      <Expression xsi:type="scr:PythonSource">
-        <scr:Script>from System import DateTime,String
+      <Expression xsi:type="ipy:PythonSource">
+        <ipy:Script>from System import DateTime,String
 
 @returns(String)
 def generate(): 
-  yield (DateTime.Now).ToString("yyyy-MM-dd")</scr:Script>
+  yield (DateTime.Now).ToString("yyyy-MM-dd")</ipy:Script>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
+        <Name>DateDir</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>Saving Dir</Name>
+      </Expression>
+      <Expression xsi:type="SubscribeSubject">
         <Name>DateDir</Name>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="StringProperty">
           <Value>\Green.bin</Value>
         </Combinator>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>Saving Dir</Name>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>DateDir</Name>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Zip" />
@@ -223,7 +223,7 @@ def generate():
         <Format>{0}{1}{2}</Format>
         <Selector>Item1,Item2,Item3</Selector>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>GreenPath</Name>
       </Expression>
     </Nodes>
@@ -244,9 +244,9 @@ def generate():
       <Edge From="16" To="17" Label="Source2" />
       <Edge From="18" To="19" Label="Source1" />
       <Edge From="20" To="21" Label="Source1" />
-      <Edge From="22" To="25" Label="Source3" />
-      <Edge From="23" To="25" Label="Source1" />
-      <Edge From="24" To="25" Label="Source2" />
+      <Edge From="22" To="25" Label="Source1" />
+      <Edge From="23" To="25" Label="Source2" />
+      <Edge From="24" To="25" Label="Source3" />
       <Edge From="25" To="26" Label="Source1" />
       <Edge From="26" To="27" Label="Source1" />
     </Edges>

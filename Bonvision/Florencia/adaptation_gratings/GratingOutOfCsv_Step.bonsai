@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.6.3"
+<WorkflowBuilder Version="2.8.5"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
-                 xmlns:scr="clr-namespace:Bonsai.Scripting;assembly=Bonsai.Scripting"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
+                 xmlns:ipy="clr-namespace:Bonsai.Scripting.IronPython;assembly=Bonsai.Scripting.IronPython"
                  xmlns:mx="clr-namespace:Bonsai.DAQmx;assembly=Bonsai.DAQmx"
+                 xmlns:scr="clr-namespace:Bonsai.Scripting.Expressions;assembly=Bonsai.Scripting.Expressions"
                  xmlns:spk="clr-namespace:Bonsai.Spinnaker;assembly=Bonsai.Spinnaker"
                  xmlns:gl="clr-namespace:Bonsai.Shaders;assembly=Bonsai.Shaders"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
@@ -18,7 +19,7 @@
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="io:CreateSerialPort">
           <io:Name>ArduinoAnalog</io:Name>
-          <io:PortName>COM4</io:PortName>
+          <io:PortName>COM3</io:PortName>
           <io:BaudRate>115200</io:BaudRate>
           <io:Encoding>utf-8</io:Encoding>
           <io:Parity>None</io:Parity>
@@ -40,32 +41,32 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>C:\Data\FG006\</Value>
+                <Value>C:\Data\XX\</Value>
               </Combinator>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>Saving Dir</Name>
             </Expression>
-            <Expression xsi:type="scr:PythonSource">
-              <scr:Script>from System import DateTime,String
+            <Expression xsi:type="ipy:PythonSource">
+              <ipy:Script>from System import DateTime,String
 
 @returns(String)
 def generate(): 
-  yield (DateTime.Now).ToString("yyyy-MM-dd")</scr:Script>
+  yield (DateTime.Now).ToString("yyyy-MM-dd")</ipy:Script>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
+              <Name>DateDir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
               <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
                 <Value>\Video.avi</Value>
               </Combinator>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>Saving Dir</Name>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
@@ -74,7 +75,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>VideoPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -95,7 +96,7 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>LogPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -116,13 +117,8 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>NidaqPath</Name>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>\VideoBottom.avi</Value>
-              </Combinator>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>Saving Dir</Name>
@@ -131,13 +127,18 @@ def generate():
               <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>\VideoBottom.avi</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
             </Expression>
             <Expression xsi:type="Format">
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>VideoBottomPath</Name>
             </Expression>
             <Expression xsi:type="SubscribeSubject">
@@ -158,16 +159,16 @@ def generate():
               <Format>{0}{1}{2}</Format>
               <Selector>Item1,Item2,Item3</Selector>
             </Expression>
-            <Expression xsi:type="BehaviorSubject">
+            <Expression xsi:type="rx:BehaviorSubject">
               <Name>ArduinoInput</Name>
             </Expression>
           </Nodes>
           <Edges>
             <Edge From="0" To="1" Label="Source1" />
             <Edge From="2" To="3" Label="Source1" />
-            <Edge From="4" To="7" Label="Source3" />
-            <Edge From="5" To="7" Label="Source1" />
-            <Edge From="6" To="7" Label="Source2" />
+            <Edge From="4" To="7" Label="Source1" />
+            <Edge From="5" To="7" Label="Source2" />
+            <Edge From="6" To="7" Label="Source3" />
             <Edge From="7" To="8" Label="Source1" />
             <Edge From="8" To="9" Label="Source1" />
             <Edge From="10" To="13" Label="Source1" />
@@ -180,9 +181,9 @@ def generate():
             <Edge From="18" To="19" Label="Source3" />
             <Edge From="19" To="20" Label="Source1" />
             <Edge From="20" To="21" Label="Source1" />
-            <Edge From="22" To="25" Label="Source3" />
-            <Edge From="23" To="25" Label="Source1" />
-            <Edge From="24" To="25" Label="Source2" />
+            <Edge From="22" To="25" Label="Source1" />
+            <Edge From="23" To="25" Label="Source2" />
+            <Edge From="24" To="25" Label="Source3" />
             <Edge From="25" To="26" Label="Source1" />
             <Edge From="26" To="27" Label="Source1" />
             <Edge From="28" To="31" Label="Source1" />
@@ -199,7 +200,7 @@ def generate():
           <io:NewLine>\n</io:NewLine>
         </Combinator>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>Arduino</Name>
       </Expression>
       <Expression xsi:type="Combinator">
@@ -209,13 +210,13 @@ def generate():
           <mx:ActiveEdge>Rising</mx:ActiveEdge>
           <mx:SampleMode>ContinuousSamples</mx:SampleMode>
           <mx:BufferSize>1</mx:BufferSize>
-          <mx:SamplesPerRead>-1</mx:SamplesPerRead>
+          <mx:SamplesPerChannel xsi:nil="true" />
           <mx:Channels>
             <mx:AnalogInputChannelConfiguration>
               <mx:ChannelName>Photodiode</mx:ChannelName>
               <mx:MinimumValue>-10</mx:MinimumValue>
               <mx:MaximumValue>10</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev2/ai0</mx:PhysicalChannel>
+              <mx:PhysicalChannel>Dev1/ai0</mx:PhysicalChannel>
               <mx:TerminalConfiguration>Differential</mx:TerminalConfiguration>
               <mx:VoltageUnits>Volts</mx:VoltageUnits>
             </mx:AnalogInputChannelConfiguration>
@@ -223,23 +224,15 @@ def generate():
               <mx:ChannelName>ArduinoSync</mx:ChannelName>
               <mx:MinimumValue>-5</mx:MinimumValue>
               <mx:MaximumValue>5</mx:MaximumValue>
-              <mx:PhysicalChannel>Dev2/ai1</mx:PhysicalChannel>
+              <mx:PhysicalChannel>Dev1/ai1</mx:PhysicalChannel>
               <mx:TerminalConfiguration>Rse</mx:TerminalConfiguration>
               <mx:VoltageUnits>Volts</mx:VoltageUnits>
             </mx:AnalogInputChannelConfiguration>
           </mx:Channels>
         </Combinator>
       </Expression>
-      <Expression xsi:type="PublishSubject">
+      <Expression xsi:type="rx:PublishSubject">
         <Name>NIDAQ</Name>
-      </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>ArduinoInput</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
         <Name>Arduino</Name>
@@ -249,14 +242,14 @@ def generate():
           <rx:Count>20</rx:Count>
         </Combinator>
       </Expression>
-      <Expression xsi:type="Condition">
+      <Expression xsi:type="rx:Condition">
         <Workflow>
           <Nodes>
             <Expression xsi:type="WorkflowInput">
               <Name>Source1</Name>
             </Expression>
-            <Expression xsi:type="scr:PythonTransform">
-              <scr:Script>@returns(bool)
+            <Expression xsi:type="ipy:PythonTransform">
+              <ipy:Script>@returns(bool)
 def process(value):
   mylist = value.split("\t")
 
@@ -265,7 +258,7 @@ def process(value):
   else:
     return False
 
-</scr:Script>
+</ipy:Script>
             </Expression>
             <Expression xsi:type="WorkflowOutput" />
           </Nodes>
@@ -280,10 +273,10 @@ def process(value):
         <Separator />
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item2</Selector>
+        <Selector>Item1</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item1</Selector>
+        <Selector>Item2</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
         <Selector>Item3</Selector>
@@ -292,10 +285,10 @@ def process(value):
         <Selector>Item4</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item6</Selector>
+        <Selector>Item5</Selector>
       </Expression>
       <Expression xsi:type="MemberSelector">
-        <Selector>Item5</Selector>
+        <Selector>Item6</Selector>
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="rx:Zip" />
@@ -303,8 +296,16 @@ def process(value):
       <Expression xsi:type="scr:ExpressionTransform">
         <scr:Expression>new(Item1 as Wheel1, Item2 as Wheel2, Item3 as Camera, Item4 as Camera2, Item5 as Sync,  Item6 as Time)</scr:Expression>
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>ArduinoInput</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\FG006\2023-11-09\ArduinoInput.csv</io:FileName>
+        <io:FileName>C:\Data\XX\2024-09-12\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -318,14 +319,6 @@ def process(value):
           <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
         </Combinator>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>VideoPath</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
-      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:Timer">
           <gl:DueTime>PT5S</gl:DueTime>
@@ -337,9 +330,17 @@ def process(value):
       <Expression xsi:type="MemberSelector">
         <Selector>Image</Selector>
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>VideoPath</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\FG006\2023-11-09\Video.avi</cv:FileName>
+          <cv:FileName>C:\Data\XX\2024-09-12\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -364,14 +365,6 @@ def process(value):
           <spk:ColorProcessing>NoColorProcessing</spk:ColorProcessing>
         </Combinator>
       </Expression>
-      <Expression xsi:type="SubscribeSubject">
-        <Name>VideoBottomPath</Name>
-      </Expression>
-      <Expression xsi:type="PropertyMapping">
-        <PropertyMappings>
-          <Property Name="FileName" />
-        </PropertyMappings>
-      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="gl:Timer">
           <gl:DueTime>PT5S</gl:DueTime>
@@ -383,9 +376,17 @@ def process(value):
       <Expression xsi:type="MemberSelector">
         <Selector>Image</Selector>
       </Expression>
+      <Expression xsi:type="SubscribeSubject">
+        <Name>VideoBottomPath</Name>
+      </Expression>
+      <Expression xsi:type="PropertyMapping">
+        <PropertyMappings>
+          <Property Name="FileName" />
+        </PropertyMappings>
+      </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\FG006\2023-11-09\VideoBottom.avi</cv:FileName>
+          <cv:FileName>C:\Data\XX\2024-09-12\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -421,7 +422,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\FG006\2023-11-09\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>C:\Data\XX\2024-09-12\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -480,7 +481,7 @@ def process(value):
           <num:Seed xsi:nil="true" />
         </Combinator>
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>rand</Name>
       </Expression>
       <Expression xsi:type="SubscribeSubject">
@@ -518,17 +519,17 @@ def process(value):
       <Expression xsi:type="Disable">
         <Builder xsi:type="IncludeWorkflow" Path="BonVision:Environment.NormalizedView.bonsai" />
       </Expression>
-      <Expression xsi:type="BehaviorSubject">
+      <Expression xsi:type="rx:BehaviorSubject">
         <Name>drawStim</Name>
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.SphereMapping.bonsai">
-        <FaceSize xsi:nil="true" />
         <ClearColor>Gray</ClearColor>
         <Width xsi:nil="true" />
         <Height xsi:nil="true" />
         <RotationZ>0</RotationZ>
         <RotationY>0</RotationY>
         <RotationX>0</RotationX>
+        <FaceSize xsi:nil="true" />
       </Expression>
       <Expression xsi:type="IncludeWorkflow" Path="BonVision:Environment.ViewWindow.bonsai">
         <Width>37.5</Width>
@@ -563,9 +564,9 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\FG006\2023-11-09\Log.csv</FileName>
+        <FileName>C:\Data\XX\2024-09-12\Log.csv</FileName>
       </Expression>
-      <Expression xsi:type="Sink">
+      <Expression xsi:type="rx:Sink">
         <Name>Metadata</Name>
         <Workflow>
           <Nodes>
@@ -588,13 +589,13 @@ def process(value):
             <Expression xsi:type="SubscribeSubject">
               <Name>Saving Dir</Name>
             </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
                 <Value>\nidaqChannels.csv</Value>
               </Combinator>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
@@ -609,7 +610,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\FG006\2023-11-09\nidaqChannels.csv</io:FileName>
+              <io:FileName>C:\Data\XX\2024-09-12\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -650,13 +651,13 @@ def process(value):
             <Expression xsi:type="SubscribeSubject">
               <Name>Saving Dir</Name>
             </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
+            </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
                 <Value>\arduinoChannels.csv</Value>
               </Combinator>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
@@ -671,11 +672,16 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\FG006\2023-11-09\arduinoChannels.csv</io:FileName>
+              <io:FileName>C:\Data\XX\2024-09-12\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
               <io:IncludeHeader>false</io:IncludeHeader>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>GratingsStep</Value>
+              </Combinator>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
@@ -697,16 +703,24 @@ def process(value):
                 <Value>TFreqEnd</Value>
               </Combinator>
             </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="StringProperty">
+                <Value>Contrast</Value>
+              </Combinator>
+            </Expression>
+            <Expression xsi:type="Combinator">
+              <Combinator xsi:type="rx:Zip" />
+            </Expression>
             <Expression xsi:type="SubscribeSubject">
               <Name>Saving Dir</Name>
+            </Expression>
+            <Expression xsi:type="SubscribeSubject">
+              <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
                 <Value>\props.csv</Value>
               </Combinator>
-            </Expression>
-            <Expression xsi:type="SubscribeSubject">
-              <Name>DateDir</Name>
             </Expression>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="rx:Zip" />
@@ -720,21 +734,8 @@ def process(value):
                 <Property Name="FileName" />
               </PropertyMappings>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>GratingsStep</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="StringProperty">
-                <Value>Contrast</Value>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="rx:Zip" />
-            </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\FG003\2023-06-07\props.csv</io:FileName>
+              <io:FileName>C:\Data\XX\2024-09-12\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -747,8 +748,8 @@ def process(value):
             <Edge From="2" To="3" Label="Source2" />
             <Edge From="3" To="10" Label="Source1" />
             <Edge From="4" To="7" Label="Source1" />
-            <Edge From="5" To="7" Label="Source3" />
-            <Edge From="6" To="7" Label="Source2" />
+            <Edge From="5" To="7" Label="Source2" />
+            <Edge From="6" To="7" Label="Source3" />
             <Edge From="7" To="8" Label="Source1" />
             <Edge From="8" To="9" Label="Source1" />
             <Edge From="9" To="10" Label="Source2" />
@@ -761,24 +762,24 @@ def process(value):
             <Edge From="17" To="18" Label="Source5" />
             <Edge From="18" To="25" Label="Source1" />
             <Edge From="19" To="22" Label="Source1" />
-            <Edge From="20" To="22" Label="Source3" />
-            <Edge From="21" To="22" Label="Source2" />
+            <Edge From="20" To="22" Label="Source2" />
+            <Edge From="21" To="22" Label="Source3" />
             <Edge From="22" To="23" Label="Source1" />
             <Edge From="23" To="24" Label="Source1" />
             <Edge From="24" To="25" Label="Source2" />
-            <Edge From="26" To="38" Label="Source2" />
-            <Edge From="27" To="38" Label="Source3" />
-            <Edge From="28" To="38" Label="Source4" />
-            <Edge From="29" To="38" Label="Source5" />
-            <Edge From="30" To="33" Label="Source1" />
-            <Edge From="31" To="33" Label="Source3" />
-            <Edge From="32" To="33" Label="Source2" />
-            <Edge From="33" To="34" Label="Source1" />
-            <Edge From="34" To="35" Label="Source1" />
-            <Edge From="35" To="39" Label="Source2" />
-            <Edge From="36" To="38" Label="Source1" />
-            <Edge From="37" To="38" Label="Source6" />
-            <Edge From="38" To="39" Label="Source1" />
+            <Edge From="26" To="32" Label="Source1" />
+            <Edge From="27" To="32" Label="Source2" />
+            <Edge From="28" To="32" Label="Source3" />
+            <Edge From="29" To="32" Label="Source4" />
+            <Edge From="30" To="32" Label="Source5" />
+            <Edge From="31" To="32" Label="Source6" />
+            <Edge From="32" To="39" Label="Source1" />
+            <Edge From="33" To="36" Label="Source1" />
+            <Edge From="34" To="36" Label="Source2" />
+            <Edge From="35" To="36" Label="Source3" />
+            <Edge From="36" To="37" Label="Source1" />
+            <Edge From="37" To="38" Label="Source1" />
+            <Edge From="38" To="39" Label="Source2" />
           </Edges>
         </Workflow>
       </Expression>
@@ -808,53 +809,10 @@ Double.Parse(it[5]) as Amplitud,
 Double.Parse(it[6]) as Offset,
 Double.Parse(it[7]) as Phase)</scr:Expression>
             </Expression>
-            <Expression xsi:type="CreateObservable">
+            <Expression xsi:type="rx:CreateObservable">
               <Name>GratingPres</Name>
               <Workflow>
                 <Nodes>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>drawStim</Name>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>GratingParams</Name>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="SpatialFrequency" Selector="SFreq" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="SubscribeSubject">
-                    <Name>GratingParams</Name>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="Contrast" Selector="Contrast" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="scr:PythonSource">
-                    <scr:Script>from System import Random, TimeSpan
-random = Random()
-
-@returns(TimeSpan)
-def generate():
-  ind = random.Next(0,4)
-  yield TimeSpan.FromSeconds(random.NextDouble() * (3 - 2) + 2)</scr:Script>
-                  </Expression>
-                  <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                    <Format>ISI:{0}</Format>
-                    <Selector>TotalSeconds</Selector>
-                    <Name>Events</Name>
-                  </Expression>
-                  <Expression xsi:type="PropertyMapping">
-                    <PropertyMappings>
-                      <Property Name="DueTime" />
-                    </PropertyMappings>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="gl:Timer">
-                      <gl:DueTime>PT4S</gl:DueTime>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>drawStim</Name>
                   </Expression>
@@ -871,7 +829,15 @@ def generate():
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="gl:Timer">
+                      <gl:DueTime>PT4S</gl:DueTime>
+                    </Combinator>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:TakeUntil" />
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>drawStim</Name>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>GratingParams</Name>
@@ -883,7 +849,7 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="DoubleProperty">
-                      <Value>180</Value>
+                      <Value>270</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
@@ -892,6 +858,22 @@ def generate():
                   <Expression xsi:type="PropertyMapping">
                     <PropertyMappings>
                       <Property Name="Angle" Selector="it" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>GratingParams</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="SpatialFrequency" Selector="SFreq" />
+                    </PropertyMappings>
+                  </Expression>
+                  <Expression xsi:type="SubscribeSubject">
+                    <Name>GratingParams</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="Contrast" Selector="Contrast" />
                     </PropertyMappings>
                   </Expression>
                   <Expression xsi:type="SubscribeSubject">
@@ -915,11 +897,6 @@ def generate():
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:TakeUntil" />
                   </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="gl:Timer">
-                      <gl:DueTime>PT2S</gl:DueTime>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="SubscribeSubject">
                     <Name>GratingParams</Name>
                   </Expression>
@@ -930,7 +907,7 @@ def generate():
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="DoubleProperty">
-                      <Value>7.5</Value>
+                      <Value>6</Value>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="PropertyMapping">
@@ -980,7 +957,7 @@ def generate():
                       <dsp:Frequency>0.125</dsp:Frequency>
                       <dsp:Waveform>Sine</dsp:Waveform>
                       <dsp:SampleRate>44100</dsp:SampleRate>
-                      <dsp:Amplitude>7.5</dsp:Amplitude>
+                      <dsp:Amplitude>6</dsp:Amplitude>
                       <dsp:Offset>2</dsp:Offset>
                       <dsp:Phase>1.5714</dsp:Phase>
                     </Combinator>
@@ -992,6 +969,11 @@ def generate():
                   </Expression>
                   <Expression xsi:type="MemberSelector">
                     <Selector>Val0</Selector>
+                  </Expression>
+                  <Expression xsi:type="Combinator">
+                    <Combinator xsi:type="gl:Timer">
+                      <gl:DueTime>PT2S</gl:DueTime>
+                    </Combinator>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:TakeUntil" />
@@ -1034,25 +1016,44 @@ def generate():
                     <LocationX>0</LocationX>
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
-                    <Angle>180</Angle>
+                    <ExtentX>360</ExtentX>
+                    <ExtentY>360</ExtentY>
                     <SpatialFrequency>0.08</SpatialFrequency>
                     <TemporalFrequency>2</TemporalFrequency>
                     <Phase>0</Phase>
+                    <Angle>270</Angle>
                     <SquareWave>false</SquareWave>
                     <Contrast>1</Contrast>
                     <DutyCycle xsi:nil="true" />
                     <Radius>1</Radius>
                     <Aperture>0</Aperture>
                     <Opacity>1</Opacity>
-                    <ExtentX>360</ExtentX>
-                    <ExtentY>360</ExtentY>
                   </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="rx:TakeUntil" />
                   </Expression>
+                  <Expression xsi:type="ipy:PythonSource">
+                    <ipy:Script>from System import Random, TimeSpan
+random = Random()
+
+@returns(TimeSpan)
+def generate():
+  ind = random.Next(0,4)
+  yield TimeSpan.FromSeconds(random.NextDouble() * (3 - 2) + 2)</ipy:Script>
+                  </Expression>
+                  <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
+                    <Format>ISI:{0}</Format>
+                    <Selector>TotalSeconds</Selector>
+                    <Name>Events</Name>
+                  </Expression>
+                  <Expression xsi:type="PropertyMapping">
+                    <PropertyMappings>
+                      <Property Name="DueTime" />
+                    </PropertyMappings>
+                  </Expression>
                   <Expression xsi:type="Combinator">
                     <Combinator xsi:type="gl:Delay">
-                      <gl:DueTime>PT2.211S</gl:DueTime>
+                      <gl:DueTime>PT2.121S</gl:DueTime>
                     </Combinator>
                   </Expression>
                   <Expression xsi:type="WorkflowOutput" />
@@ -1060,11 +1061,11 @@ def generate():
                     <Name>Source1</Name>
                   </Expression>
                   <Expression xsi:type="IncludeWorkflow" Path="BonVision:Logging.LogEvent.bonsai">
-                    <Format />
+                    <Format>Ori={0}, SFreq={1}, Contrast={2}, TFreqStart={3}, TFreqEnd={4}, Amplitud={5}, Offset={6}, Phase={7}</Format>
                     <Selector>Ori,SFreq,Contrast,TFreqStart,TFreqEnd,Amplitud,Offset,Phase</Selector>
                     <Name>Events</Name>
                   </Expression>
-                  <Expression xsi:type="AsyncSubject">
+                  <Expression xsi:type="rx:AsyncSubject">
                     <Name>GratingParams</Name>
                   </Expression>
                   <Expression xsi:type="Disable">
@@ -1119,55 +1120,55 @@ def generate():
                   </Expression>
                 </Nodes>
                 <Edges>
-                  <Edge From="0" To="47" Label="Source1" />
-                  <Edge From="1" To="2" Label="Source1" />
-                  <Edge From="2" To="47" Label="Source3" />
-                  <Edge From="3" To="4" Label="Source1" />
-                  <Edge From="4" To="47" Label="Source4" />
+                  <Edge From="0" To="1" Label="Source1" />
+                  <Edge From="1" To="3" Label="Source1" />
+                  <Edge From="2" To="3" Label="Source2" />
+                  <Edge From="2" To="45" Label="Source2" />
+                  <Edge From="4" To="44" Label="Source1" />
                   <Edge From="5" To="6" Label="Source1" />
                   <Edge From="6" To="7" Label="Source1" />
-                  <Edge From="7" To="49" Label="Source2" />
-                  <Edge From="8" To="48" Label="Source2" />
-                  <Edge From="8" To="11" Label="Source2" />
-                  <Edge From="9" To="10" Label="Source1" />
+                  <Edge From="7" To="8" Label="Source1" />
+                  <Edge From="8" To="9" Label="Source1" />
+                  <Edge From="9" To="44" Label="Source2" />
                   <Edge From="10" To="11" Label="Source1" />
+                  <Edge From="11" To="44" Label="Source3" />
                   <Edge From="12" To="13" Label="Source1" />
-                  <Edge From="13" To="14" Label="Source1" />
+                  <Edge From="13" To="44" Label="Source4" />
                   <Edge From="14" To="15" Label="Source1" />
                   <Edge From="15" To="16" Label="Source1" />
-                  <Edge From="16" To="47" Label="Source2" />
-                  <Edge From="17" To="18" Label="Source1" />
-                  <Edge From="18" To="19" Label="Source1" />
-                  <Edge From="19" To="21" Label="Source1" />
-                  <Edge From="20" To="21" Label="Source2" />
-                  <Edge From="21" To="44" Label="Source1" />
-                  <Edge From="22" To="38" Label="Source2" />
+                  <Edge From="16" To="18" Label="Source1" />
+                  <Edge From="17" To="18" Label="Source2" />
+                  <Edge From="18" To="41" Label="Source1" />
+                  <Edge From="19" To="20" Label="Source1" />
+                  <Edge From="20" To="21" Label="Source1" />
+                  <Edge From="21" To="22" Label="Source1" />
+                  <Edge From="22" To="31" Label="Source1" />
                   <Edge From="23" To="24" Label="Source1" />
                   <Edge From="24" To="25" Label="Source1" />
                   <Edge From="25" To="26" Label="Source1" />
-                  <Edge From="26" To="35" Label="Source1" />
+                  <Edge From="26" To="31" Label="Source2" />
                   <Edge From="27" To="28" Label="Source1" />
                   <Edge From="28" To="29" Label="Source1" />
                   <Edge From="29" To="30" Label="Source1" />
-                  <Edge From="30" To="35" Label="Source2" />
+                  <Edge From="30" To="31" Label="Source3" />
                   <Edge From="31" To="32" Label="Source1" />
                   <Edge From="32" To="33" Label="Source1" />
-                  <Edge From="33" To="34" Label="Source1" />
-                  <Edge From="34" To="35" Label="Source3" />
-                  <Edge From="35" To="36" Label="Source1" />
+                  <Edge From="33" To="35" Label="Source1" />
+                  <Edge From="34" To="35" Label="Source2" />
+                  <Edge From="35" To="41" Label="Source2" />
                   <Edge From="36" To="37" Label="Source1" />
                   <Edge From="37" To="38" Label="Source1" />
-                  <Edge From="38" To="44" Label="Source2" />
-                  <Edge From="39" To="40" Label="Source1" />
-                  <Edge From="40" To="41" Label="Source1" />
-                  <Edge From="41" To="43" Label="Source1" />
-                  <Edge From="42" To="43" Label="Source2" />
-                  <Edge From="43" To="44" Label="Source3" />
+                  <Edge From="38" To="40" Label="Source1" />
+                  <Edge From="39" To="40" Label="Source2" />
+                  <Edge From="40" To="41" Label="Source3" />
+                  <Edge From="41" To="42" Label="Source1" />
+                  <Edge From="42" To="43" Label="Source1" />
+                  <Edge From="43" To="44" Label="Source5" />
                   <Edge From="44" To="45" Label="Source1" />
-                  <Edge From="45" To="46" Label="Source1" />
-                  <Edge From="46" To="47" Label="Source5" />
+                  <Edge From="45" To="49" Label="Source1" />
+                  <Edge From="46" To="47" Label="Source1" />
                   <Edge From="47" To="48" Label="Source1" />
-                  <Edge From="48" To="49" Label="Source1" />
+                  <Edge From="48" To="49" Label="Source2" />
                   <Edge From="49" To="50" Label="Source1" />
                   <Edge From="51" To="52" Label="Source1" />
                   <Edge From="52" To="53" Label="Source1" />
@@ -1211,6 +1212,11 @@ def generate():
                     </Expression>
                     <Expression xsi:type="Combinator">
                       <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:SignalSource />
+                        <mx:SampleRate>0</mx:SampleRate>
+                        <mx:ActiveEdge>Rising</mx:ActiveEdge>
+                        <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+                        <mx:BufferSize>1000</mx:BufferSize>
                         <mx:Channels>
                           <mx:DigitalOutputChannelConfiguration>
                             <mx:ChannelName />
@@ -1232,6 +1238,11 @@ def generate():
                     </Expression>
                     <Expression xsi:type="Combinator">
                       <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:SignalSource />
+                        <mx:SampleRate>0</mx:SampleRate>
+                        <mx:ActiveEdge>Rising</mx:ActiveEdge>
+                        <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+                        <mx:BufferSize>1000</mx:BufferSize>
                         <mx:Channels>
                           <mx:DigitalOutputChannelConfiguration>
                             <mx:ChannelName />
@@ -1284,6 +1295,11 @@ def generate():
                     </Expression>
                     <Expression xsi:type="Combinator">
                       <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:SignalSource />
+                        <mx:SampleRate>0</mx:SampleRate>
+                        <mx:ActiveEdge>Rising</mx:ActiveEdge>
+                        <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+                        <mx:BufferSize>1000</mx:BufferSize>
                         <mx:Channels>
                           <mx:DigitalOutputChannelConfiguration>
                             <mx:ChannelName />
@@ -1305,6 +1321,11 @@ def generate():
                     </Expression>
                     <Expression xsi:type="Combinator">
                       <Combinator xsi:type="mx:DigitalOutput">
+                        <mx:SignalSource />
+                        <mx:SampleRate>0</mx:SampleRate>
+                        <mx:ActiveEdge>Rising</mx:ActiveEdge>
+                        <mx:SampleMode>ContinuousSamples</mx:SampleMode>
+                        <mx:BufferSize>1000</mx:BufferSize>
                         <mx:Channels>
                           <mx:DigitalOutputChannelConfiguration>
                             <mx:ChannelName />
@@ -1363,37 +1384,37 @@ def generate():
       <Edge From="2" To="3" Label="Source1" />
       <Edge From="4" To="5" Label="Source1" />
       <Edge From="6" To="7" Label="Source1" />
-      <Edge From="7" To="20" Label="Source2" />
+      <Edge From="7" To="8" Label="Source1" />
       <Edge From="8" To="9" Label="Source1" />
       <Edge From="9" To="10" Label="Source1" />
-      <Edge From="10" To="11" Label="Source1" />
-      <Edge From="11" To="12" Label="Source1" />
-      <Edge From="11" To="13" Label="Source1" />
-      <Edge From="11" To="14" Label="Source1" />
-      <Edge From="11" To="15" Label="Source1" />
-      <Edge From="11" To="16" Label="Source1" />
-      <Edge From="11" To="17" Label="Source1" />
-      <Edge From="12" To="18" Label="Source2" />
-      <Edge From="13" To="18" Label="Source1" />
-      <Edge From="14" To="18" Label="Source3" />
-      <Edge From="15" To="18" Label="Source4" />
-      <Edge From="16" To="18" Label="Source6" />
-      <Edge From="17" To="18" Label="Source5" />
+      <Edge From="9" To="11" Label="Source1" />
+      <Edge From="9" To="12" Label="Source1" />
+      <Edge From="9" To="13" Label="Source1" />
+      <Edge From="9" To="14" Label="Source1" />
+      <Edge From="9" To="15" Label="Source1" />
+      <Edge From="10" To="16" Label="Source1" />
+      <Edge From="11" To="16" Label="Source2" />
+      <Edge From="12" To="16" Label="Source3" />
+      <Edge From="13" To="16" Label="Source4" />
+      <Edge From="14" To="16" Label="Source5" />
+      <Edge From="15" To="16" Label="Source6" />
+      <Edge From="16" To="17" Label="Source1" />
+      <Edge From="17" To="20" Label="Source1" />
       <Edge From="18" To="19" Label="Source1" />
-      <Edge From="19" To="20" Label="Source1" />
-      <Edge From="21" To="25" Label="Source1" />
-      <Edge From="22" To="23" Label="Source1" />
-      <Edge From="23" To="27" Label="Source2" />
-      <Edge From="24" To="25" Label="Source2" />
+      <Edge From="19" To="20" Label="Source2" />
+      <Edge From="21" To="23" Label="Source1" />
+      <Edge From="22" To="23" Label="Source2" />
+      <Edge From="23" To="24" Label="Source1" />
+      <Edge From="24" To="27" Label="Source1" />
       <Edge From="25" To="26" Label="Source1" />
-      <Edge From="26" To="27" Label="Source1" />
+      <Edge From="26" To="27" Label="Source2" />
       <Edge From="27" To="28" Label="Source1" />
-      <Edge From="29" To="33" Label="Source1" />
-      <Edge From="30" To="31" Label="Source1" />
-      <Edge From="31" To="35" Label="Source2" />
-      <Edge From="32" To="33" Label="Source2" />
+      <Edge From="29" To="31" Label="Source1" />
+      <Edge From="30" To="31" Label="Source2" />
+      <Edge From="31" To="32" Label="Source1" />
+      <Edge From="32" To="35" Label="Source1" />
       <Edge From="33" To="34" Label="Source1" />
-      <Edge From="34" To="35" Label="Source1" />
+      <Edge From="34" To="35" Label="Source2" />
       <Edge From="35" To="36" Label="Source1" />
       <Edge From="37" To="38" Label="Source1" />
       <Edge From="38" To="41" Label="Source1" />
