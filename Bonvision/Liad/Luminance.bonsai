@@ -44,7 +44,7 @@
           <Nodes>
             <Expression xsi:type="Combinator">
               <Combinator xsi:type="StringProperty">
-                <Value>D:\Data\Test\</Value>
+                <Value>D:\Data\Ely\</Value>
               </Combinator>
             </Expression>
             <Expression xsi:type="rx:BehaviorSubject">
@@ -360,7 +360,7 @@ def process(value):
         </PropertyMappings>
       </Expression>
       <Expression xsi:type="io:CsvWriter">
-        <io:FileName>C:\Data\Tara\2023-12-15\ArduinoInput.csv</io:FileName>
+        <io:FileName>D:\Data\test\2024-07-25\ArduinoInput.csv</io:FileName>
         <io:Delimiter>,</io:Delimiter>
         <io:Append>false</io:Append>
         <io:Overwrite>false</io:Overwrite>
@@ -391,7 +391,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Tara\2023-12-15\Video.avi</cv:FileName>
+          <cv:FileName>D:\Data\test\2024-07-25\Video.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -433,7 +433,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="cv:VideoWriter">
-          <cv:FileName>C:\Data\Tara\2023-12-15\VideoBottom.avi</cv:FileName>
+          <cv:FileName>D:\Data\test\2024-07-25\VideoBottom.avi</cv:FileName>
           <cv:Suffix>FileCount</cv:Suffix>
           <cv:Buffered>false</cv:Buffered>
           <cv:Overwrite>false</cv:Overwrite>
@@ -472,7 +472,7 @@ def process(value):
       </Expression>
       <Expression xsi:type="Combinator">
         <Combinator xsi:type="dsp:MatrixWriter">
-          <dsp:Path>C:\Data\Tara\2023-12-15\NiDaqInput.bin</dsp:Path>
+          <dsp:Path>D:\Data\test\2024-07-25\NiDaqInput.bin</dsp:Path>
           <dsp:Suffix>FileCount</dsp:Suffix>
           <dsp:Overwrite>false</dsp:Overwrite>
           <dsp:Layout>RowMajor</dsp:Layout>
@@ -558,9 +558,9 @@ def process(value):
               <LocationY>-21</LocationY>
               <Layer>100</Layer>
               <Angle>15</Angle>
-              <ColorR>1</ColorR>
-              <ColorG>1</ColorG>
-              <ColorB>1</ColorB>
+              <ColorR>0</ColorR>
+              <ColorG>0</ColorG>
+              <ColorB>0</ColorB>
               <ColorA>1</ColorA>
             </Expression>
             <Expression xsi:type="Combinator">
@@ -691,7 +691,7 @@ def process(value):
         <Append>false</Append>
         <Overwrite>false</Overwrite>
         <Suffix>FileCount</Suffix>
-        <FileName>C:\Data\Tara\2023-12-15\Log.csv</FileName>
+        <FileName>D:\Data\test\2024-07-25\Log.csv</FileName>
       </Expression>
       <Expression xsi:type="rx:Sink">
         <Name>Metadata</Name>
@@ -752,7 +752,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Tara\2023-12-15\nidaqChannels.csv</io:FileName>
+              <io:FileName>D:\Data\test\2024-07-25\nidaqChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -796,7 +796,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Tara\2023-12-15\props.csv</io:FileName>
+              <io:FileName>D:\Data\test\2024-07-25\props.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -857,7 +857,7 @@ def process(value):
               </PropertyMappings>
             </Expression>
             <Expression xsi:type="io:CsvWriter">
-              <io:FileName>C:\Data\Tara\2023-12-15\arduinoChannels.csv</io:FileName>
+              <io:FileName>D:\Data\test\2024-07-25\arduinoChannels.csv</io:FileName>
               <io:Append>false</io:Append>
               <io:Overwrite>false</io:Overwrite>
               <io:Suffix>FileCount</io:Suffix>
@@ -1015,9 +1015,9 @@ def process(value):
                     <LocationY>0</LocationY>
                     <Layer>0</Layer>
                     <Angle>0</Angle>
-                    <ColorR>0.45</ColorR>
-                    <ColorG>0.45</ColorG>
-                    <ColorB>0.45</ColorB>
+                    <ColorR>0.15</ColorR>
+                    <ColorG>0.15</ColorG>
+                    <ColorB>0.15</ColorB>
                     <ColorA>1</ColorA>
                   </Expression>
                   <Expression xsi:type="Combinator">

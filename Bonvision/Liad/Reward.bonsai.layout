@@ -880,30 +880,6 @@
     </Size>
     <WindowState>Normal</WindowState>
   </DialogSettings>
-  <DialogSettings>
-    <Visible>false</Visible>
-    <Location>
-      <X>0</X>
-      <Y>0</Y>
-    </Location>
-    <Size>
-      <Width>0</Width>
-      <Height>0</Height>
-    </Size>
-    <WindowState>Normal</WindowState>
-  </DialogSettings>
-  <DialogSettings>
-    <Visible>false</Visible>
-    <Location>
-      <X>0</X>
-      <Y>0</Y>
-    </Location>
-    <Size>
-      <Width>0</Width>
-      <Height>0</Height>
-    </Size>
-    <WindowState>Normal</WindowState>
-  </DialogSettings>
   <DialogSettings xsi:type="WorkflowEditorSettings">
     <Visible>false</Visible>
     <Location>
@@ -918,8 +894,8 @@
     <EditorDialogSettings>
       <Visible>true</Visible>
       <Location>
-        <X>220</X>
-        <Y>247</Y>
+        <X>451</X>
+        <Y>127</Y>
       </Location>
       <Size>
         <Width>664</Width>
@@ -989,14 +965,46 @@
         <WindowState>Normal</WindowState>
       </DialogSettings>
       <DialogSettings>
-        <Visible>false</Visible>
+        <Visible>true</Visible>
         <Location>
-          <X>0</X>
-          <Y>0</Y>
+          <X>15</X>
+          <Y>118</Y>
         </Location>
         <Size>
-          <Width>0</Width>
-          <Height>0</Height>
+          <Width>336</Width>
+          <Height>65</Height>
+        </Size>
+        <WindowState>Normal</WindowState>
+        <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <ObjectTextVisualizer />
+        </VisualizerSettings>
+      </DialogSettings>
+      <DialogSettings>
+        <Visible>true</Visible>
+        <Location>
+          <X>234</X>
+          <Y>234</Y>
+        </Location>
+        <Size>
+          <Width>336</Width>
+          <Height>65</Height>
+        </Size>
+        <WindowState>Normal</WindowState>
+        <VisualizerTypeName>Bonsai.Design.ObjectTextVisualizer</VisualizerTypeName>
+        <VisualizerSettings>
+          <ObjectTextVisualizer />
+        </VisualizerSettings>
+      </DialogSettings>
+      <DialogSettings>
+        <Visible>false</Visible>
+        <Location>
+          <X>208</X>
+          <Y>208</Y>
+        </Location>
+        <Size>
+          <Width>416</Width>
+          <Height>279</Height>
         </Size>
         <WindowState>Normal</WindowState>
       </DialogSettings>
@@ -1109,23 +1117,6 @@
       <Height>400</Height>
     </Size>
     <WindowState>Normal</WindowState>
-    <VisualizerTypeName>Bonsai.Dsp.Design.MatVisualizer</VisualizerTypeName>
-    <VisualizerSettings>
-      <MatVisualizer>
-        <XMin>0</XMin>
-        <XMax>1</XMax>
-        <YMin>0</YMin>
-        <YMax>1.1</YMax>
-        <AutoScaleX>true</AutoScaleX>
-        <AutoScaleY>true</AutoScaleY>
-        <SelectedPage>0</SelectedPage>
-        <ChannelsPerPage>16</ChannelsPerPage>
-        <OverlayChannels>true</OverlayChannels>
-        <ChannelOffset>0</ChannelOffset>
-        <HistoryLength>500</HistoryLength>
-        <WaveformBufferLength>1</WaveformBufferLength>
-      </MatVisualizer>
-    </VisualizerSettings>
   </DialogSettings>
   <DialogSettings>
     <Visible>false</Visible>
@@ -1154,9 +1145,9 @@
     <VisualizerSettings>
       <MatVisualizer>
         <XMin>0</XMin>
-        <XMax>500</XMax>
-        <YMin>-1.14</YMin>
-        <YMax>-1</YMax>
+        <XMax>1</XMax>
+        <YMin>0</YMin>
+        <YMax>1.1</YMax>
         <AutoScaleX>true</AutoScaleX>
         <AutoScaleY>true</AutoScaleY>
         <SelectedPage>0</SelectedPage>
